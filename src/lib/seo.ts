@@ -1,4 +1,5 @@
-import { site } from "./site";
+import type { Metadata } from "next";
+import { site, cities, services } from "./site";
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://alphalocksmithngarage.com";
 
@@ -11,7 +12,13 @@ export const localBusinessJsonLd = {
   logo: `${SITE_URL}/logo.png`,
   image: `${SITE_URL}/logo.png`,
   telephone: "+1-503-505-8560",
-  areaServed: { "@type": "City", name: "Portland, OR" },
+  description: "Licensed Portland locksmith, garage door and automatic gate service, open 24/7.",
+  areaServed: cities.map((name) => ({ "@type": "City", name: `${name}, OR` })),
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Services",
+    itemListElement: services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.title } })),
+  },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -31,5 +38,28 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
       name: it.name,
       item: `${SITE_URL}${it.path}`,
     })),
+  };
+}
+
+/** Per-page metadata with matching Open Graph and Twitter tags (these do not inherit page titles). */
+export function pageMeta({ title, description, path }: { title: string; description: string; path: string }): Metadata {
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: { type: "website", siteName: site.name, locale: "en_US", url: path, title: `${title} | Alpha Locksmith`, description, images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: site.name }] },
+    twitter: { card: "summary_large_image", title: `${title} | Alpha Locksmith`, description, images: ["/twitter-image"] },
+  };
+}
+
+export function serviceJsonLd({ name, description, path }: { name: string; description: string; path: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name,
+    description,
+    url: `${SITE_URL}${path}`,
+    provider: { "@id": `${SITE_URL}/#business` },
+    areaServed: cities.map((c) => ({ "@type": "City", name: `${c}, OR` })),
   };
 }
