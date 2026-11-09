@@ -34,7 +34,7 @@ export function WorkGallery() {
             </button>
           ))}
         </div>
-        <p className="text-[0.875rem] text-muted">Real jobs by the Alpha team</p>
+        <p className="text-small text-muted">Real jobs by the Alpha team</p>
       </div>
 
       <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -50,14 +50,14 @@ export function WorkGallery() {
                     role="img"
                     aria-label={`${w.cat}: ${w.caption} (photo coming soon)`}
                     className="grid size-full place-items-center"
-                    style={{ background: "radial-gradient(120% 90% at 30% 20%, #3a2a22, #202020 70%)" }}
+                    style={{ background: "radial-gradient(120% 90% at 30% 20%, #3a2410, #202020 70%)" }}
                   >
                     <Icon className="size-10 text-orange/70" />
                   </div>
                 )}
               </div>
-              <p className="mt-2 font-display text-[0.875rem] font-bold uppercase tracking-[0.12em] text-orange">{w.cat}</p>
-              <p className="text-[0.875rem]">{w.caption}</p>
+              <p className="mt-2 font-display text-label font-bold uppercase tracking-[0.12em] text-orange">{w.cat}</p>
+              <p className="text-small">{w.caption}</p>
             </li>
           );
         })}

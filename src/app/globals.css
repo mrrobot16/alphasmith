@@ -8,8 +8,8 @@
   --line: #333333;
   --text: #f4f4f2;
   --muted: #a8a8a3;
-  --orange: #ed6f31;
-  --orange-ink: #151515;
+  --orange: #ff6700;
+  --orange-ink: #000000;
   --topbar: #000000;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -23,8 +23,17 @@
   --color-ink: var(--text);
   --color-muted: var(--muted);
   --color-orange: var(--orange);
+  --color-topbar: var(--topbar);
   --font-display: var(--font-barlow-condensed), "Arial Narrow", sans-serif;
   --font-sans: var(--font-barlow), system-ui, sans-serif;
+
+  /* Type scale: one size per role */
+  --text-label: 0.875rem; /* 14px: uppercase tags, chips, badges */
+  --text-small: 0.9375rem; /* 15px: captions, attributions, footer links */
+  --text-body: 1rem; /* 16px: prose, buttons, inputs */
+  --text-lead: 1.25rem; /* 20px: hero intro */
+  --text-title: 1.25rem; /* 20px: card titles, FAQ questions */
+  --text-sub: 1.5rem; /* 24px: form title, price line, large buttons */
 }
 
 html {
@@ -98,7 +107,7 @@ h4 {
 }
 @media (hover: hover) and (pointer: fine) {
   .btn:hover {
-    background: #f78250;
+    background: #ff8533;
   }
 }
 
@@ -137,9 +146,17 @@ h4 {
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 0.6rem 0.7rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text);
   transition: border-color 160ms var(--ease-out);
+}
+/* Custom select arrow so it can sit inset from the edge */
+select.field {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23a8a8a3' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
 }
 .field::placeholder {
   color: #6f6f6b;

@@ -9,14 +9,14 @@ colors:
   hairline: "#333333"
   text: "#f4f4f2"
   text-muted: "#a8a8a3"
-  dispatch-orange: "#ed6f31"
-  dispatch-orange-hover: "#f78250"
+  dispatch-orange: "#ff6700"
+  dispatch-orange-hover: "#ff8533"
   topbar-black: "#000000"
-  orange-ink: "#151515"
+  orange-ink: "#000000"
 typography:
   display:
     fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
-    fontSize: "clamp(2.4rem, 5.4vw, 4.25rem)"
+    fontSize: "clamp(2.5rem, 5.4vw, 4.25rem)"
     fontWeight: 800
     lineHeight: 1
     letterSpacing: "0.005em"
@@ -25,16 +25,31 @@ typography:
     fontSize: "clamp(2rem, 3.6vw, 3rem)"
     fontWeight: 700
     lineHeight: 1
-  title:
+  sub:
     fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
-    fontSize: "1.125rem"
+    fontSize: "1.5rem"
     fontWeight: 700
     lineHeight: 1
+  title:
+    fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 700
+    lineHeight: 1
+  lead:
+    fontFamily: "Barlow, system-ui, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 600
+    lineHeight: 1.3
   body:
     fontFamily: "Barlow, system-ui, sans-serif"
-    fontSize: "0.92rem"
+    fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.6
+  small:
+    fontFamily: "Barlow, system-ui, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 400
+    lineHeight: 1.5
   label:
     fontFamily: "Barlow Condensed, Arial Narrow, sans-serif"
     fontSize: "0.875rem"
@@ -94,10 +109,10 @@ The mood is urgent, sturdy and no-nonsense. It must read fast on a phone in a st
 A near-black palette with one saturated orange.
 
 ### Primary
-- **Dispatch Orange** (#ed6f31): Every primary button, the sticky call bar, eyebrow labels, icons, check marks, stars and the orange "area" section. Hover lifts to #f78250.
+- **Dispatch Orange** (#ff6700): Every primary button, the sticky call bar, eyebrow labels, icons, check marks, stars and the orange "area" section. Hover lifts to #ff8533.
 
 ### Neutral
-- **Night Black** (#151515): Page background and field fill; also the text on orange buttons.
+- **Night Black** (#151515): Page background and field fill.
 - **Shop Floor** (#202020): Alternating section background.
 - **Steel Surface** (#202020) and **Raised Steel** (#2a2a2a): Cards and form panels; the step up from the page.
 - **Hairline** (#333333): All borders and dividers.
@@ -107,7 +122,7 @@ A near-black palette with one saturated orange.
 ### Named Rules
 **The One Voice Rule.** Orange is the only accent. If something is not an action, a credential or a label that must be seen, it is not orange.
 
-**The Black-on-Orange Rule.** Text on orange is near-black (or pure black on the call bar), never white.
+**The Black-on-Orange Rule.** Text on orange is pure black (#000000), never white or near-black.
 
 ## Typography
 
@@ -117,14 +132,19 @@ A near-black palette with one saturated orange.
 **Character:** A stamped, workshop-sign headline over a calm, legible body.
 
 ### Hierarchy
-- **Display** (800, clamp(2.4rem to 4.25rem), 1.0): The one H1 per page, uppercase, with the key phrase in orange.
-- **Headline** (700, clamp(2rem to 3rem), 1.0): Section titles, uppercase.
-- **Title** (700, 1.125rem, 1.0): Card titles and form headings.
-- **Body** (400, 0.92rem, 1.6): Paragraphs; keep lines near 65 characters.
-- **Label** (600, 0.875rem, 0.14em tracking, uppercase): Eyebrows, badges, filter chips, stat captions. Never smaller than 14px.
+One size per role, defined as tokens in globals.css (`text-label`, `text-small`, `text-body`, `text-lead`, `text-title`, `text-sub`). No other literal font sizes.
+- **Display** (800, clamp(2.5rem to 4.25rem), 1.0): The one H1 per page, uppercase, key phrase in orange.
+- **Headline** (700, clamp(2rem to 3rem), 1.0): Every section title, uppercase (`.h-section`).
+- **Sub** (700, 1.5rem): Form title, price line, large call buttons.
+- **Title** (700, 1.25rem): Card titles, FAQ questions, stat values.
+- **Lead** (600, 1.25rem): The hero intro line.
+- **Body** (400, 1rem, 1.6): All prose, buttons, inputs, list items; keep lines near 65 characters.
+- **Small** (400, 0.9375rem): Captions, attributions, footer links, breadcrumbs.
+- **Label** (600, 0.875rem, 0.14em tracking, uppercase): Eyebrows, badges, filter chips, stat captions. Only for short tracked-caps labels.
 
 ### Named Rules
-**The Fourteen-Pixel Floor Rule.** No text below 0.875rem (14px). Small text on dark backgrounds is the first thing to fail on a phone.
+**The Readable-Copy Rule.** Anything a person reads as a sentence is 16px. 15px is for captions and meta, and 14px only for tracked uppercase labels.
+**The One-Size-Per-Role Rule.** The same role is the same size on every page and state. Do not add a new literal size; use a token or change the token.
 
 ## Layout
 
@@ -144,7 +164,7 @@ Soft but sturdy: inputs 6px, buttons 8px, cards 10px, chips and badges fully pil
 ## Components
 
 ### Buttons
-Solid orange with near-black condensed uppercase text. Hover (on pointer devices only) lightens to #f78250; pressing scales to 0.97 in 160ms with a strong ease-out. The sticky bar variant is solid black with white text.
+Solid orange with pure black condensed uppercase text. Hover (on pointer devices only) lightens to #ff8533; pressing scales to 0.97 in 160ms with a strong ease-out. The sticky bar variant is solid black with white text.
 
 ### Cards
 Steel Surface fill, 1px hairline, 10px radius, 20px padding. Used for services, the quote form, steps, reviews, FAQ items and pricing.
@@ -173,4 +193,4 @@ Content rises 10px and fades in over 500ms once on load. All motion is removed u
 - Don't add shadows, gradients on surfaces, or glass effects.
 - Don't put white text on orange.
 - Don't invent reviews, prices or years in business.
-- Don't use type below 14px.
+- Don't use type below 14px, and don't set prose below 16px.
