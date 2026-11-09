@@ -11,11 +11,11 @@ export const site = {
 };
 
 export const nav = [
-  { label: "Locksmith", href: "#services" },
+  { label: "Locksmith", href: "/locksmith-services" },
   { label: "Garage Doors", href: "/garage-door-services/spring-repair" },
-  { label: "Automatic Gates", href: "#services" },
-  { label: "Fencing", href: "#services" },
-  { label: "Access Control", href: "#services" },
+  { label: "Automatic Gates", href: "/automatic-gate-services" },
+  { label: "Fencing", href: "/fence-services" },
+  { label: "Access Control", href: "/access-control-services" },
   { label: "Locations", href: "/locations/beaverton" },
   { label: "Reviews", href: "#reviews" },
   { label: "About Us", href: "/#about" },
@@ -27,6 +27,7 @@ export const services = [
     title: "Locksmith services",
     body: "Emergency lockout service, lock change, lock rekey, lock repairs, storefront doors and auto keys.",
     cta: "Locksmith services",
+    href: "/locksmith-services",
   },
   {
     icon: "garage",
@@ -40,12 +41,14 @@ export const services = [
     title: "Automatic gates",
     body: "Driveway and commercial gate repair, gate repair, and fence repair and installation services.",
     cta: "Automatic gate services",
+    href: "/automatic-gate-services",
   },
   {
     icon: "access",
     title: "Access control systems",
     body: "Keycard and fob entry, keypad and intercom systems, gate access control and panic hardware.",
     cta: "Access control services",
+    href: "/access-control-services",
   },
 ] as const;
 
