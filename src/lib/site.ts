@@ -91,3 +91,25 @@ export const cities = [
   "West Linn",
   "Wilsonville",
 ];
+
+/** Placeholder reviews for the homepage carousel. Replace with real Google reviews. */
+export const homeReviews = [
+  "an emergency home lockout",
+  "a garage door spring replacement",
+  "car key or fob replacement",
+  "a driveway gate repair",
+  "rekeying locks after a move",
+  "a new garage door opener",
+  "a storefront lockout",
+  "keycard and keypad entry",
+  "a fence repair",
+  "a broken key extraction",
+  "a garage door off its track",
+  "a gate intercom install",
+  "a new deadbolt install",
+  "a roll-up door repair",
+  "a gate opener replacement",
+].map((job) => ({
+  text: `[Real Google review about ${job}, in the customer's words.]`,
+  by: "[First name L.] · [Town] · Google · [Month Year]",
+}));
