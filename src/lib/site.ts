@@ -5,6 +5,7 @@ export const site = {
   license: "CCB#248737",
   certification: "62990CLS",
   bbb: "A+",
+  email: "alphalocksmithor11@gmail.com",
   mapUrl: "https://www.google.com/maps?cid=2033016683438900625",
   mapEmbed: "https://www.google.com/maps?cid=2033016683438900625&output=embed",
 };
