@@ -6,7 +6,7 @@ const CCB_SEARCH = "https://search.ccb.state.or.us/search/";
 
 export function NeedHelpBand() {
   return (
-    <section data-section="need_help_band" className="border-t-[3px] border-orange bg-black py-12">
+    <section data-section="need_help_band" className="hidden border-t-[3px] border-orange bg-black py-12 lg:block">
       <div className="wrap flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
         <div>
           <h2 className="h-section">Need help now?</h2>
@@ -44,21 +44,21 @@ export function SiteFooter() {
             <h2 className="font-display text-label font-bold uppercase tracking-[0.14em]">Licensed and certified</h2>
             <ul className="mt-3 space-y-1.5 text-small">
               <li>
-                <a href={CCB_SEARCH} target="_blank" rel="noopener noreferrer" className="underline hover:text-orange">
+                <a href={CCB_SEARCH} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-orange md:text-ink md:underline">
                   Contractor License {site.license}
                 </a>
               </li>
               <li>
-                <a href={CCB_SEARCH} target="_blank" rel="noopener noreferrer" className="underline hover:text-orange">
+                <a href={CCB_SEARCH} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-orange md:text-ink md:underline">
                   Locksmith Certification {site.certification}
                 </a>
               </li>
-              <li className="text-muted">Issued by the Oregon Construction Contractors Board</li>
-              <li className="text-muted">[Insured and bonded]</li>
+              <li className="hidden text-muted md:list-item">Issued by the Oregon Construction Contractors Board</li>
+              <li className="hidden text-muted md:list-item">[Insured and bonded]</li>
             </ul>
           </div>
 
-          <nav aria-label="Company">
+          <nav aria-label="Company" className="hidden md:block">
             <h2 className="font-display text-label font-bold uppercase tracking-[0.14em]">Company</h2>
             <ul className="mt-3 space-y-1.5 text-small text-muted">
               {[

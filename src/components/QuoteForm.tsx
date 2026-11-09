@@ -7,7 +7,7 @@ import { submitQuote, type QuoteState } from "@/app/actions";
 
 const services = ["Locksmith", "Garage doors", "Automatic gates", "Fencing", "Access control"];
 
-export function QuoteForm() {
+export function QuoteForm({ id = "quote" }: { id?: string }) {
   const pathname = usePathname();
   const [state, action, pending] = useActionState<QuoteState, FormData>(submitQuote, null);
 
@@ -16,8 +16,8 @@ export function QuoteForm() {
   }, [state]);
 
   return (
-    <form id="quote" data-section="quote_form" data-clarity-mask="True" action={action} className="card scroll-mt-6 p-5" aria-labelledby="quote-title">
-      <h2 id="quote-title" className="text-sub">
+    <form id={id} data-section="quote_form" data-clarity-mask="True" action={action} className="card scroll-mt-6 p-5" aria-labelledby={`${id}-title`}>
+      <h2 id={`${id}-title`} className="text-sub">
         Request a quote
       </h2>
       <p className="mt-2 text-small leading-snug text-muted">

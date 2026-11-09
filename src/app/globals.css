@@ -14,6 +14,16 @@
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+/* Phones and tablets use the near-black palette from the mobile design. */
+@media (max-width: 1023px) {
+  :root {
+    --bg: #070707;
+    --bg-alt: #070707;
+    --surface: #1a1a1a;
+    --surface-2: #222222;
+  }
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-alt: var(--bg-alt);
@@ -46,8 +56,13 @@ body {
   color: var(--text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  /* room for the sticky call bar */
-  padding-bottom: 64px;
+  /* room for the sticky call bar (taller on phones, where it has two buttons) */
+  padding-bottom: 9rem;
+}
+@media (min-width: 1024px) {
+  body {
+    padding-bottom: 64px;
+  }
 }
 
 h1,

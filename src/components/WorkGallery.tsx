@@ -13,6 +13,9 @@ const iconFor = {
   "access control": "access",
 } as const;
 
+/** Phones show the first 8 tiles; larger screens show them all (10). */
+const MOBILE_MAX = 8;
+
 export function WorkGallery() {
   const [active, setActive] = useState("All");
   const filters = workFilters.filter((f) => f === "All" || work.some((w) => w.cat === f));
@@ -20,8 +23,8 @@ export function WorkGallery() {
 
   return (
     <div>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter work by service">
+      <div className="flex items-center justify-between gap-3">
+        <div className="-mx-4 flex min-w-0 gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden" role="group" aria-label="Filter work by service">
           {filters.map((f) => (
             <button
               key={f}
@@ -30,20 +33,20 @@ export function WorkGallery() {
               data-track-label={f}
               aria-pressed={active === f}
               onClick={() => setActive(f)}
-              className={`chip ${active === f ? "!border-orange !bg-orange/10" : ""}`}
+              className={`chip shrink-0 whitespace-nowrap ${active === f ? "!border-orange !bg-orange/10" : ""}`}
             >
               {f}
             </button>
           ))}
         </div>
-        <p className="text-small text-muted">Real jobs by the Alpha team</p>
+        <p className="hidden text-small text-muted sm:block">Real jobs by the Alpha team</p>
       </div>
 
       <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {items.map((w) => {
+        {items.map((w, i) => {
           const Icon = serviceIcons[iconFor[w.cat.toLowerCase() as keyof typeof iconFor] ?? "key"];
           return (
-            <li key={w.caption} className="rise">
+            <li key={w.caption} className={`rise ${i >= MOBILE_MAX ? "hidden md:block" : ""}`}>
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line">
                 {w.src ? (
                   <Image src={w.src} alt={`${w.cat}: ${w.caption}`} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover" />

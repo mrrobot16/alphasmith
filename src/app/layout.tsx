@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { StickyCall } from "@/components/Shared";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Analytics } from "@/components/Analytics";
+import { QuoteAnchor } from "@/components/QuoteAnchor";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL, localBusinessJsonLd } from "@/lib/seo";
 import "./globals.css";
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${barlow.variable} ${barlowCondensed.variable}`}>
       <body>
         <Analytics />
+        <QuoteAnchor />
         <JsonLd data={localBusinessJsonLd} />
         <SiteHeader />
         <main>{children}</main>
