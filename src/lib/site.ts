@@ -63,7 +63,7 @@ export const workFilters = [
 
 export type WorkItem = { cat: string; caption: string; src?: string };
 
-/** Set `src` (e.g. "/work/spring.jpg", file in /public/work) to show a real photo. */
+/** The gallery shows 10 on desktop and the first 8 on phones. Set `src` (e.g. "/work/spring.jpg", file in /public/work) to show a real photo. */
 export const work: WorkItem[] = [
   { cat: "Locksmith", caption: "Lock installation and repair", src: "/our-work-4.jpg" },
   { cat: "Garage doors", caption: "Spring and track repair", src: "/our-work-3.jpg" },
@@ -75,7 +75,6 @@ export const work: WorkItem[] = [
   { cat: "Automatic gates", caption: "Wood driveway gate", src: "/work/wood-driveway-gate.jpg" },
   { cat: "Fencing", caption: "Chain-link fence", src: "/work/chain-link-fence.jpg" },
   { cat: "Access control", caption: "Video intercom at gate", src: "/work/gate-video-intercom.jpg" },
-  { cat: "Locksmith", caption: "Key cutting and duplication", src: "/our-work-5.jpg" },
 ];
 
 export const cities = [
