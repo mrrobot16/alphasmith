@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: { absolute: "Portland Locksmith & Garage Door Repair | Alpha Locksmith" },
 };
 
+// Phone layout (below 1024px): the quote form sits after the services section instead of beside the hero.
 export default function Home() {
   return (
     <>
