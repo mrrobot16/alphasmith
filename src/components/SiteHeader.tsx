@@ -10,7 +10,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="border-b border-line">
+    <header data-section="header" className="border-b border-line">
       <div className="bg-topbar text-small">
         <div className="wrap flex flex-wrap items-center gap-x-6 gap-y-1 py-2">
           <span className="flex items-center gap-2 font-bold">
@@ -51,6 +51,8 @@ export function SiteHeader() {
           </a>
           <button
             type="button"
+            data-track="menu_toggle"
+            data-track-label={open ? "Close menu" : "Open menu"}
             className="grid size-11 place-items-center rounded-lg border border-line xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"

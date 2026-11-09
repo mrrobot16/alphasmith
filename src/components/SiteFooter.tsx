@@ -6,7 +6,7 @@ const CCB_SEARCH = "https://search.ccb.state.or.us/search/";
 
 export function NeedHelpBand() {
   return (
-    <section className="border-t-[3px] border-orange bg-black py-12">
+    <section data-section="need_help_band" className="border-t-[3px] border-orange bg-black py-12">
       <div className="wrap flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
         <div>
           <h2 className="h-section">Need help now?</h2>
@@ -24,7 +24,7 @@ export function SiteFooter() {
   return (
     <>
       <NeedHelpBand />
-      <footer className="border-t border-line bg-bg">
+      <footer data-section="footer" className="border-t border-line bg-bg">
         <div className="wrap grid gap-10 py-12 md:grid-cols-3">
           <div>
             <Logo size="lg" />

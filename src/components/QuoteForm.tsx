@@ -16,7 +16,7 @@ export function QuoteForm() {
   }, [state]);
 
   return (
-    <form id="quote" action={action} className="card scroll-mt-6 p-5" aria-labelledby="quote-title">
+    <form id="quote" data-section="quote_form" data-clarity-mask="True" action={action} className="card scroll-mt-6 p-5" aria-labelledby="quote-title">
       <h2 id="quote-title" className="text-sub">
         Request a quote
       </h2>

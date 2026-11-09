@@ -45,7 +45,7 @@ export default function Home() {
 
       <TrustBar />
 
-      <section id="services" className="wrap py-16">
+      <section id="services" data-section="services" className="wrap py-16">
         <h2 className="h-section">Our services</h2>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => {
@@ -67,7 +67,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section className="border-t border-line py-16">
+      <section data-section="our_work" className="border-t border-line py-16">
         <div className="wrap">
           <h2 className="h-section">Our work</h2>
           <div className="mt-6">
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="bg-bg-alt py-16">
+      <section id="about" data-section="about" className="bg-bg-alt py-16">
         <div className="wrap grid items-center gap-8 md:grid-cols-[340px_1fr] md:gap-12">
           <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line">
             <Image
@@ -119,7 +119,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="service-area" className="scroll-mt-4 bg-orange py-14 text-black">
+      <section id="service-area" data-section="service_area" className="scroll-mt-4 bg-orange py-14 text-black">
         <div className="wrap">
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
@@ -156,7 +156,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="reviews" className="scroll-mt-6 py-16">
+      <section id="reviews" data-section="reviews" className="scroll-mt-6 py-16">
         <div className="wrap">
           <ReviewsCarousel items={homeReviews} />
         </div>

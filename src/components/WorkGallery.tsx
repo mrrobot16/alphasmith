@@ -26,6 +26,8 @@ export function WorkGallery() {
             <button
               key={f}
               type="button"
+              data-track="gallery_filter"
+              data-track-label={f}
               aria-pressed={active === f}
               onClick={() => setActive(f)}
               className={`chip ${active === f ? "!border-orange !bg-orange/10" : ""}`}

@@ -61,7 +61,7 @@ export function CityPage({ city }: { city: City }) {
 
       <TrustBar />
 
-      <section className="wrap py-14">
+      <section data-section="services" className="wrap py-14">
         <h2 className="h-section">Our services in {name}</h2>
         <ul className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => {
@@ -80,7 +80,7 @@ export function CityPage({ city }: { city: City }) {
         </ul>
       </section>
 
-      <section className="bg-bg-alt py-14">
+      <section data-section="local_team_and_map" className="bg-bg-alt py-14">
         <div className="wrap grid gap-8 lg:grid-cols-2">
           <div>
             <h2 className="h-section">Your local {name} team</h2>
@@ -97,7 +97,7 @@ export function CityPage({ city }: { city: City }) {
         </div>
       </section>
 
-      <section className="py-14">
+      <section data-section="recent_jobs" className="py-14">
         <div className="wrap">
           <h2 className="h-section">Recent jobs in {name}</h2>
           <ul className="mt-6 grid gap-4 md:grid-cols-3">
@@ -113,21 +113,21 @@ export function CityPage({ city }: { city: City }) {
         </div>
       </section>
 
-      <section id="reviews" className="bg-bg-alt py-14">
+      <section id="reviews" data-section="reviews" className="bg-bg-alt py-14">
         <div className="wrap">
           <h2 className="h-section">What {name} customers say</h2>
           <div className="mt-6"><Reviews items={reviews} /></div>
         </div>
       </section>
 
-      <section className="py-14">
+      <section data-section="faq" className="py-14">
         <div className="wrap">
           <h2 className="h-section">Frequently asked questions</h2>
           <div className="mt-6"><Faq items={faqs} /></div>
         </div>
       </section>
 
-      <section className="border-t border-line bg-bg-alt py-14">
+      <section data-section="nearby_areas" className="border-t border-line bg-bg-alt py-14">
         <div className="wrap">
           <h2 className="h-section">Nearby areas we serve</h2>
           <ul className="mt-6 flex flex-wrap gap-3">

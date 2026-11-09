@@ -9,7 +9,7 @@ export function TrustBar() {
     { Icon: AwardIcon, label: "BBB rating", value: site.bbb },
   ];
   return (
-    <div className="border-y border-line bg-surface/60">
+    <div data-section="trust_bar" className="border-y border-line bg-surface/60">
       <ul className="wrap grid grid-cols-2 gap-x-6 gap-y-4 py-5 lg:grid-cols-4">
         {items.map(({ Icon, label, value }) => (
           <li key={value} className="flex items-center gap-3">
@@ -31,7 +31,7 @@ export function TrustBar() {
 
 export function StickyCall() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-black bg-orange text-black">
+    <div data-section="sticky_call_bar" className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-black bg-orange text-black">
       <div className="wrap flex items-center justify-between gap-4 py-2.5">
         <span className="flex items-center gap-2 text-small font-bold">
           <span className="size-1.5 rounded-full bg-black" />
@@ -103,7 +103,7 @@ export function Hero({
   form: React.ReactNode;
 }) {
   return (
-    <section className="wrap grid gap-10 py-12 lg:grid-cols-[1fr_340px] lg:gap-20 lg:py-20">
+    <section data-section="hero" className="wrap grid gap-10 py-12 lg:grid-cols-[1fr_340px] lg:gap-20 lg:py-20">
       <div className="rise">
         <p className="inline-flex items-center gap-2 rounded-full border border-orange/70 px-3 py-1 font-display text-label font-semibold uppercase tracking-[0.12em] text-orange">
           <span className="size-1.5 rounded-full bg-orange" /> {badge}

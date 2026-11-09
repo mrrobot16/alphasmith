@@ -48,7 +48,7 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
 
       <TrustBar />
 
-      <div className="bg-orange text-black">
+      <div data-section="warning_band" className="bg-orange text-black">
         <div className="wrap flex flex-col items-start gap-3 py-4 md:flex-row md:items-center md:justify-between md:gap-6">
           <p className="flex min-w-0 flex-1 items-center gap-3 text-body">
             <WarnIcon className="shrink-0" />
@@ -60,7 +60,7 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </div>
       </div>
 
-      <section className="wrap grid gap-10 py-14 md:grid-cols-2">
+      <section data-section="signs_and_pricing" className="wrap grid gap-10 py-14 md:grid-cols-2">
         <div>
           <h2 className="h-section">{c.signs.title}</h2>
           <ul className="mt-5 space-y-3 text-body">
@@ -80,7 +80,7 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </div>
       </section>
 
-      <section className="bg-bg-alt py-14">
+      <section data-section="how_it_works" className="bg-bg-alt py-14">
         <div className="wrap">
           <h2 className="h-section">{c.steps.title}</h2>
           <ol className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -95,7 +95,7 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </div>
       </section>
 
-      <section className="py-14">
+      <section data-section="brands" className="py-14">
         <div className="wrap">
           <h2 className="h-section">{c.brands.title}</h2>
           <ul className="mt-5 flex flex-wrap gap-2">
@@ -104,21 +104,21 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </div>
       </section>
 
-      <section id="reviews" className="bg-bg-alt py-14">
+      <section id="reviews" data-section="reviews" className="bg-bg-alt py-14">
         <div className="wrap">
           <h2 className="h-section">What customers say</h2>
           <div className="mt-6"><Reviews items={c.reviews} /></div>
         </div>
       </section>
 
-      <section id="faq" className="py-14">
+      <section id="faq" data-section="faq" className="py-14">
         <div className="wrap">
           <h2 className="h-section">Frequently asked questions</h2>
           <div className="mt-6"><Faq items={c.faqs} /></div>
         </div>
       </section>
 
-      <section className="bg-bg-alt py-14">
+      <section data-section="areas_and_related" className="bg-bg-alt py-14">
         <div className="wrap">
           <h2 className="h-section">{c.near.title}</h2>
           <p className="mt-3 text-small text-muted">{c.near.intro}</p>

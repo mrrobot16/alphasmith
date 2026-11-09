@@ -38,6 +38,7 @@ export function ReviewsCarousel({ items }: { items: Review[] }) {
               <button
                 key={dir}
                 type="button"
+                data-track="reviews_nav"
                 aria-label={dir === "prev" ? "Previous reviews" : "Next reviews"}
                 disabled={disabled}
                 onClick={() => setPage(current + (dir === "prev" ? -1 : 1))}
@@ -67,6 +68,7 @@ export function ReviewsCarousel({ items }: { items: Review[] }) {
           <button
             key={i}
             type="button"
+            data-track="reviews_nav"
             aria-label={`Show reviews page ${i + 1}`}
             aria-current={i === current}
             onClick={() => setPage(i)}
