@@ -27,7 +27,7 @@ export function SiteFooter() {
       <footer className="border-t border-line bg-bg">
         <div className="wrap grid gap-10 py-12 md:grid-cols-3">
           <div>
-            <Logo />
+            <Logo size="lg" />
             <p className="mt-3 text-small font-bold">Alpha Locksmith and Garage</p>
             <ul className="mt-2 space-y-1.5 text-small">
               <li>

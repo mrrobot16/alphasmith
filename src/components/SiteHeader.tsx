@@ -28,12 +28,12 @@ export function SiteHeader() {
       </div>
 
       <div className="wrap flex items-start justify-between gap-4 py-4 xl:items-center">
-        <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:gap-8">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:gap-6">
           <Link href="/" aria-label="Alpha Locksmith & Garage home">
             <Logo />
           </Link>
           <nav aria-label="Main" className="hidden xl:block">
-            <ul className="flex flex-nowrap gap-x-4 text-small font-semibold">
+            <ul className="flex flex-nowrap gap-x-3.5 text-small font-semibold">
               {nav.map((n) => (
                 <li key={n.label}>
                   <Link href={n.href} className="whitespace-nowrap text-ink/90 transition-colors hover:text-orange">
