@@ -24,32 +24,34 @@ export function ReviewsCarousel({ items }: { items: Review[] }) {
   const start = current * size;
   const visible = items.slice(start, start + size);
 
+  const buttons = (["prev", "next"] as const).map((dir) => {
+    const disabled = dir === "prev" ? current === 0 : current === pages - 1;
+    return (
+      <button
+        key={dir}
+        type="button"
+        data-track="reviews_nav"
+        aria-label={dir === "prev" ? "Previous reviews" : "Next reviews"}
+        disabled={disabled}
+        onClick={() => setPage(current + (dir === "prev" ? -1 : 1))}
+        className="chip size-11 justify-center !p-0 disabled:opacity-40"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d={dir === "prev" ? "M10 3L5 8l5 5" : "M6 3l5 5-5 5"} />
+        </svg>
+      </button>
+    );
+  });
+
   return (
     <div>
       <div className="flex items-center justify-between gap-4">
         <h2 className="h-section">What customers say</h2>
-        <div className="flex items-center gap-3">
+        <div className="hidden items-center gap-3 md:flex">
           <p className="whitespace-nowrap text-small text-muted" aria-live="polite">
-            {size === 1 ? start + 1 : `${start + 1}–${Math.min(start + size, items.length)}`} of {items.length}
+            {start + 1}–{Math.min(start + size, items.length)} of {items.length}
           </p>
-          {(["prev", "next"] as const).map((dir) => {
-            const disabled = dir === "prev" ? current === 0 : current === pages - 1;
-            return (
-              <button
-                key={dir}
-                type="button"
-                data-track="reviews_nav"
-                aria-label={dir === "prev" ? "Previous reviews" : "Next reviews"}
-                disabled={disabled}
-                onClick={() => setPage(current + (dir === "prev" ? -1 : 1))}
-                className="chip size-11 justify-center !p-0 disabled:opacity-40"
-              >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d={dir === "prev" ? "M10 3L5 8l5 5" : "M6 3l5 5-5 5"} />
-                </svg>
-              </button>
-            );
-          })}
+          {buttons}
         </div>
       </div>
 
@@ -62,6 +64,15 @@ export function ReviewsCarousel({ items }: { items: Review[] }) {
           </li>
         ))}
       </ul>
+
+      {/* Phones: previous, counter and next sit under the card. */}
+      <div className="mt-4 flex items-center justify-between md:hidden">
+        {buttons[0]}
+        <p className="font-display text-title font-bold text-muted" aria-live="polite">
+          {current + 1} / {pages}
+        </p>
+        {buttons[1]}
+      </div>
 
       <div className="mt-6 hidden justify-center gap-2 md:flex" role="group" aria-label="Review pages">
         {Array.from({ length: pages }, (_, i) => (
