@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { serviceAreas, type ServicePageConfig } from "@/lib/services";
+import { cityHref } from "@/lib/cities";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { QuoteForm } from "./QuoteForm";
 import { TrustBar, Hero, Faq, Reviews } from "./Shared";
@@ -122,15 +123,14 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
           <h2 className="h-section">{c.near.title}</h2>
           <p className="mt-3 text-small text-muted">{c.near.intro}</p>
           <ul className="mt-5 flex flex-wrap gap-2">
-            {serviceAreas.map((a) => (
-              <li key={a}>
-                {a === "Beaverton" ? (
-                  <Link href="/locations/beaverton" className="chip">{a}</Link>
-                ) : (
-                  <span className="chip">{a}</span>
-                )}
-              </li>
-            ))}
+            {serviceAreas.map((a) => {
+              const href = cityHref(a);
+              return (
+                <li key={a}>
+                  {href ? <Link href={href} className="chip">{a}</Link> : <span className="chip">{a}</span>}
+                </li>
+              );
+            })}
           </ul>
           <h3 className="mt-10 text-sub">Related services</h3>
           <ul className="mt-4 flex flex-wrap gap-2">

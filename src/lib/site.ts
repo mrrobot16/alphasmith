@@ -16,7 +16,7 @@ export const nav = [
   { label: "Automatic Gates", href: "/automatic-gate-services" },
   { label: "Fencing", href: "/fence-services" },
   { label: "Access Control", href: "/access-control-services" },
-  { label: "Locations", href: "/locations/beaverton" },
+  { label: "Locations", href: "/#service-area" },
   { label: "Reviews", href: "#reviews" },
   { label: "About Us", href: "/#about" },
 ];

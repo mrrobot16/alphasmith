@@ -8,6 +8,7 @@ import { TrustBar, Hero } from "@/components/Shared";
 import { GoogleMap } from "@/components/GoogleMap";
 import { pageMeta } from "@/lib/seo";
 import { WorkGallery } from "@/components/WorkGallery";
+import { citySlug } from "@/lib/cities";
 import { ReviewsCarousel } from "@/components/ReviewsCarousel";
 
 export const metadata: Metadata = {
@@ -118,7 +119,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-orange py-14 text-black">
+      <section id="service-area" className="scroll-mt-4 bg-orange py-14 text-black">
         <div className="wrap">
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
@@ -140,7 +141,7 @@ export default function Home() {
                 {cities.map((c) => (
                   <li key={c}>
                     <Link
-                      href={c === "Beaverton" ? "/locations/beaverton" : "#"}
+                      href={`/locations/${citySlug(c)}`}
                       className="chip !border-black !text-black transition-colors hover:!bg-black hover:!text-white"
                     >
                       {c}
