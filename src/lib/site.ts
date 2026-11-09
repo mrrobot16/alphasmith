@@ -66,12 +66,12 @@ export const work: WorkItem[] = [
   { cat: "Garage doors", caption: "Spring and track repair", src: "/our-work-3.jpg" },
   { cat: "Automatic gates", caption: "Gate panel repair", src: "/our-work-1.jpg" },
   { cat: "Fencing", caption: "Metal fence installation", src: "/our-work-2.jpg" },
-  { cat: "Access control", caption: "Keycard and keypad entry" },
-  { cat: "Locksmith", caption: "Car lockout service" },
+  { cat: "Access control", caption: "Keycard and keypad entry", src: "/work/keycard-entry.jpg" },
+  { cat: "Locksmith", caption: "Car lockout service", src: "/work/car-lockout.jpg" },
   { cat: "Garage doors", caption: "Commercial overhead door service", src: "/our-work-6.jpg" },
-  { cat: "Automatic gates", caption: "Wood driveway gate" },
-  { cat: "Fencing", caption: "Chain-link fence" },
-  { cat: "Access control", caption: "Video intercom at gate" },
+  { cat: "Automatic gates", caption: "Wood driveway gate", src: "/work/wood-driveway-gate.jpg" },
+  { cat: "Fencing", caption: "Chain-link fence", src: "/work/chain-link-fence.jpg" },
+  { cat: "Access control", caption: "Video intercom at gate", src: "/work/gate-video-intercom.jpg" },
   { cat: "Locksmith", caption: "Key cutting and duplication", src: "/our-work-5.jpg" },
 ];
 
