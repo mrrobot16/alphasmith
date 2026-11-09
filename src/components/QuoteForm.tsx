@@ -1,12 +1,14 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { track, leadConversion } from "./Analytics";
 import { submitQuote, type QuoteState } from "@/app/actions";
 
 const services = ["Locksmith", "Garage doors", "Automatic gates", "Fencing", "Access control"];
 
 export function QuoteForm() {
+  const pathname = usePathname();
   const [state, action, pending] = useActionState<QuoteState, FormData>(submitQuote, null);
 
   useEffect(() => {
@@ -14,15 +16,25 @@ export function QuoteForm() {
   }, [state]);
 
   return (
-    <form action={action} className="card p-5" aria-labelledby="quote-title">
-      <h2 id="quote-title" className="text-xl">
+    <form id="quote" action={action} className="card scroll-mt-6 p-5" aria-labelledby="quote-title">
+      <h2 id="quote-title" className="text-sub">
         Request a quote
       </h2>
-      <p className="mt-1 text-[0.875rem] leading-snug text-muted">
+      <p className="mt-2 text-small leading-snug text-muted">
         Not an emergency? Tell us what you need and we will call you back.
       </p>
 
-      <div className="mt-4 space-y-3 text-[0.875rem] font-semibold">
+      <input type="hidden" name="page" value={pathname} />
+      {/* Honeypot: hidden from people, bots fill it in */}
+      <input
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
+
+      <div className="mt-4 space-y-3 text-small font-semibold">
         <label className="block">
           Name
           <input name="name" autoComplete="name" required placeholder="Your name" className="field mt-1" />
@@ -69,14 +81,14 @@ export function QuoteForm() {
         </label>
       </div>
 
-      <button type="submit" disabled={pending} className="btn mt-4 w-full py-2.5 text-[1rem] disabled:opacity-60">
+      <button type="submit" disabled={pending} className="btn mt-4 w-full py-2.5 text-body disabled:opacity-60">
         {pending ? "Sending…" : "Send request"}
       </button>
 
       <p
         role="status"
         aria-live="polite"
-        className={`mt-3 text-[0.875rem] ${state?.ok ? "text-orange" : "text-red-400"} ${state ? "" : "hidden"}`}
+        className={`mt-3 text-small ${state?.ok ? "text-orange" : "text-red-400"} ${state ? "" : "hidden"}`}
       >
         {state?.message}
       </p>
