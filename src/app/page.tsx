@@ -79,11 +79,6 @@ export default function Home() {
         </ul>
       </section>
 
-      {/* Phones and tablets: the quote form sits here instead of beside the hero. */}
-      <section className="wrap pb-14 lg:hidden">
-        <QuoteForm id="quote-m" />
-      </section>
-
       <section data-section="our_work" className="border-t border-line py-14 lg:py-16">
         <div className="wrap">
           <div className="flex items-baseline justify-between gap-4">
@@ -196,6 +191,11 @@ export default function Home() {
         <div className="wrap">
           <ReviewsCarousel items={homeReviews} />
         </div>
+      </section>
+
+      {/* Phones and tablets: the quote form sits at the end of the page instead of beside the hero. It comes last, just above the footer. */}
+      <section className="wrap pb-14 lg:hidden">
+        <QuoteForm id="quote-m" />
       </section>
     </>
   );
