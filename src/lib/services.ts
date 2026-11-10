@@ -12,23 +12,24 @@ export type ServicePageConfig = {
   meta: { title: string; description: string };
   crumbs: { category: string; label: string };
   schema: { name: string; description: string };
-  hero: { badge: string; title: string; accent: string; lead: string; checks: string[] };
+  hero: {
+    badge: string;
+    title: string;
+    accent: string;
+    lead: string;
+    checks: string[];
+    /** Large photo beside the hero text (file in /public). */
+    image: { src: string; alt: string };
+  };
   warning: { bold: string; text: string };
   signs: { title: string; items: string[] };
-  info: { title: string; body: string; priceLabel: string; priceNote: string };
+  info: { title: string; body: string };
   steps: { title: string; items: [string, string, string][] };
   brands: { title: string; items: string[] };
-  reviews: { text: string; by: string }[];
   faqs: { q: string; a: string }[];
   near: { title: string; intro: string };
   related: { label: string; href?: string }[];
 };
-
-const REVIEW_BY = "[First name L.] · [Town] · Google · [Month Year]";
-const review = (job: string) => ({
-  text: `[Real Google review about ${job}, in the customer's words.]`,
-  by: REVIEW_BY,
-});
 
 const licensed = `Licensed and certified, ${site.license}`;
 const quote = "Written quote before any work starts";
@@ -64,6 +65,7 @@ export const springRepair: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Broken torsion or extension spring? We replace springs on residential and commercial garage doors across the Portland metro, usually the same day you call.",
     checks: [quote, licensed, "[Warranty: e.g. X-year warranty on springs and labor]"],
+    image: { src: "/our-work-3.jpg", alt: "Alpha technician repairing a garage door spring and track" },
   },
   warning: {
     bold: "Spring broke? Don't force the door.",
@@ -82,8 +84,6 @@ export const springRepair: ServicePageConfig = {
   info: {
     title: "Torsion or extension?",
     body: "**Torsion springs** sit on a bar above the door. **Extension springs** run along the side tracks. We repair both, and we'll tell you which you have when you call.",
-    priceLabel: "Spring replacement from [$XXX]",
-    priceNote: "[What the price includes, e.g. parts, labor, tune-up. Final price confirmed in writing on site.]",
   },
   steps: {
     title: "How a spring repair works",
@@ -98,11 +98,6 @@ export const springRepair: ServicePageConfig = {
     title: "Brands we work on",
     items: ["LiftMaster", "Chamberlain", "Genie", "Clopay", "Amarr", "Wayne Dalton", "Overhead Door", "[Other brands you service]"],
   },
-  reviews: [
-    review("a garage door spring replacement"),
-    review("a same-day spring repair"),
-    review("a commercial overhead door spring"),
-  ],
   faqs: [
     { q: "How much does garage door spring repair cost?", a: "[Price range and what affects it: spring type, door size, parts and labor. Final price confirmed in writing before work starts.]" },
     { q: "Can you come today?", a: "[Same-day availability and typical arrival window.]" },
@@ -139,6 +134,7 @@ export const locksmith: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Locked out, lost your keys, or need your locks changed? Our licensed locksmiths handle homes, businesses and vehicles across the Portland metro, day or night.",
     checks: [quote, licensed, "[Typical arrival time, e.g. 30 to 45 minutes]"],
+    image: { src: "/our-work-4.jpg", alt: "Locksmith installing a lock on a front door" },
   },
   warning: {
     bold: "Locked out? Don't force the lock.",
@@ -158,8 +154,6 @@ export const locksmith: ServicePageConfig = {
   info: {
     title: "Rekey or replace?",
     body: "**Rekeying** changes the lock so old keys stop working, and you keep the hardware you already have. **Replacing** is the right call when a lock is damaged, worn out, or you want a higher-security model. Not sure? Call us and we'll recommend the simpler option.",
-    priceLabel: "Lockout service from [$XXX]",
-    priceNote: "[What the price includes, e.g. service call, labor, parts. Final price confirmed in writing before work starts.]",
   },
   steps: {
     title: "How a locksmith call works",
@@ -174,11 +168,6 @@ export const locksmith: ServicePageConfig = {
     title: "Lock brands we work on",
     items: ["Schlage", "Kwikset", "Yale", "Medeco", "Baldwin", "[Other brands you service]"],
   },
-  reviews: [
-    review("an emergency home lockout"),
-    review("rekeying locks after a move"),
-    review("a car key replacement"),
-  ],
   faqs: [
     { q: "How much does a locksmith cost?", a: "[Price range and what affects it: time of day, lock type, parts and labor. Final price confirmed in writing before work starts.]" },
     { q: "How fast can you get here?", a: "[Typical arrival window and 24/7 availability.]" },
@@ -216,6 +205,7 @@ export const automaticGates: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Gate stuck, opener dead, or ready for a new driveway gate? We repair and install automatic gates for homes and businesses across the Portland metro.",
     checks: [quote, licensed, "[Warranty: e.g. X-year warranty on gate openers and labor]"],
+    image: { src: "/work/wood-driveway-gate.jpg", alt: "Wood automatic driveway gate installed by Alpha" },
   },
   warning: {
     bold: "Gate stuck or not closing? Keep people and pets clear.",
@@ -234,8 +224,6 @@ export const automaticGates: ServicePageConfig = {
   info: {
     title: "Swing or slide?",
     body: "**Swing gates** open like a door on hinges and suit driveways with room in front of the gate. **Slide gates** roll along the fence line and suit tight or sloped driveways. We repair and install both, and we'll help you choose the right type.",
-    priceLabel: "Gate repair from [$XXX]",
-    priceNote: "[What the price includes, e.g. diagnosis, parts, labor. Final price confirmed in writing before work starts.]",
   },
   steps: {
     title: "How a gate repair works",
@@ -250,11 +238,6 @@ export const automaticGates: ServicePageConfig = {
     title: "Gate opener brands we work on",
     items: ["LiftMaster", "Chamberlain", "Viking Access", "FAAC", "Nice", "[Other brands you service]"],
   },
-  reviews: [
-    review("a driveway gate repair"),
-    review("a gate opener replacement"),
-    review("a new automatic gate install"),
-  ],
   faqs: [
     { q: "How much does automatic gate repair cost?", a: "[Price range and what affects it: opener type, gate size, parts and labor. Final price confirmed in writing before work starts.]" },
     { q: "Can you come today?", a: "[Same-day availability and typical arrival window.]" },
@@ -293,6 +276,7 @@ export const accessControl: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Keycards, fobs, keypads and intercoms that decide who gets in and when. We install, repair and rekey access control for businesses, offices, gated properties and multi-unit buildings.",
     checks: [quote, licensed, "[Warranty: e.g. X-year warranty on equipment and labor]"],
+    image: { src: "/work/gate-video-intercom.jpg", alt: "Video intercom and keypad entry at a gate" },
   },
   warning: {
     bold: "Locked out or system down? Call us any time.",
@@ -312,8 +296,6 @@ export const accessControl: ServicePageConfig = {
   info: {
     title: "Which system fits?",
     body: "**Keypad and keycard** systems suit offices and small buildings. **Fob and proximity readers** suit larger sites with many users. **Intercom and video entry** suit gates and multi-unit buildings. We install and service them all, and we'll help you choose.",
-    priceLabel: "System installation from [$XXX per door]",
-    priceNote: "[What the price includes, e.g. reader, lock hardware, programming. Final price confirmed in writing before work starts.]",
   },
   steps: {
     title: "How an access control job works",
@@ -328,11 +310,6 @@ export const accessControl: ServicePageConfig = {
     title: "Equipment we install and service",
     items: ["Keypads", "Keycard readers", "Key fobs", "Intercoms", "Video entry", "Panic hardware", "Electric strikes", "[Other equipment you service]"],
   },
-  reviews: [
-    review("a keycard entry system install"),
-    review("a gate keypad and intercom repair"),
-    review("an access control system for an office"),
-  ],
   faqs: [
     { q: "How much does an access control system cost?", a: "[Price range and what affects it: number of doors, reader type, wiring and programming. Final price confirmed in writing before work starts.]" },
     { q: "Can you add access control to our existing doors?", a: "[Which doors and locks you can retrofit, and what to expect.]" },
@@ -370,6 +347,7 @@ export const fencing: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Storm damage, leaning posts or a brand-new fence line? We repair and install fences and gates for homes and businesses across the Portland metro.",
     checks: [quote, licensed, "[Warranty: e.g. X-year warranty on materials and labor]"],
+    image: { src: "/our-work-2.jpg", alt: "Alpha technician installing a metal fence" },
   },
   warning: {
     bold: "Fence down after a storm? Secure the area first.",
@@ -389,8 +367,6 @@ export const fencing: ServicePageConfig = {
   info: {
     title: "Which fence fits?",
     body: "**Chain-link** is durable and budget friendly, and works for yards and commercial lots. **Wood** gives privacy and a classic look. **Metal and ornamental** fencing suits security and curb appeal. Tell us what you need and we'll recommend what holds up in Portland's wet weather.",
-    priceLabel: "Fence repair from [$XXX]",
-    priceNote: "[What the price includes, e.g. materials, labor, haul-away. Final price confirmed in writing before work starts.]",
   },
   steps: {
     title: "How a fence job works",
@@ -405,11 +381,6 @@ export const fencing: ServicePageConfig = {
     title: "Fence types we work with",
     items: ["Chain-link", "Wood", "Metal and ornamental", "Privacy fencing", "Fence gates", "[Other types you install]"],
   },
-  reviews: [
-    review("a fence repair after a storm"),
-    review("a new chain-link fence"),
-    review("a metal fence installation"),
-  ],
   faqs: [
     { q: "How much does fence repair cost?", a: "[Price range and what affects it: fence type, length, materials and labor. Final price confirmed in writing before work starts.]" },
     { q: "Can you come out to give a quote?", a: "[How quotes work: on-site visit, photos, and typical timing.]" },

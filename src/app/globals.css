@@ -188,6 +188,34 @@ select.field {
 }
 
 /* Entrance: sections fade up once */
+/* Reviews carousel: the new page slides in from the side it is travelling towards. */
+@keyframes slide-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes slide-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.slide-next {
+  animation: slide-from-right 450ms var(--ease-out) backwards;
+}
+.slide-prev {
+  animation: slide-from-left 450ms var(--ease-out) backwards;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -199,7 +227,10 @@ select.field {
   }
 }
 .rise {
-  animation: rise 500ms var(--ease-out) both;
+  /* "backwards" (not "both"): once the entrance ends the element returns to its normal styles,
+     so it is not left in its own opacity/transform layer, which some browsers paint a different
+     shade from the page background. */
+  animation: rise 500ms var(--ease-out) backwards;
 }
 
 details > summary {
@@ -224,7 +255,9 @@ details[open] > summary::before {
   html {
     scroll-behavior: auto;
   }
-  .rise {
+  .rise,
+  .slide-next,
+  .slide-prev {
     animation: none;
   }
   .btn,

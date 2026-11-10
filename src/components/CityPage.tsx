@@ -1,31 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
-import { site, services } from "@/lib/site";
+import { site, services, homeReviews } from "@/lib/site";
 import { cityHref, type City } from "@/lib/cities";
 import { breadcrumbJsonLd } from "@/lib/seo";
-import { QuoteForm } from "./QuoteForm";
-import { TrustBar, Hero, Faq, Reviews } from "./Shared";
+import { TrustBar, Hero, Faq } from "./Shared";
+import { ReviewsCarousel } from "./ReviewsCarousel";
+import { RecentJobs } from "./RecentJobs";
 import { GoogleMap } from "./GoogleMap";
 import { JsonLd } from "./JsonLd";
 import { CheckIcon, PhoneIcon, serviceIcons } from "./Icons";
 
-const REVIEW_BY = "[First name L.] · [Town] · Google · [Month Year]";
-
-// Replace with real photos of jobs in each city when available.
-const recentJobs = [
-  { src: "/work/job-slat-gate.jpg", alt: "Black steel slat driveway gate installed by Alpha" },
-  { src: "/work/job-overhead-door.jpg", alt: "Alpha technician inspecting an overhead door" },
-  { src: "/work/job-door-hardware.jpg", alt: "Installing new door hardware" },
-];
 
 export function CityPage({ city }: { city: City }) {
-  const { name } = city;
+  const { name, state } = city;
   const path = `/locations/${city.slug}`;
-  const reviews = [
-    { text: `[Real Google review about a lockout in ${name}, in the customer's words.]`, by: REVIEW_BY },
-    { text: `[Real Google review about a garage door repair in ${name}, in the customer's words.]`, by: REVIEW_BY },
-    { text: `[Real Google review about a gate or access control job in ${name}, in the customer's words.]`, by: REVIEW_BY },
-  ];
   const faqs = [
     { q: `How fast can you get to ${name}?`, a: "[Typical arrival time and where the team is based.]" },
     { q: `Do you charge a trip fee to ${name}?`, a: "[Trip fee policy.]" },
@@ -46,7 +33,7 @@ export function CityPage({ city }: { city: City }) {
         </ol>
       </nav>
 
-      <Hero badge={`Serving ${name} · Open 24/7`} title="Locksmith & garage door service" accent={`in ${name}, OR`} form={<QuoteForm />}>
+      <Hero badge={`Serving ${name} · Open 24/7`} title="Locksmith & garage door service" accent={`in ${name}, ${state}`}>
         <p className="mt-6 max-w-[36rem] text-body leading-relaxed text-muted">
           Locked out, broken garage door, or a gate that won&apos;t close? Alpha serves homes and businesses in {name},
           day or night.
@@ -61,7 +48,7 @@ export function CityPage({ city }: { city: City }) {
 
       <TrustBar />
 
-      <section data-section="services" className="wrap py-14">
+      <section data-section="services" className="wrap py-8 sm:py-14">
         <h2 className="h-section">Our services in {name}</h2>
         <ul className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => {
@@ -80,7 +67,7 @@ export function CityPage({ city }: { city: City }) {
         </ul>
       </section>
 
-      <section data-section="local_team_and_map" className="bg-bg-alt py-14">
+      <section data-section="local_team_and_map" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap grid gap-8 lg:grid-cols-2">
           <div>
             <h2 className="h-section">Your local {name} team</h2>
@@ -93,41 +80,31 @@ export function CityPage({ city }: { city: City }) {
             <h3 className="mt-6 text-title">Neighborhoods</h3>
             <p className="mt-2 text-small text-muted">[List the {name} neighborhoods you serve]</p>
           </div>
-          <GoogleMap place={`${name}, OR`} className="h-full min-h-64" />
+          <GoogleMap place={`${name}, ${state}`} className="h-full min-h-64" />
         </div>
       </section>
 
-      <section data-section="recent_jobs" className="py-14">
+      <section data-section="recent_jobs" className="py-8 sm:py-14">
         <div className="wrap">
-          <h2 className="h-section">Recent jobs in {name}</h2>
-          <ul className="mt-6 grid gap-4 md:grid-cols-3">
-            {recentJobs.map((j) => (
-              <li key={j.src}>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line">
-                  <Image src={j.src} alt={j.alt} fill sizes="(min-width:768px) 33vw, 100vw" className="object-cover" />
-                </div>
-                <p className="mt-2 text-small text-muted">[Job type, {name} · Month Year]</p>
-              </li>
-            ))}
-          </ul>
+          <h2 className="h-section">Recent jobs near you</h2>
+          <RecentJobs name={name} />
         </div>
       </section>
 
-      <section id="reviews" data-section="reviews" className="bg-bg-alt py-14">
+      <section id="reviews" data-section="reviews" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
-          <h2 className="h-section">What {name} customers say</h2>
-          <div className="mt-6"><Reviews items={reviews} /></div>
+          <ReviewsCarousel items={homeReviews} title={`What ${name} customers say`} />
         </div>
       </section>
 
-      <section data-section="faq" className="py-14">
+      <section data-section="faq" className="py-8 sm:py-14">
         <div className="wrap">
           <h2 className="h-section">Frequently asked questions</h2>
           <div className="mt-6"><Faq items={faqs} /></div>
         </div>
       </section>
 
-      <section data-section="nearby_areas" className="border-t border-line bg-bg-alt py-14">
+      <section data-section="nearby_areas" className="border-t border-line bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
           <h2 className="h-section">Nearby areas we serve</h2>
           <ul className="mt-6 flex flex-wrap gap-3">

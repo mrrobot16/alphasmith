@@ -129,13 +129,13 @@ export function SiteHeader() {
               <a href={site.phoneHref} className="btn w-full py-3.5 text-sub !text-black">
                 <PhoneIcon className="size-6" /> Call {site.phone}
               </a>
-              <a
-                href="#quote"
+              <Link
+                href="/#quote"
                 onClick={() => setOpen(false)}
                 className="btn w-full !border-2 !border-solid !border-[#4a4a4a] !bg-black py-3 text-body !font-sans !font-semibold !normal-case !text-white"
               >
                 Request a quote
-              </a>
+              </Link>
               <p className="text-center text-small text-muted">
                 Open 24/7 · {site.license}
               </p>

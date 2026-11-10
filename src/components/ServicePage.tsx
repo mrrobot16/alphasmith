@@ -1,11 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { site, homeReviews } from "@/lib/site";
 import { serviceAreas, type ServicePageConfig } from "@/lib/services";
 import { cityHref } from "@/lib/cities";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
-import { QuoteForm } from "./QuoteForm";
-import { TrustBar, Hero, Faq, Reviews } from "./Shared";
+import { TrustBar, Hero, Faq } from "./Shared";
+import { ReviewsCarousel } from "./ReviewsCarousel";
 import { JsonLd } from "./JsonLd";
+import { StepsList } from "./StepsList";
 import { CheckIcon, PhoneIcon, WarnIcon } from "./Icons";
 
 /** Renders **bold** segments inside a plain string. */
@@ -32,7 +34,22 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </ol>
       </nav>
 
-      <Hero badge={c.hero.badge} title={c.hero.title} accent={c.hero.accent} form={<QuoteForm />}>
+      <Hero badge={c.hero.badge} title={c.hero.title} accent={c.hero.accent}
+        asideWide
+        asideHiddenOnPhones
+        form={
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line lg:aspect-[5/4]">
+            <Image
+              src={c.hero.image.src}
+              alt={c.hero.image.alt}
+              fill
+              priority
+              sizes="(min-width:1024px) 520px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        }
+      >
         <p className="mt-6 max-w-[36rem] text-body leading-relaxed text-muted">{c.hero.lead}</p>
         <ul className="mt-5 space-y-2 text-body">
           {c.hero.checks.map((t) => (
@@ -60,7 +77,7 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </div>
       </div>
 
-      <section data-section="signs_and_pricing" className="wrap grid gap-10 py-14 md:grid-cols-2">
+      <section data-section="signs_and_info" className="wrap grid gap-6 py-8 sm:py-14 md:grid-cols-2 md:gap-10">
         <div>
           <h2 className="h-section">{c.signs.title}</h2>
           <ul className="mt-5 space-y-3 text-body">
@@ -72,30 +89,17 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         <div>
           <h2 className="h-section">{c.info.title}</h2>
           <p className="mt-4 text-body leading-relaxed"><Rich text={c.info.body} /></p>
-          <div className="card mt-5 p-4">
-            <p className="eyebrow !text-label">Pricing</p>
-            <p className="mt-1 font-display text-sub font-bold uppercase">{c.info.priceLabel}</p>
-            <p className="mt-1 text-small text-muted">{c.info.priceNote}</p>
-          </div>
         </div>
       </section>
 
-      <section data-section="how_it_works" className="bg-bg-alt py-14">
+      <section data-section="how_it_works" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
           <h2 className="h-section">{c.steps.title}</h2>
-          <ol className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {c.steps.items.map(([n, t, b]) => (
-              <li key={n} className="card p-5">
-                <p className="font-display text-sub font-bold text-orange">{n}</p>
-                <h3 className="mt-2 text-title">{t}</h3>
-                <p className="mt-2 text-body leading-relaxed text-muted">{b}</p>
-              </li>
-            ))}
-          </ol>
+          <StepsList items={c.steps.items} />
         </div>
       </section>
 
-      <section data-section="brands" className="py-14">
+      <section data-section="brands" className="py-8 sm:py-14">
         <div className="wrap">
           <h2 className="h-section">{c.brands.title}</h2>
           <ul className="mt-5 flex flex-wrap gap-2">
@@ -104,21 +108,20 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </div>
       </section>
 
-      <section id="reviews" data-section="reviews" className="bg-bg-alt py-14">
+      <section id="reviews" data-section="reviews" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
-          <h2 className="h-section">What customers say</h2>
-          <div className="mt-6"><Reviews items={c.reviews} /></div>
+          <ReviewsCarousel items={homeReviews} />
         </div>
       </section>
 
-      <section id="faq" data-section="faq" className="py-14">
+      <section id="faq" data-section="faq" className="py-8 sm:py-14">
         <div className="wrap">
           <h2 className="h-section">Frequently asked questions</h2>
           <div className="mt-6"><Faq items={c.faqs} /></div>
         </div>
       </section>
 
-      <section data-section="areas_and_related" className="bg-bg-alt py-14">
+      <section data-section="areas_and_related" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
           <h2 className="h-section">{c.near.title}</h2>
           <p className="mt-3 text-small text-muted">{c.near.intro}</p>
