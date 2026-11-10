@@ -122,6 +122,7 @@ export function Hero({
   form,
   formDesktopOnly = false,
   asideWide = false,
+  asideHiddenOnPhones = false,
 }: {
   badge: string;
   title: string;
@@ -132,6 +133,8 @@ export function Hero({
   formDesktopOnly?: boolean;
   /** Wider right column, for a photo instead of the 340px quote form. */
   asideWide?: boolean;
+  /** Hide the right column below 768px (phones only). */
+  asideHiddenOnPhones?: boolean;
 }) {
   return (
     <section
@@ -150,7 +153,7 @@ export function Hero({
         </h1>
         {children}
       </div>
-      {form && <div className={`rise [animation-delay:80ms] ${formDesktopOnly ? "hidden lg:block" : ""}`}>{form}</div>}
+      {form && <div className={`rise [animation-delay:80ms] ${formDesktopOnly ? "hidden lg:block" : asideHiddenOnPhones ? "hidden md:block" : ""}`}>{form}</div>}
     </section>
   );
 }
