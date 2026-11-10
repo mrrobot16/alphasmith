@@ -13,9 +13,6 @@ const iconFor = {
   "access control": "access",
 } as const;
 
-/** Phones show the first 8 tiles; larger screens show them all (10). */
-const MOBILE_MAX = 8;
-
 export function WorkGallery() {
   const [active, setActive] = useState("All");
   const filters = workFilters.filter((f) => f === "All" || work.some((w) => w.cat === f));
@@ -43,10 +40,10 @@ export function WorkGallery() {
       </div>
 
       <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {items.map((w, i) => {
+        {items.map((w) => {
           const Icon = serviceIcons[iconFor[w.cat.toLowerCase() as keyof typeof iconFor] ?? "key"];
           return (
-            <li key={w.caption} className={`rise ${i >= MOBILE_MAX ? "hidden md:block" : ""}`}>
+            <li key={w.caption} className="rise">
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line">
                 {w.src ? (
                   <Image src={w.src} alt={`${w.cat}: ${w.caption}`} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover" />
