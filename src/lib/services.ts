@@ -12,7 +12,15 @@ export type ServicePageConfig = {
   meta: { title: string; description: string };
   crumbs: { category: string; label: string };
   schema: { name: string; description: string };
-  hero: { badge: string; title: string; accent: string; lead: string; checks: string[] };
+  hero: {
+    badge: string;
+    title: string;
+    accent: string;
+    lead: string;
+    checks: string[];
+    /** Large photo beside the hero text (file in /public). */
+    image: { src: string; alt: string };
+  };
   warning: { bold: string; text: string };
   signs: { title: string; items: string[] };
   info: { title: string; body: string; priceLabel: string; priceNote: string };
@@ -64,6 +72,7 @@ export const springRepair: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Broken torsion or extension spring? We replace springs on residential and commercial garage doors across the Portland metro, usually the same day you call.",
     checks: [quote, licensed, "[Warranty: e.g. X-year warranty on springs and labor]"],
+    image: { src: "/our-work-3.jpg", alt: "Alpha technician repairing a garage door spring and track" },
   },
   warning: {
     bold: "Spring broke? Don't force the door.",
@@ -139,6 +148,7 @@ export const locksmith: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Locked out, lost your keys, or need your locks changed? Our licensed locksmiths handle homes, businesses and vehicles across the Portland metro, day or night.",
     checks: [quote, licensed, "[Typical arrival time, e.g. 30 to 45 minutes]"],
+    image: { src: "/our-work-4.jpg", alt: "Locksmith installing a lock on a front door" },
   },
   warning: {
     bold: "Locked out? Don't force the lock.",
@@ -216,6 +226,7 @@ export const automaticGates: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Gate stuck, opener dead, or ready for a new driveway gate? We repair and install automatic gates for homes and businesses across the Portland metro.",
     checks: [quote, licensed, "[Warranty: e.g. X-year warranty on gate openers and labor]"],
+    image: { src: "/work/wood-driveway-gate.jpg", alt: "Wood automatic driveway gate installed by Alpha" },
   },
   warning: {
     bold: "Gate stuck or not closing? Keep people and pets clear.",
@@ -293,6 +304,7 @@ export const accessControl: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Keycards, fobs, keypads and intercoms that decide who gets in and when. We install, repair and rekey access control for businesses, offices, gated properties and multi-unit buildings.",
     checks: [quote, licensed, "[Warranty: e.g. X-year warranty on equipment and labor]"],
+    image: { src: "/work/gate-video-intercom.jpg", alt: "Video intercom and keypad entry at a gate" },
   },
   warning: {
     bold: "Locked out or system down? Call us any time.",
@@ -370,6 +382,7 @@ export const fencing: ServicePageConfig = {
     accent: "Portland, OR",
     lead: "Storm damage, leaning posts or a brand-new fence line? We repair and install fences and gates for homes and businesses across the Portland metro.",
     checks: [quote, licensed, "[Warranty: e.g. X-year warranty on materials and labor]"],
+    image: { src: "/our-work-2.jpg", alt: "Alpha technician installing a metal fence" },
   },
   warning: {
     bold: "Fence down after a storm? Secure the area first.",

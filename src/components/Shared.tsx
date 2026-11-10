@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/lib/site";
 import { ShieldIcon, KeyIcon, DocIcon, AwardIcon, PhoneIcon } from "./Icons";
 
@@ -46,13 +47,13 @@ export function StickyCall() {
             <a href={site.phoneHref} className="btn min-w-0 flex-1 whitespace-nowrap px-3 py-3 text-title !text-black sm:text-sub">
               <PhoneIcon className="size-5 shrink-0" /> Call {site.phone}
             </a>
-            <a
-              href="#quote"
+            <Link
+              href="/#quote"
               data-track-label="Quote"
               className="btn !border-2 !border-solid !border-[#4a4a4a] !bg-black px-6 py-3 text-title !text-white sm:text-sub"
             >
               Quote
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -120,17 +121,23 @@ export function Hero({
   children,
   form,
   formDesktopOnly = false,
+  asideWide = false,
 }: {
   badge: string;
   title: string;
   accent: string;
   children: React.ReactNode;
-  form: React.ReactNode;
+  form?: React.ReactNode;
   /** Home page: below lg the form is shown further down the page instead. */
   formDesktopOnly?: boolean;
+  /** Wider right column, for a photo instead of the 340px quote form. */
+  asideWide?: boolean;
 }) {
   return (
-    <section data-section="hero" className="wrap grid gap-10 py-12 lg:grid-cols-[1fr_340px] lg:gap-20 lg:py-20">
+    <section
+      data-section="hero"
+      className={`wrap grid gap-10 py-12 lg:py-20 ${form ? (asideWide ? "lg:grid-cols-[1fr_minmax(0,520px)] lg:items-center lg:gap-14" : "lg:grid-cols-[1fr_340px] lg:gap-20") : ""}`}
+    >
       <div className="rise">
         <p className="inline-flex items-center gap-2.5 rounded-full border border-orange/70 py-1.5 pl-2.5 pr-4 font-display text-small font-semibold uppercase tracking-[0.12em] text-orange">
           <span className="grid size-4 place-items-center rounded-full bg-orange/30">
@@ -143,7 +150,7 @@ export function Hero({
         </h1>
         {children}
       </div>
-      <div className={`rise [animation-delay:80ms] ${formDesktopOnly ? "hidden lg:block" : ""}`}>{form}</div>
+      {form && <div className={`rise [animation-delay:80ms] ${formDesktopOnly ? "hidden lg:block" : ""}`}>{form}</div>}
     </section>
   );
 }

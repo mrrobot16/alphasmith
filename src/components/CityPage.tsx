@@ -3,7 +3,6 @@ import Link from "next/link";
 import { site, services } from "@/lib/site";
 import { cityHref, type City } from "@/lib/cities";
 import { breadcrumbJsonLd } from "@/lib/seo";
-import { QuoteForm } from "./QuoteForm";
 import { TrustBar, Hero, Faq, Reviews } from "./Shared";
 import { GoogleMap } from "./GoogleMap";
 import { JsonLd } from "./JsonLd";
@@ -46,7 +45,7 @@ export function CityPage({ city }: { city: City }) {
         </ol>
       </nav>
 
-      <Hero badge={`Serving ${name} · Open 24/7`} title="Locksmith & garage door service" accent={`in ${name}, OR`} form={<QuoteForm />}>
+      <Hero badge={`Serving ${name} · Open 24/7`} title="Locksmith & garage door service" accent={`in ${name}, OR`}>
         <p className="mt-6 max-w-[36rem] text-body leading-relaxed text-muted">
           Locked out, broken garage door, or a gate that won&apos;t close? Alpha serves homes and businesses in {name},
           day or night.

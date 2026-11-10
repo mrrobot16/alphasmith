@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 /**
@@ -7,17 +8,10 @@ import { useEffect } from "react";
  * phones) and only one is ever visible. Links to "#quote" scroll to the visible one.
  */
 export function QuoteAnchor() {
+  const pathname = usePathname(); // re-run after client-side navigation to a new page
   useEffect(() => {
     const visibleForm = () =>
       [...document.querySelectorAll<HTMLElement>('form[data-section="quote_form"]')].find((f) => f.offsetParent !== null);
-
-    const go = () => {
-      if (window.location.hash !== "#quote") return false;
-      const form = visibleForm();
-      if (!form) return false;
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-      return true;
-    };
 
     const onClick = (e: MouseEvent) => {
       const a = (e.target as HTMLElement | null)?.closest<HTMLAnchorElement>("a");
@@ -31,9 +25,20 @@ export function QuoteAnchor() {
       history.replaceState(null, "", "#quote");
     };
 
-    go();
+    // Arriving on "/#quote" from another page: the browser finds no element with that id,
+    // so scroll ourselves, and once more after Next.js finishes its own scroll handling.
+    const jump = () => {
+      const form = window.location.hash === "#quote" ? visibleForm() : undefined;
+      if (form) form.scrollIntoView({ behavior: "instant", block: "start" });
+    };
+    jump();
+    const t = window.setTimeout(jump, 400);
+
     document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
-  }, []);
+    return () => {
+      window.clearTimeout(t);
+      document.removeEventListener("click", onClick);
+    };
+  }, [pathname]);
   return null;
 }

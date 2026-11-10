@@ -1,9 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { serviceAreas, type ServicePageConfig } from "@/lib/services";
 import { cityHref } from "@/lib/cities";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
-import { QuoteForm } from "./QuoteForm";
 import { TrustBar, Hero, Faq, Reviews } from "./Shared";
 import { JsonLd } from "./JsonLd";
 import { CheckIcon, PhoneIcon, WarnIcon } from "./Icons";
@@ -32,7 +32,21 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </ol>
       </nav>
 
-      <Hero badge={c.hero.badge} title={c.hero.title} accent={c.hero.accent} form={<QuoteForm />}>
+      <Hero badge={c.hero.badge} title={c.hero.title} accent={c.hero.accent}
+        asideWide
+        form={
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line lg:aspect-[5/4]">
+            <Image
+              src={c.hero.image.src}
+              alt={c.hero.image.alt}
+              fill
+              priority
+              sizes="(min-width:1024px) 520px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        }
+      >
         <p className="mt-6 max-w-[36rem] text-body leading-relaxed text-muted">{c.hero.lead}</p>
         <ul className="mt-5 space-y-2 text-body">
           {c.hero.checks.map((t) => (
