@@ -199,7 +199,10 @@ select.field {
   }
 }
 .rise {
-  animation: rise 500ms var(--ease-out) both;
+  /* "backwards" (not "both"): once the entrance ends the element returns to its normal styles,
+     so it is not left in its own opacity/transform layer, which some browsers paint a different
+     shade from the page background. */
+  animation: rise 500ms var(--ease-out) backwards;
 }
 
 details > summary {
