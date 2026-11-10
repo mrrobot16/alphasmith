@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { site, services } from "@/lib/site";
+import { site, services, homeReviews } from "@/lib/site";
 import { cityHref, type City } from "@/lib/cities";
 import { breadcrumbJsonLd } from "@/lib/seo";
-import { TrustBar, Hero, Faq, Reviews } from "./Shared";
+import { TrustBar, Hero, Faq } from "./Shared";
+import { ReviewsCarousel } from "./ReviewsCarousel";
 import { GoogleMap } from "./GoogleMap";
 import { JsonLd } from "./JsonLd";
 import { CheckIcon, PhoneIcon, serviceIcons } from "./Icons";
 
-const REVIEW_BY = "[First name L.] · [Town] · Google · [Month Year]";
 
 // Replace with real photos of jobs in each city when available.
 const recentJobs = [
@@ -20,11 +20,6 @@ const recentJobs = [
 export function CityPage({ city }: { city: City }) {
   const { name } = city;
   const path = `/locations/${city.slug}`;
-  const reviews = [
-    { text: `[Real Google review about a lockout in ${name}, in the customer's words.]`, by: REVIEW_BY },
-    { text: `[Real Google review about a garage door repair in ${name}, in the customer's words.]`, by: REVIEW_BY },
-    { text: `[Real Google review about a gate or access control job in ${name}, in the customer's words.]`, by: REVIEW_BY },
-  ];
   const faqs = [
     { q: `How fast can you get to ${name}?`, a: "[Typical arrival time and where the team is based.]" },
     { q: `Do you charge a trip fee to ${name}?`, a: "[Trip fee policy.]" },
@@ -114,8 +109,7 @@ export function CityPage({ city }: { city: City }) {
 
       <section id="reviews" data-section="reviews" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
-          <h2 className="h-section">What {name} customers say</h2>
-          <div className="mt-6"><Reviews items={reviews} /></div>
+          <ReviewsCarousel items={homeReviews} title={`What ${name} customers say`} />
         </div>
       </section>
 

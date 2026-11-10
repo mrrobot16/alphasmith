@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { site, homeReviews } from "@/lib/site";
 import { serviceAreas, type ServicePageConfig } from "@/lib/services";
 import { cityHref } from "@/lib/cities";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
-import { TrustBar, Hero, Faq, Reviews } from "./Shared";
+import { TrustBar, Hero, Faq } from "./Shared";
+import { ReviewsCarousel } from "./ReviewsCarousel";
 import { JsonLd } from "./JsonLd";
 import { StepsList } from "./StepsList";
 import { CheckIcon, PhoneIcon, WarnIcon } from "./Icons";
@@ -109,8 +110,7 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
 
       <section id="reviews" data-section="reviews" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
-          <h2 className="h-section">What customers say</h2>
-          <div className="mt-6"><Reviews items={c.reviews} /></div>
+          <ReviewsCarousel items={homeReviews} />
         </div>
       </section>
 

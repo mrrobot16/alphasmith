@@ -88,22 +88,6 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
   );
 }
 
-export function Reviews({ items }: { items: { text: string; by: string }[] }) {
-  return (
-    <ul className="grid gap-4 md:grid-cols-3">
-      {items.map((r) => (
-        <li key={r.text} className="card p-5">
-          <p className="text-orange" aria-label="5 out of 5 stars">
-            ★★★★★
-          </p>
-          <p className="mt-3 text-body leading-relaxed">{r.text}</p>
-          <p className="mt-3 text-small text-muted">{r.by}</p>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export function Placeholder({ label, className = "" }: { label: string; className?: string }) {
   return (
     <div
