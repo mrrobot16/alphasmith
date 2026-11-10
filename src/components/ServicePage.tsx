@@ -74,7 +74,7 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         </div>
       </div>
 
-      <section data-section="signs_and_pricing" className="wrap grid gap-10 py-14 md:grid-cols-2">
+      <section data-section="signs_and_info" className="wrap grid gap-10 py-14 md:grid-cols-2">
         <div>
           <h2 className="h-section">{c.signs.title}</h2>
           <ul className="mt-5 space-y-3 text-body">
@@ -86,11 +86,6 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
         <div>
           <h2 className="h-section">{c.info.title}</h2>
           <p className="mt-4 text-body leading-relaxed"><Rich text={c.info.body} /></p>
-          <div className="card mt-5 p-4">
-            <p className="eyebrow !text-label">Pricing</p>
-            <p className="mt-1 font-display text-sub font-bold uppercase">{c.info.priceLabel}</p>
-            <p className="mt-1 text-small text-muted">{c.info.priceNote}</p>
-          </div>
         </div>
       </section>
 

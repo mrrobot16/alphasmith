@@ -23,7 +23,7 @@ export type ServicePageConfig = {
   };
   warning: { bold: string; text: string };
   signs: { title: string; items: string[] };
-  info: { title: string; body: string; priceLabel: string; priceNote: string };
+  info: { title: string; body: string };
   steps: { title: string; items: [string, string, string][] };
   brands: { title: string; items: string[] };
   reviews: { text: string; by: string }[];
@@ -91,8 +91,6 @@ export const springRepair: ServicePageConfig = {
   info: {
     title: "Torsion or extension?",
     body: "**Torsion springs** sit on a bar above the door. **Extension springs** run along the side tracks. We repair both, and we'll tell you which you have when you call.",
-    priceLabel: "Spring replacement from [$XXX]",
-    priceNote: "[What the price includes, e.g. parts, labor, tune-up. Final price confirmed in writing on site.]",
   },
   steps: {
     title: "How a spring repair works",
@@ -168,8 +166,6 @@ export const locksmith: ServicePageConfig = {
   info: {
     title: "Rekey or replace?",
     body: "**Rekeying** changes the lock so old keys stop working, and you keep the hardware you already have. **Replacing** is the right call when a lock is damaged, worn out, or you want a higher-security model. Not sure? Call us and we'll recommend the simpler option.",
-    priceLabel: "Lockout service from [$XXX]",
-    priceNote: "[What the price includes, e.g. service call, labor, parts. Final price confirmed in writing before work starts.]",
   },
   steps: {
     title: "How a locksmith call works",
@@ -245,8 +241,6 @@ export const automaticGates: ServicePageConfig = {
   info: {
     title: "Swing or slide?",
     body: "**Swing gates** open like a door on hinges and suit driveways with room in front of the gate. **Slide gates** roll along the fence line and suit tight or sloped driveways. We repair and install both, and we'll help you choose the right type.",
-    priceLabel: "Gate repair from [$XXX]",
-    priceNote: "[What the price includes, e.g. diagnosis, parts, labor. Final price confirmed in writing before work starts.]",
   },
   steps: {
     title: "How a gate repair works",
@@ -324,8 +318,6 @@ export const accessControl: ServicePageConfig = {
   info: {
     title: "Which system fits?",
     body: "**Keypad and keycard** systems suit offices and small buildings. **Fob and proximity readers** suit larger sites with many users. **Intercom and video entry** suit gates and multi-unit buildings. We install and service them all, and we'll help you choose.",
-    priceLabel: "System installation from [$XXX per door]",
-    priceNote: "[What the price includes, e.g. reader, lock hardware, programming. Final price confirmed in writing before work starts.]",
   },
   steps: {
     title: "How an access control job works",
@@ -402,8 +394,6 @@ export const fencing: ServicePageConfig = {
   info: {
     title: "Which fence fits?",
     body: "**Chain-link** is durable and budget friendly, and works for yards and commercial lots. **Wood** gives privacy and a classic look. **Metal and ornamental** fencing suits security and curb appeal. Tell us what you need and we'll recommend what holds up in Portland's wet weather.",
-    priceLabel: "Fence repair from [$XXX]",
-    priceNote: "[What the price includes, e.g. materials, labor, haul-away. Final price confirmed in writing before work starts.]",
   },
   steps: {
     title: "How a fence job works",
