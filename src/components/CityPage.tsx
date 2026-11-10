@@ -1,21 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 import { site, services, homeReviews } from "@/lib/site";
 import { cityHref, type City } from "@/lib/cities";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import { TrustBar, Hero, Faq } from "./Shared";
 import { ReviewsCarousel } from "./ReviewsCarousel";
+import { RecentJobs } from "./RecentJobs";
 import { GoogleMap } from "./GoogleMap";
 import { JsonLd } from "./JsonLd";
 import { CheckIcon, PhoneIcon, serviceIcons } from "./Icons";
 
-
-// Replace with real photos of jobs in each city when available.
-const recentJobs = [
-  { src: "/work/job-slat-gate.jpg", alt: "Black steel slat driveway gate installed by Alpha" },
-  { src: "/work/job-overhead-door.jpg", alt: "Alpha technician inspecting an overhead door" },
-  { src: "/work/job-door-hardware.jpg", alt: "Installing new door hardware" },
-];
 
 export function CityPage({ city }: { city: City }) {
   const { name } = city;
@@ -93,17 +86,8 @@ export function CityPage({ city }: { city: City }) {
 
       <section data-section="recent_jobs" className="py-8 sm:py-14">
         <div className="wrap">
-          <h2 className="h-section">Recent jobs in {name}</h2>
-          <ul className="mt-6 grid gap-4 md:grid-cols-3">
-            {recentJobs.map((j) => (
-              <li key={j.src}>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line">
-                  <Image src={j.src} alt={j.alt} fill sizes="(min-width:768px) 33vw, 100vw" className="object-cover" />
-                </div>
-                <p className="mt-2 text-small text-muted">[Job type, {name} · Month Year]</p>
-              </li>
-            ))}
-          </ul>
+          <h2 className="h-section">Recent jobs near you</h2>
+          <RecentJobs name={name} />
         </div>
       </section>
 
