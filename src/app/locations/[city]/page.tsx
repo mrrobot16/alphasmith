@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   if (!city) return {};
   return pageMeta({
     title: `Locksmith & Garage Doors in ${city.name}`,
-    description: `Locksmith, garage door and automatic gate service in ${city.name}, OR, day or night. Licensed, with a written quote first. Call 503-505-8560.`,
+    description: `Locksmith, garage door and automatic gate service in ${city.name}, ${city.state}, day or night. Licensed, with a written quote first. Call 503-505-8560.`,
     path: `/locations/${city.slug}`,
   });
 }

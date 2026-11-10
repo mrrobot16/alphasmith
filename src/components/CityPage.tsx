@@ -11,7 +11,7 @@ import { CheckIcon, PhoneIcon, serviceIcons } from "./Icons";
 
 
 export function CityPage({ city }: { city: City }) {
-  const { name } = city;
+  const { name, state } = city;
   const path = `/locations/${city.slug}`;
   const faqs = [
     { q: `How fast can you get to ${name}?`, a: "[Typical arrival time and where the team is based.]" },
@@ -33,7 +33,7 @@ export function CityPage({ city }: { city: City }) {
         </ol>
       </nav>
 
-      <Hero badge={`Serving ${name} · Open 24/7`} title="Locksmith & garage door service" accent={`in ${name}, OR`}>
+      <Hero badge={`Serving ${name} · Open 24/7`} title="Locksmith & garage door service" accent={`in ${name}, ${state}`}>
         <p className="mt-6 max-w-[36rem] text-body leading-relaxed text-muted">
           Locked out, broken garage door, or a gate that won&apos;t close? Alpha serves homes and businesses in {name},
           day or night.
@@ -80,7 +80,7 @@ export function CityPage({ city }: { city: City }) {
             <h3 className="mt-6 text-title">Neighborhoods</h3>
             <p className="mt-2 text-small text-muted">[List the {name} neighborhoods you serve]</p>
           </div>
-          <GoogleMap place={`${name}, OR`} className="h-full min-h-64" />
+          <GoogleMap place={`${name}, ${state}`} className="h-full min-h-64" />
         </div>
       </section>
 
