@@ -25,7 +25,9 @@ export const localBusinessJsonLd = {
     opens: "00:00",
     closes: "23:59",
   },
-  // Add streetAddress, geo and sameAs (Google profile) once confirmed.
+  // Social, review and BBB profiles of the same business.
+  sameAs: [...site.social.map((s) => s.href), site.bbbUrl],
+  // Add streetAddress and geo once confirmed.
 };
 
 export function breadcrumbJsonLd(items: { name: string; path: string }[]) {

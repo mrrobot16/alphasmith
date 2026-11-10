@@ -5,7 +5,13 @@ export const site = {
   license: "CCB#248737",
   certification: "62990CLS",
   bbb: "A+",
+  bbbUrl: "https://www.bbb.org/us/or/wilsonville/profile/car-locksmith/alpha-locksmith-garage-llc-1296-1000175373",
   email: "alphalocksmithor11@gmail.com",
+  social: [
+    { label: "Instagram", handle: "@alphalocksmithor", href: "https://www.instagram.com/alphalocksmithor/" },
+    { label: "Facebook", handle: "Alpha Locksmith & Garage", href: "https://www.facebook.com/profile.php?id=61573086032419" },
+    { label: "Yelp", handle: "Alpha Locksmith & Garage", href: "https://yelp.to/p7p67ZjmUW" },
+  ],
   mapUrl: "https://www.google.com/maps?cid=2033016683438900625",
   mapEmbed: "https://www.google.com/maps?cid=2033016683438900625&output=embed",
 };

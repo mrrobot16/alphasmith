@@ -53,26 +53,52 @@ export function SiteFooter() {
                   Locksmith Certification {site.certification}
                 </a>
               </li>
+              <li>
+                <a href={site.bbbUrl} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-orange md:text-ink md:underline">
+                  BBB Rating {site.bbb}
+                </a>
+              </li>
               <li className="hidden text-muted md:list-item">Issued by the Oregon Construction Contractors Board</li>
               <li className="hidden text-muted md:list-item">[Insured and bonded]</li>
             </ul>
           </div>
 
-          <nav aria-label="Company" className="hidden md:block">
-            <h2 className="font-display text-label font-bold uppercase tracking-[0.14em]">Company</h2>
-            <ul className="mt-3 space-y-1.5 text-small text-muted">
-              {[
-                ["About Us", "/#about"],
-                ["Reviews", "/#reviews"],
-                ["FAQ", "/garage-door-services/spring-repair#faq"],
-                ["Contact and booking", "/#quote"],
-              ].map(([label, href]) => (
-                <li key={label}>
-                  <Link href={href} className="hover:text-orange">{label}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div>
+            <nav aria-label="Company" className="hidden md:block">
+              <h2 className="font-display text-label font-bold uppercase tracking-[0.14em]">Company</h2>
+              <ul className="mt-3 space-y-1.5 text-small text-muted">
+                {[
+                  ["About Us", "/#about"],
+                  ["Reviews", "/#reviews"],
+                  ["FAQ", "/garage-door-services/spring-repair#faq"],
+                  ["Contact and booking", "/#quote"],
+                ].map(([label, href]) => (
+                  <li key={label}>
+                    <Link href={href} className="hover:text-orange">{label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div className="md:mt-8">
+              <h2 className="font-display text-label font-bold uppercase tracking-[0.14em]">Follow us</h2>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {site.social.map((s) => (
+                  <li key={s.label}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${site.name} on ${s.label} (${s.handle})`}
+                      className="chip px-4 py-2 text-body"
+                    >
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </footer>
     </>
