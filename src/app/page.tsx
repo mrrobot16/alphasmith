@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { site, services, cities, homeReviews } from "@/lib/site";
+import { site, services, homeReviews } from "@/lib/site";
 import { serviceIcons, PhoneIcon } from "@/components/Icons";
 import { QuoteForm } from "@/components/QuoteForm";
 import { TrustBar, Hero } from "@/components/Shared";
 import { GoogleMap } from "@/components/GoogleMap";
 import { pageMeta } from "@/lib/seo";
 import { WorkGallery } from "@/components/WorkGallery";
-import { citySlug } from "@/lib/cities";
 import { ReviewsCarousel } from "@/components/ReviewsCarousel";
+import { ServiceAreaCities } from "@/components/ServiceAreaCities";
 
 export const metadata: Metadata = {
   ...pageMeta({
@@ -157,19 +157,7 @@ export default function Home() {
               <p className="hidden font-display text-label font-bold uppercase tracking-[0.14em] lg:block">
                 Cities we serve
               </p>
-              <ul className="flex flex-wrap gap-2 lg:mt-3">
-                {cities.map((c) => (
-                  <li key={c}>
-                    <Link
-                      href={`/locations/${citySlug(c)}`}
-                      className="chip !border-black !text-black transition-colors hover:!bg-black hover:!text-white"
-                    >
-                      {c}
-                    </Link>
-                  </li>
-                ))}
-                <li className="chip !border-black !bg-black !text-white">+22 more</li>
-              </ul>
+              <ServiceAreaCities />
             </div>
             <div className="lg:col-start-1 lg:row-start-2">
               <hr className="mb-4 border-t-2 border-black lg:my-4" />

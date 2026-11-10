@@ -97,6 +97,32 @@ export const cities = [
   "Wilsonville",
 ];
 
+/** Other places we travel to. Shown behind the "+22 more" button; they do not have their own pages yet. */
+export const moreCities = [
+  "Aloha",
+  "Aurora",
+  "Beavercreek",
+  "Estacada",
+  "Forest Grove",
+  "Government Camp",
+  "Hood Village",
+  "Keizer",
+  "McMinnville",
+  "Molalla",
+  "Newberg",
+  "Oregon City",
+  "Rhododendron",
+  "Salem",
+  "Sandy",
+  "Scappoose",
+  "Sherwood",
+  "Silverton",
+  "St. Helens",
+  "Troutdale",
+  "Vancouver metro area",
+  "Woodburn",
+];
+
 /** Placeholder reviews for the homepage carousel. Replace with real Google reviews. */
 export const homeReviews = [
   "an emergency home lockout",
