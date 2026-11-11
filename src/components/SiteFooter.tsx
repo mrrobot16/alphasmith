@@ -2,7 +2,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 import { Logo } from "./Logo";
 
-const CCB_SEARCH = "https://search.ccb.state.or.us/search/";
+const CCB_SEARCH = "https://search.ccb.state.or.us/search/business_details.aspx";
 
 export function NeedHelpBand() {
   return (
