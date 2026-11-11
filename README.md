@@ -99,12 +99,14 @@ Almost all copy lives in data files, so you rarely touch components.
 | Social share image | `src/app/opengraph-image.tsx` |
 | Page titles and descriptions | `pageMeta(...)` in each page, or `meta` in `services.ts` |
 
-Text in **[square brackets]** is placeholder copy that still needs real information: prices, warranties, arrival times, local intros, neighborhoods and real Google reviews. It lives in `services.ts`, `CityPage.tsx` and `page.tsx` (homepage reviews come from `homeReviews` in `site.ts`).
+Text in **[square brackets]** is placeholder copy that still needs real information: prices, warranties, arrival times, local intros and neighborhoods. It lives in `services.ts`, `CityPage.tsx` and `page.tsx`.
+
+The "What customers say" carousel (home, service and city pages) shows real Google reviews from `homeReviews` in `site.ts`. Add new ones to that list word for word, with the reviewer's name. Every card opens the Google listing at `site.reviewsUrl` in a new tab.
 
 ## 5. Before launch checklist
 
 1. Fill in the bracketed placeholders, and check the ZIP codes in `cities.ts` and the brand lists in `services.ts`.
-2. Replace the placeholder reviews with real ones.
+2. Confirm every review in `homeReviews` really is the 5-star review it is shown as (the cards always show five stars).
 3. Set the environment variables above in your hosting provider (not just `.env.local`).
 4. Verify the sending domain in Resend and send a real test lead.
 5. Add the Google Business Profile link and street address (if public) to the footer and `src/lib/seo.ts`.

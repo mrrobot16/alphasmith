@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { site } from "@/lib/site";
 
 type Review = { text: string; by: string };
 
@@ -90,10 +91,22 @@ export function ReviewsCarousel({ items, title = "What customers say" }: { items
           className={`grid gap-4 md:grid-cols-3 ${dir === 1 ? "slide-next" : dir === -1 ? "slide-prev" : ""}`}
         >
           {visible.map((r) => (
-            <li key={r.text} className="card flex flex-col p-5">
-              <p className="text-orange" aria-label="5 out of 5 stars">★★★★★</p>
-              <p className="mt-3 flex-1 text-body leading-relaxed">{r.text}</p>
-              <p className="mt-4 text-small text-muted">{r.by}</p>
+            <li key={r.text}>
+              {/* The whole card opens the Google listing's reviews in a new tab. */}
+              <a
+                href={site.reviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="review_click"
+                data-track-label={r.by}
+                aria-label={`Read this review from ${r.by.replace(" · Google review", "")} on Google (opens in a new tab)`}
+                className="card flex h-full flex-col p-5 transition-colors hover:!border-orange"
+              >
+                <span className="text-orange" aria-hidden="true">★★★★★</span>
+                <span className="sr-only">5 out of 5 stars</span>
+                <span className="mt-3 block flex-1 whitespace-pre-line text-body leading-relaxed">{r.text}</span>
+                <span className="mt-4 block text-small text-muted">{r.by}</span>
+              </a>
             </li>
           ))}
         </ul>

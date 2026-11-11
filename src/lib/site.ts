@@ -13,6 +13,9 @@ export const site = {
     { label: "Yelp", handle: "Alpha Locksmith & Garage", href: "https://yelp.to/p7p67ZjmUW" },
   ],
   mapUrl: "https://www.google.com/maps?cid=2033016683438900625",
+  /** Opens the Google Maps listing on its reviews tab. Every review card on the site links here. */
+  reviewsUrl:
+    "https://www.google.com/maps/place/Alpha+Locksmith+%26+Garage/@45.3076513,-125.0672226,8z/data=!4m8!3m7!1s0x23d3c51193888b2d:0x66afb91c9fa7a49f!8m2!3d45.3329604!4d-122.5687369!9m1!1b1!16s%2Fg%2F11y9zjm5lg?entry=ttu&g_ep=EgoyMDI2MTEwOC4wIKXMDSoASAFQAw%3D%3D",
   mapEmbed: "https://www.google.com/maps?cid=2033016683438900625&output=embed",
 };
 
@@ -123,24 +126,21 @@ export const moreCities = [
   "Woodburn",
 ];
 
-/** Placeholder reviews for the homepage carousel. Replace with real Google reviews. */
+/** Real Google reviews, word for word as customers wrote them. Add new ones at the end. Every card on the site opens `site.reviewsUrl`. */
 export const homeReviews = [
-  "an emergency home lockout",
-  "a garage door spring replacement",
-  "car key or fob replacement",
-  "a driveway gate repair",
-  "rekeying locks after a move",
-  "a new garage door opener",
-  "a storefront lockout",
-  "keycard and keypad entry",
-  "a fence repair",
-  "a broken key extraction",
-  "a garage door off its track",
-  "a gate intercom install",
-  "a new deadbolt install",
-  "a roll-up door repair",
-  "a gate opener replacement",
-].map((job) => ({
-  text: `[Real Google review about ${job}, in the customer's words.]`,
-  by: "[First name L.] · [Town] · Google · [Month Year]",
-}));
+  { name: "Diane Anderson", text: "The locksmith who serviced my home was excellent. Joseph was efficient, and his fees were reasonable. Joseph was also clear in explaining what he had done, and I felt safe. As he was leaving, he had parked his truck infront of my garage, he saw the loose doorframe, found a nail and pounded it in. Voila !" },
+  { name: "Colby Gillen", text: "Alpha Locksmith and the owner Andres were super helpful. Very fast and affordable. 100% recommend their services." },
+  { name: "Hector Garcia", text: "While traveling to Portland I got lockout out of my vehicle, I called Alpha Locksmith & Garage and Andres was very friendly and explained the process. The price was the best one in the market and he helped me very fast. Thank you Andres for such a great work and quick response." },
+  { name: "Rodny Rodriguez", text: "I called Alpha Locksmith & Garage and the technician arrived in about 15-20 minutes. They opened my vehicle fast and at affordable price. Andres did a great job at explaining the whole process. Recommended 100%" },
+  { name: "Vanessa Enahoro", text: "Alpha Locksmith & Garage was amazing. They came to my house in less than 20 minutes. Opened the door very quickly and the technician was very friendly. Andres did a great job! I recommend them" },
+  { name: "Dean Manley", text: "Speedy arrival, great prices, quick to unlock my door" },
+  { name: "Aidia Dobbels", text: "These guys are the best! I was in portland from out of town and didn’t know what else to do, so i called and they responded right away. He was super quick and and got there fast aswell!" },
+  { name: "TJ Pound", text: "I got locked out of my Andres showed up in a very timely manner and got the job done quick and efficiently at a great price!!!" },
+  { name: "John Pyle", text: "I locked myself out of my vehicle. Andres the technician was friendly, quick and affordable. Thanks" },
+  { name: "Drew Kaatz", text: "Great business. Did an amazing job on my house. Thank you!" },
+  { name: "Michael Keskin", text: "On time quick friendly and very knowledgeable\nWould definitely use again\nHopefully we don’t though" },
+  { name: "Cordero", text: "Quick, fast and reliable service. Answered right away. Would recommend if youre in need of help right away." },
+  { name: "Lamonte", text: "Came very quickly, opened our door within a few seconds and was very efficient. Very good experience" },
+  { name: "jose ramirez", text: "Alpha locksmith came out and replaced my door locks great service thank you" },
+  { name: "Sherry Vote", text: "From start to finish Andres was fast and reliable with helping fix my front door lock and he was even able to re-key all my locks so I only have 1 key. I highly recommend this company and will keep them in mind for future locksmith services." },
+].map((r) => ({ text: r.text, by: `${r.name} · Google review` }));
