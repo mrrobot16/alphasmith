@@ -17,6 +17,12 @@ export const site = {
   reviewsUrl:
     "https://www.google.com/maps/place/Alpha+Locksmith+%26+Garage/@45.3076513,-125.0672226,8z/data=!4m8!3m7!1s0x23d3c51193888b2d:0x66afb91c9fa7a49f!8m2!3d45.3329604!4d-122.5687369!9m1!1b1!16s%2Fg%2F11y9zjm5lg?entry=ttu&g_ep=EgoyMDI2MTEwOC4wIKXMDSoASAFQAw%3D%3D",
   mapEmbed: "https://www.google.com/maps?cid=2033016683438900625&output=embed",
+  /**
+   * The home page "Do you serve my area?" map. Center is the middle of the Portland metro and zoom 9
+   * shows roughly a 30-mile radius: Vancouver WA to the north, Salem and Newberg to the south and
+   * west, Sandy and Estacada to the east. Zoom in (10, 11) to tighten it, out (8) to widen it.
+   */
+  serviceAreaMap: { center: { lat: 45.45, lng: -122.6 }, zoom: 9 },
 };
 
 export const nav = [

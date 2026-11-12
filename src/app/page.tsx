@@ -171,7 +171,12 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <GoogleMap className="mt-8 h-72 !border-2 !border-black" />
+          <GoogleMap
+            center={site.serviceAreaMap.center}
+            zoom={site.serviceAreaMap.zoom}
+            title="Map of the Portland metro area we serve"
+            className="mt-8 h-96 !border-2 !border-black lg:h-[28rem]"
+          />
         </div>
       </section>
 
