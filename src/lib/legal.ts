@@ -2,8 +2,8 @@ import { site } from "./site";
 
 /** Text still to be confirmed by the owner. Kept visibly bracketed until real values exist. */
 export const legalPlaceholders = {
-  address: "[Business street address, Portland, OR]",
-  effectiveDate: "[Effective date]",
+  address: "[Street address is missing]",
+  effectiveDate: "[Effective date is missing]",
 };
 
 /**
@@ -11,6 +11,7 @@ export const legalPlaceholders = {
  *  - p: paragraph. Supports [label](/path) links.
  *  - ul / ol: lists.
  *  - h: sub-heading inside a section.
+ *  - todo: a visible bracketed note for information the owner still has to supply.
  *  - contact: the business contact card.
  */
 export type LegalBlock =
@@ -18,6 +19,7 @@ export type LegalBlock =
   | { ul: string[] }
   | { ol: string[] }
   | { h: string }
+  | { todo: string }
   | { contact: true };
 
 export type LegalSection = { title: string; blocks: LegalBlock[] };
@@ -40,6 +42,7 @@ export const terms: LegalDoc = {
     {
       title: "Consent for SMS communication",
       blocks: [
+        { todo: "[SMS is unconfirmed: confirm that Alpha sends text messages. If it does not, remove this section]" },
         {
           p: "By providing your phone number and consenting to receive SMS communications, you agree to the following terms regarding text message communications.",
         },
@@ -143,6 +146,7 @@ export const privacy: LegalDoc = {
             "Usage information: how you interact with our website, such as IP address, browser type, and device data, used to improve the experience.",
           ],
         },
+        { todo: "[Payment details are unconfirmed: confirm that payment details are collected through the website. If not, remove them from the first item]" },
       ],
     },
     {
@@ -205,6 +209,7 @@ export const privacy: LegalDoc = {
     {
       title: "SMS opt-in",
       blocks: [
+        { todo: "[SMS is unconfirmed: confirm that Alpha sends text messages. If it does not, remove this section]" },
         {
           p: "SMS opt-in data and phone numbers collected for the purpose of SMS are not shared with any third party or affiliate companies for marketing purposes.",
         },
@@ -216,6 +221,7 @@ export const privacy: LegalDoc = {
         {
           p: "Our website may use cookies and similar tracking technologies to enhance your experience, analyze trends, and administer the site. You can control the use of cookies at the individual browser level.",
         },
+        { todo: "[Analytics and ad tools are missing: name Google Analytics, Google Ads and Clarity here once they are switched on]" },
       ],
     },
     {

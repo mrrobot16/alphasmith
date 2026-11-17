@@ -45,6 +45,7 @@ function Contact() {
 
 function Block({ b }: { b: LegalBlock }) {
   if ("p" in b) return <p className="mt-4"><Inline text={b.p} /></p>;
+  if ("todo" in b) return <p className="mt-4 text-muted">{b.todo}</p>;
   if ("h" in b) return <h3 className="mt-8 text-title">{b.h}</h3>;
   if ("ul" in b)
     return (
