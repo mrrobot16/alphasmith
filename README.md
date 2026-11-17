@@ -80,6 +80,30 @@ To track something new, add `data-section="name"` to a section or `data-track="e
 
 The site has no cookie consent banner. GA4 and Clarity set cookies, so check whether your audience needs one.
 
+### Display ads (Google AdSense)
+
+Six places on the site can show a Google display ad. They are built in but **off by default**: with the variables below blank, no ad script loads, no request is made and the slots take up no space. This is separate from the Google Ads *conversion tracking* above, which measures your ad campaigns.
+
+| Variable | What it does |
+|---|---|
+| `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | Your publisher ID, e.g. `ca-pub-1234567890123456`. Also serves `/ads.txt`, which AdSense asks for. |
+| `NEXT_PUBLIC_ADSENSE_ENABLED` | `true` turns the ads on. Needs the client ID and a slot ID. |
+| `NEXT_PUBLIC_ADSENSE_PREVIEW` | `true` shows dashed boxes where the ads will go, with no ad requests. Use it to review positions. |
+| `NEXT_PUBLIC_ADSENSE_SLOT_*` | One ad unit ID per placement (create them in AdSense under Ads, then By ad unit). |
+
+| Placement | Slot variable | Where it appears |
+|---|---|---|
+| `home_mid` | `NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID` | Home page, after services |
+| `home_bottom` | `NEXT_PUBLIC_ADSENSE_SLOT_HOME_BOTTOM` | Home page, after reviews |
+| `service_mid` | `NEXT_PUBLIC_ADSENSE_SLOT_SERVICE_MID` | Service pages, after the signs section |
+| `service_bottom` | `NEXT_PUBLIC_ADSENSE_SLOT_SERVICE_BOTTOM` | Service pages, after the FAQ |
+| `city_mid` | `NEXT_PUBLIC_ADSENSE_SLOT_CITY_MID` | City pages, after recent jobs |
+| `city_bottom` | `NEXT_PUBLIC_ADSENSE_SLOT_CITY_BOTTOM` | City pages, after the FAQ |
+
+A placement shows a real ad only when ads are enabled **and** that placement has its own slot ID, so you can switch them on one at a time. To move or add a placement, edit `src/lib/ads.ts` and drop `<AdSlot placement="..." />` where you want it. The code lives in `src/components/AdSlot.tsx` and `AdSenseScript.tsx`.
+
+Before turning ads on: the site has no cookie consent banner, and AdSense requires consent handling for visitors in the EU and UK. Ads also sit next to your call-to-action, so check they do not push the phone number or quote form out of view.
+
 ## 4. Where to edit things
 
 Almost all copy lives in data files, so you rarely touch components.

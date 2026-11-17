@@ -5,6 +5,7 @@ import { breadcrumbJsonLd } from "@/lib/seo";
 import { TrustBar, Hero, Faq } from "./Shared";
 import { ReviewsCarousel } from "./ReviewsCarousel";
 import { RecentJobs } from "./RecentJobs";
+import { AdSlot } from "./AdSlot";
 import { GoogleMap } from "./GoogleMap";
 import { JsonLd } from "./JsonLd";
 import { CheckIcon, PhoneIcon, serviceIcons } from "./Icons";
@@ -91,6 +92,8 @@ export function CityPage({ city }: { city: City }) {
         </div>
       </section>
 
+      <AdSlot placement="city_mid" />
+
       <section id="reviews" data-section="reviews" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
           <ReviewsCarousel items={homeReviews} title={`What ${name} customers say`} />
@@ -103,6 +106,8 @@ export function CityPage({ city }: { city: City }) {
           <div className="mt-6"><Faq items={faqs} /></div>
         </div>
       </section>
+
+      <AdSlot placement="city_bottom" />
 
       <section data-section="nearby_areas" className="border-t border-line bg-bg-alt py-8 sm:py-14">
         <div className="wrap">

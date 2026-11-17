@@ -5,6 +5,7 @@ import { StickyCall } from "@/components/Shared";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Analytics } from "@/components/Analytics";
 import { QuoteAnchor } from "@/components/QuoteAnchor";
+import { AdSenseScript } from "@/components/AdSenseScript";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL, localBusinessJsonLd } from "@/lib/seo";
 import "./globals.css";
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Analytics />
         <QuoteAnchor />
+        <AdSenseScript />
         <JsonLd data={localBusinessJsonLd} />
         <SiteHeader />
         <main>{children}</main>
