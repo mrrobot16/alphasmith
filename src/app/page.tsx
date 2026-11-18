@@ -120,10 +120,6 @@ export default function Home() {
               When you call, you talk to the team that does the work, and Andres stands behind every job, from a
               2 a.m. lockout to a new garage door.
             </p>
-            <p className="mt-3 text-body text-muted">
-              [Andres&apos;s story: how long he&apos;s been in the trade, how Alpha started, and what customers can
-              count on.]
-            </p>
             <dl className="mt-6 grid auto-rows-fr grid-cols-2 gap-3 md:flex md:flex-wrap md:gap-x-8 md:gap-y-5">
               {[
                 ["10+ years", "in the trade"],
