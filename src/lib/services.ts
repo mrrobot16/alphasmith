@@ -1,14 +1,16 @@
 import { site } from "./site";
+import type { City } from "./cities";
 
 /**
  * Content for every service page. All of them render through
  * components/ServicePage.tsx, so the structure is identical and only the copy
- * changes. Text in [square brackets] is placeholder copy that still needs real
- * information from the business (prices, warranty, arrival times, reviews).
+ * changes. Business facts we do not have yet (prices, warranty terms, arrival times)
+ * are not stated as numbers: the copy points to the written quote instead.
  * Use **double asterisks** for bold inside `info.body`.
  */
 export type ServicePageConfig = {
-  path: string;
+  /** Last part of /locations/[city]/service/[service]. */
+  slug: string;
   meta: { title: string; description: string };
   crumbs: { category: string; label: string };
   schema: { name: string; description: string };
@@ -28,27 +30,16 @@ export type ServicePageConfig = {
   brands: { title: string; items: string[] };
   faqs: { q: string; a: string }[];
   near: { title: string; intro: string };
-  related: { label: string; href?: string }[];
+  /** slug links to another service page in the same city. */
+  related: { label: string; slug?: string }[];
 };
 
 const licensed = `Licensed and certified, ${site.license}`;
 const quote = "Written quote before any work starts";
 
-export const serviceAreas = [
-  "Portland",
-  "Wilsonville",
-  "Beaverton",
-  "Hillsboro",
-  "Tigard",
-  "Lake Oswego",
-  "Gresham",
-  "Oregon City",
-  "Salem",
-  "Vancouver metro area",
-];
 
 export const springRepair: ServicePageConfig = {
-  path: "/garage-door-services/spring-repair",
+  slug: "garage-door-spring-repair",
   meta: {
     title: "Garage Door Spring Repair in Portland, OR",
     description:
@@ -64,7 +55,7 @@ export const springRepair: ServicePageConfig = {
     title: "Garage door spring repair in",
     accent: "Portland, OR",
     lead: "Broken torsion or extension spring? We replace springs on residential and commercial garage doors across the Portland metro, usually the same day you call.",
-    checks: [quote, licensed, "[Warranty: e.g. X-year warranty on springs and labor]"],
+    checks: [quote, licensed, "Residential and commercial doors"],
     image: { src: "/our-work-3.jpg", alt: "Alpha technician repairing a garage door spring and track" },
   },
   warning: {
@@ -96,28 +87,101 @@ export const springRepair: ServicePageConfig = {
   },
   brands: {
     title: "Brands we work on",
-    items: ["LiftMaster", "Chamberlain", "Genie", "Clopay", "Amarr", "Wayne Dalton", "Overhead Door", "[Other brands you service]"],
+    items: ["LiftMaster", "Chamberlain", "Genie", "Clopay", "Amarr", "Wayne Dalton", "Overhead Door"],
   },
   faqs: [
-    { q: "How much does garage door spring repair cost?", a: "[Price range and what affects it: spring type, door size, parts and labor. Final price confirmed in writing before work starts.]" },
-    { q: "Can you come today?", a: "[Same-day availability and typical arrival window.]" },
-    { q: "Should I replace both springs?", a: "[Explain why springs are usually replaced in pairs.]" },
+    { q: "How much does garage door spring repair cost?", a: "The price depends on the type of spring (torsion or extension), the size and weight of your door, and whether one or both springs and the cables need replacing. You get the price in writing before any work starts." },
+    { q: "Can you come today?", a: "Call us any time, day or night. We answer 24/7 and give you an arrival time when you call, based on where our team is and what the job needs." },
+    { q: "Should I replace both springs?", a: "Springs wear at about the same rate, so when one breaks the other is usually close behind. Replacing both keeps the door balanced and saves a second visit. We'll show you the condition of the second spring and let you decide." },
     { q: "Is it safe to open the door with a broken spring?", a: "No. Leave the door where it is, unplug the opener, and call us." },
-    { q: "Do you offer a warranty?", a: "[Warranty terms for springs and labor.]" },
+    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
   ],
   near: {
     title: "Spring repair near you",
     intro: "Same-day garage door spring repair in these areas and more:",
   },
   related: [
+    { label: "All garage door services", slug: "garage-doors" },
     { label: "Garage door opener repair" },
     { label: "Broken cable repair" },
     { label: "Commercial overhead doors" },
   ],
 };
 
+export const garageDoors: ServicePageConfig = {
+  slug: "garage-doors",
+  meta: {
+    title: "Garage Door Repair & Installation in Portland, OR",
+    description:
+      "Garage door repair, springs, cables, openers, panels and new door installation across the Portland metro. Written quote before work starts. Call 503-505-8560.",
+  },
+  crumbs: { category: "Services", label: "Garage doors" },
+  schema: {
+    name: "Garage door repair and installation",
+    description: "Garage door repair, spring and cable replacement, opener service, panel replacement and new door installation across the Portland metro.",
+  },
+  hero: {
+    badge: "Open 24/7 · Residential & commercial",
+    title: "Garage door repair & installation in",
+    accent: "Portland, OR",
+    lead: "Door off track, opener dead, or ready for a new door? We repair and install residential and commercial garage doors across the Portland metro, day or night.",
+    checks: [quote, licensed, "Residential and commercial doors"],
+    image: { src: "/work/job-overhead-door.jpg", alt: "Alpha technician working on an overhead garage door" },
+  },
+  warning: {
+    bold: "Door stuck or off track? Don't force it.",
+    text: "Garage doors are heavy and the springs are under tension. Leave the door where it is, unplug the opener, and call us.",
+  },
+  signs: {
+    title: "Signs your garage door needs service",
+    items: [
+      "The door won't open or close, or stops partway",
+      "A loud bang, grinding or scraping when it moves",
+      "The door is crooked, sagging or off its track",
+      "The opener hums but the door doesn't move",
+      "A dented or cracked panel after an impact",
+      "The door reverses for no reason or won't stay closed",
+    ],
+  },
+  info: {
+    title: "Repair or replace?",
+    body: "Most problems, such as **springs, cables, rollers and openers**, can be repaired in one visit. A **new door** makes sense when several panels are damaged, the door is very old, or you want better insulation, security or curb appeal. We'll tell you which makes sense before you spend anything.",
+  },
+  steps: {
+    title: "How a garage door call works",
+    items: [
+      ["01", "Inspect", "We check the springs, cables, tracks, rollers and opener to find everything that's worn, not just what's broken."],
+      ["02", "Written quote", "You get the price in writing before any work starts. No surprises."],
+      ["03", "Repair or install", "We repair or replace the parts, or install the new door, with hardware sized to your door."],
+      ["04", "Balance and test", "We balance the door, tune the opener and safety sensors, and test it with you before we leave."],
+    ],
+  },
+  brands: {
+    title: "Brands we work on",
+    items: ["LiftMaster", "Chamberlain", "Genie", "Clopay", "Amarr", "Wayne Dalton", "Overhead Door"],
+  },
+  faqs: [
+    { q: "How much does garage door repair cost?", a: "It depends on what failed. A roller, sensor or remote is a small repair, while springs, cables, a motor or a damaged panel cost more, and a new door costs more again. Door size and parts matter too. You get the price in writing before work starts." },
+    { q: "Can you come today?", a: "Call us any time, day or night. We answer 24/7 and give you an arrival time when you call, based on where our team is and what the job needs." },
+    { q: "Should I repair or replace my garage door?", a: "Repair is usually the better value when the problem is one part, such as a spring, cable, roller or opener. Replacement makes sense when several panels are damaged, the door is badly worn or no longer closes square, or you want better insulation or security. We'll look at the door and tell you which is the better value." },
+    { q: "Do you install new garage doors?", a: "Yes. We install new residential and commercial garage doors. Tell us the size of the opening and the style you like, and we'll quote it in writing before work starts." },
+    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
+  ],
+  near: {
+    title: "Garage door service near you",
+    intro: "Garage door repair and installation in these areas and more:",
+  },
+  related: [
+    { label: "Spring repair", slug: "garage-door-spring-repair" },
+    { label: "Automatic gates", slug: "automatic-gates" },
+    { label: "Locksmith services", slug: "locksmith" },
+    { label: "Opener repair" },
+    { label: "Commercial overhead doors" },
+  ],
+};
+
 export const locksmith: ServicePageConfig = {
-  path: "/locksmith-services",
+  slug: "locksmith",
   meta: {
     title: "Locksmith Services in Portland, OR",
     description:
@@ -133,7 +197,7 @@ export const locksmith: ServicePageConfig = {
     title: "Locksmith services in",
     accent: "Portland, OR",
     lead: "Locked out, lost your keys, or need your locks changed? Our licensed locksmiths handle homes, businesses and vehicles across the Portland metro, day or night.",
-    checks: [quote, licensed, "[Typical arrival time, e.g. 30 to 45 minutes]"],
+    checks: [quote, licensed, "Homes, businesses and vehicles"],
     image: { src: "/our-work-4.jpg", alt: "Locksmith installing a lock on a front door" },
   },
   warning: {
@@ -166,29 +230,29 @@ export const locksmith: ServicePageConfig = {
   },
   brands: {
     title: "Lock brands we work on",
-    items: ["Schlage", "Kwikset", "Yale", "Medeco", "Baldwin", "[Other brands you service]"],
+    items: ["Schlage", "Kwikset", "Yale", "Medeco", "Baldwin"],
   },
   faqs: [
-    { q: "How much does a locksmith cost?", a: "[Price range and what affects it: time of day, lock type, parts and labor. Final price confirmed in writing before work starts.]" },
-    { q: "How fast can you get here?", a: "[Typical arrival window and 24/7 availability.]" },
+    { q: "How much does a locksmith cost?", a: "The price depends on the job (a lockout, rekey, new lock or car key), the lock or key involved, and parts and labor. You get the price in writing before work starts." },
+    { q: "How fast can you get here?", a: "We answer 24/7. When you call, we give you an arrival time based on where our team is and what you need." },
     { q: "Will you damage my lock to get me in?", a: "We open locks without damaging them whenever we can. If a lock has to be drilled or replaced, we tell you first and quote the price in writing." },
-    { q: "Can you make keys for my car?", a: "[Which vehicles and key types you cover, including fobs and transponder keys.]" },
-    { q: "Do you offer a warranty?", a: "[Warranty terms for locks and labor.]" },
+    { q: "Can you make keys for my car?", a: "Yes, we handle auto keys. Tell us the year, make and model of the vehicle and what you need, such as a lost key, a spare or a key that won't turn, and we'll confirm what we can do on the phone." },
+    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
   ],
   near: {
     title: "Locksmith service near you",
     intro: "Locksmith service in these areas and more:",
   },
   related: [
-    { label: "Access control systems", href: "/access-control-services" },
-    { label: "Automatic gates", href: "/automatic-gate-services" },
+    { label: "Access control systems", slug: "access-control" },
+    { label: "Automatic gates", slug: "automatic-gates" },
     { label: "Car lockout service" },
     { label: "Key cutting" },
   ],
 };
 
 export const automaticGates: ServicePageConfig = {
-  path: "/automatic-gate-services",
+  slug: "automatic-gates",
   meta: {
     title: "Automatic Gate Repair in Portland, OR",
     description:
@@ -204,7 +268,7 @@ export const automaticGates: ServicePageConfig = {
     title: "Automatic gate repair in",
     accent: "Portland, OR",
     lead: "Gate stuck, opener dead, or ready for a new driveway gate? We repair and install automatic gates for homes and businesses across the Portland metro.",
-    checks: [quote, licensed, "[Warranty: e.g. X-year warranty on gate openers and labor]"],
+    checks: [quote, licensed, "Driveway and commercial gates"],
     image: { src: "/work/wood-driveway-gate.jpg", alt: "Wood automatic driveway gate installed by Alpha" },
   },
   warning: {
@@ -236,30 +300,30 @@ export const automaticGates: ServicePageConfig = {
   },
   brands: {
     title: "Gate opener brands we work on",
-    items: ["LiftMaster", "Chamberlain", "Viking Access", "FAAC", "Nice", "[Other brands you service]"],
+    items: ["LiftMaster", "Chamberlain", "Viking Access", "FAAC", "Nice"],
   },
   faqs: [
-    { q: "How much does automatic gate repair cost?", a: "[Price range and what affects it: opener type, gate size, parts and labor. Final price confirmed in writing before work starts.]" },
-    { q: "Can you come today?", a: "[Same-day availability and typical arrival window.]" },
+    { q: "How much does automatic gate repair cost?", a: "The price depends on the type of gate (swing or slide), the opener, the size of the gate, and which parts are worn. A sensor or remote is a small repair, while a motor or a new gate costs more. You get the price in writing before work starts." },
+    { q: "Can you come today?", a: "Call us any time, day or night. We answer 24/7 and give you an arrival time when you call, based on where our team is and what the job needs." },
     { q: "My gate won't move after a power outage. What do I do?", a: "Many gates have a manual release for outages. Check your owner's manual, and call us if the gate still won't move once power is back." },
-    { q: "Can you install a new automatic gate?", a: "[Gate types, materials and openers you install, and how long a typical install takes.]" },
-    { q: "Do you offer a warranty?", a: "[Warranty terms for gate openers and labor.]" },
+    { q: "Can you install a new automatic gate?", a: "Yes. We install automatic gates and openers for homes and businesses. Tell us the width of the opening and the style you want, and we'll quote it in writing before work starts." },
+    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
   ],
   near: {
     title: "Gate repair near you",
     intro: "Automatic gate repair and installation in these areas and more:",
   },
   related: [
-    { label: "Fence repair and installation", href: "/fence-services" },
-    { label: "Access control systems", href: "/access-control-services" },
-    { label: "Locksmith services", href: "/locksmith-services" },
+    { label: "Fence repair and installation", slug: "fencing" },
+    { label: "Access control systems", slug: "access-control" },
+    { label: "Locksmith services", slug: "locksmith" },
     { label: "Gate opener replacement" },
     { label: "Keypad and intercom" },
   ],
 };
 
 export const accessControl: ServicePageConfig = {
-  path: "/access-control-services",
+  slug: "access-control",
   meta: {
     title: "Access Control Systems in Portland, OR",
     description:
@@ -275,7 +339,7 @@ export const accessControl: ServicePageConfig = {
     title: "Access control systems in",
     accent: "Portland, OR",
     lead: "Keycards, fobs, keypads and intercoms that decide who gets in and when. We install, repair and rekey access control for businesses, offices, gated properties and multi-unit buildings.",
-    checks: [quote, licensed, "[Warranty: e.g. X-year warranty on equipment and labor]"],
+    checks: [quote, licensed, "Businesses, offices and gated properties"],
     image: { src: "/work/gate-video-intercom.jpg", alt: "Video intercom and keypad entry at a gate" },
   },
   warning: {
@@ -308,29 +372,29 @@ export const accessControl: ServicePageConfig = {
   },
   brands: {
     title: "Equipment we install and service",
-    items: ["Keypads", "Keycard readers", "Key fobs", "Intercoms", "Video entry", "Panic hardware", "Electric strikes", "[Other equipment you service]"],
+    items: ["Keypads", "Keycard readers", "Key fobs", "Intercoms", "Video entry", "Panic hardware", "Electric strikes"],
   },
   faqs: [
-    { q: "How much does an access control system cost?", a: "[Price range and what affects it: number of doors, reader type, wiring and programming. Final price confirmed in writing before work starts.]" },
-    { q: "Can you add access control to our existing doors?", a: "[Which doors and locks you can retrofit, and what to expect.]" },
-    { q: "Can we manage who has access ourselves?", a: "[Explain how users are added, removed and scheduled after setup.]" },
-    { q: "Can you repair a system someone else installed?", a: "[Which systems and brands you can service.]" },
-    { q: "Do you offer a warranty?", a: "[Warranty terms for equipment and labor.]" },
+    { q: "How much does an access control system cost?", a: "The price depends on the number of doors, the type of reader (keypad, card, fob or intercom), the wiring and the programming. We look at your doors first, then give you the price in writing before work starts." },
+    { q: "Can you add access control to our existing doors?", a: "Often, yes. A reader and electric lock can usually be added to an existing door, depending on the door, the frame and the lock that's already there. We check the door first and tell you what's possible before we quote." },
+    { q: "Can we manage who has access ourselves?", a: "Yes. After setup we show you how to add or remove users and change schedules yourself, so you don't need a service call every time someone joins or leaves." },
+    { q: "Can you repair a system someone else installed?", a: "Tell us the brand and model when you call and we'll say whether we can service it. If it's too old or locked to one vendor, we'll tell you and suggest your options." },
+    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
   ],
   near: {
     title: "Access control near you",
     intro: "Access control installation and repair in these areas and more:",
   },
   related: [
-    { label: "Locksmith services", href: "/locksmith-services" },
-    { label: "Automatic gates", href: "/automatic-gate-services" },
+    { label: "Locksmith services", slug: "locksmith" },
+    { label: "Automatic gates", slug: "automatic-gates" },
     { label: "Commercial rekeying" },
     { label: "Panic bars" },
   ],
 };
 
 export const fencing: ServicePageConfig = {
-  path: "/fence-services",
+  slug: "fencing",
   meta: {
     title: "Fence Repair & Installation, Portland OR",
     description:
@@ -346,7 +410,7 @@ export const fencing: ServicePageConfig = {
     title: "Fence repair & installation in",
     accent: "Portland, OR",
     lead: "Storm damage, leaning posts or a brand-new fence line? We repair and install fences and gates for homes and businesses across the Portland metro.",
-    checks: [quote, licensed, "[Warranty: e.g. X-year warranty on materials and labor]"],
+    checks: [quote, licensed, "Chain-link, wood and metal fences"],
     image: { src: "/our-work-2.jpg", alt: "Alpha technician installing a metal fence" },
   },
   warning: {
@@ -379,25 +443,62 @@ export const fencing: ServicePageConfig = {
   },
   brands: {
     title: "Fence types we work with",
-    items: ["Chain-link", "Wood", "Metal and ornamental", "Privacy fencing", "Fence gates", "[Other types you install]"],
+    items: ["Chain-link", "Wood", "Metal and ornamental", "Privacy fencing", "Fence gates"],
   },
   faqs: [
-    { q: "How much does fence repair cost?", a: "[Price range and what affects it: fence type, length, materials and labor. Final price confirmed in writing before work starts.]" },
-    { q: "Can you come out to give a quote?", a: "[How quotes work: on-site visit, photos, and typical timing.]" },
-    { q: "Can you repair just one section?", a: "[Explain when a repair makes sense and when a full replacement is better.]" },
-    { q: "Do you install fence gates?", a: "[Gate types you install, including automatic gates.]" },
-    { q: "Do you offer a warranty?", a: "[Warranty terms for materials and labor.]" },
+    { q: "How much does fence repair cost?", a: "The price depends on the fence type (chain-link, wood or metal), the length and height, the condition of the posts, and whether it's a repair or a new installation. You get the price in writing before work starts." },
+    { q: "Can you come out to give a quote?", a: "Call us and describe the fence or the damage. We'll tell you whether we need to see it in person, and give you the price in writing before work starts." },
+    { q: "Can you repair just one section?", a: "Often, yes. A few damaged boards, a panel or a single post can usually be fixed on their own. If the posts are rotted or leaning along a long run, replacing that stretch is usually the better value, and we'll tell you which applies." },
+    { q: "Do you install fence gates?", a: "Yes. We install and repair fence gates, including automatic gates. See our automatic gate services for opener options." },
+    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
   ],
   near: {
     title: "Fence service near you",
     intro: "Fence repair and installation in these areas and more:",
   },
   related: [
-    { label: "Automatic gates", href: "/automatic-gate-services" },
-    { label: "Access control systems", href: "/access-control-services" },
+    { label: "Automatic gates", slug: "automatic-gates" },
+    { label: "Access control systems", slug: "access-control" },
     { label: "Chain-link fence" },
     { label: "Metal fence installation" },
   ],
 };
 
-export const servicePages = [springRepair, locksmith, automaticGates, accessControl, fencing];
+export const servicePages = [locksmith, garageDoors, springRepair, automaticGates, accessControl, fencing];
+
+/** Card shown on city pages: one per service page. */
+export const serviceCards = [
+  { slug: "locksmith", icon: "key", title: "Locksmith services", cta: "Locksmith", body: "Emergency lockout service, lock change, lock rekey, lock repairs, storefront doors and auto keys." },
+  { slug: "garage-doors", icon: "garage", title: "Garage door services", cta: "Garage door", body: "Door repair, cables, panels and motor operators, plus new door installation." },
+  { slug: "garage-door-spring-repair", icon: "garage", title: "Garage door spring repair", cta: "Spring repair", body: "Broken torsion or extension springs replaced, usually the same day." },
+  { slug: "automatic-gates", icon: "gate", title: "Automatic gates", cta: "Automatic gate", body: "Driveway and commercial gate repair and installation." },
+  { slug: "fencing", icon: "gate", title: "Fence repair and installation", cta: "Fence", body: "Chain-link, wood and metal fence repair and installation for homes and businesses." },
+  { slug: "access-control", icon: "access", title: "Access control systems", cta: "Access control", body: "Keycard and fob entry, keypad and intercom systems, and panic hardware." },
+] as const;
+
+export const getServiceBySlug = (slug: string) => servicePages.find((s) => s.slug === slug);
+
+/** /locations/[city]/service/[service] */
+export const cityServicePath = (citySlug: string, serviceSlug: string) => `/locations/${citySlug}/service/${serviceSlug}`;
+
+/** The same page with the Portland wording swapped for the given city. */
+export function localizeService(c: ServicePageConfig, city: City): ServicePageConfig {
+  const place = `${city.name}, ${city.state}`;
+  const fix = (t: string) =>
+    t
+      .replaceAll("Portland, OR", place)
+      .replaceAll("Portland OR", `${city.name} ${city.state}`)
+      .replaceAll("across the Portland metro", `in ${city.name} and nearby areas`)
+      .replaceAll("the Portland metro", `${city.name} and nearby areas`)
+      .replaceAll("Portland", city.name);
+  const SKIP = new Set(["slug", "path", "href", "src"]);
+  const walk = (v: unknown): unknown =>
+    typeof v === "string"
+      ? fix(v)
+      : Array.isArray(v)
+        ? v.map(walk)
+        : v && typeof v === "object"
+          ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, SKIP.has(k) ? x : walk(x)]))
+          : v;
+  return walk(c) as ServicePageConfig;
+}

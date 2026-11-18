@@ -79,9 +79,9 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
   return (
     <div className="space-y-3">
       {items.map((f) => (
-        <details key={f.q} className="card group px-5 py-4">
+        <details key={f.q} className="card group mb-3 px-5 py-4">
           <summary className="font-display text-title font-semibold">{f.q}</summary>
-          <p className="mt-3 text-body leading-relaxed text-muted">{f.a}</p>
+          <p className="mt-2 pb-8 text-body leading-relaxed text-muted">{f.a}</p>
         </details>
       ))}
     </div>

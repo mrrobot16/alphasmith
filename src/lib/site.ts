@@ -26,11 +26,11 @@ export const site = {
 };
 
 export const nav = [
-  { label: "Locksmith", href: "/locksmith-services" },
-  { label: "Garage Doors", href: "/garage-door-services/spring-repair" },
-  { label: "Automatic Gates", href: "/automatic-gate-services" },
-  { label: "Fencing", href: "/fence-services" },
-  { label: "Access Control", href: "/access-control-services" },
+  { label: "Locksmith", href: "/locations/portland/service/locksmith" },
+  { label: "Garage Doors", href: "/locations/portland/service/garage-doors" },
+  { label: "Automatic Gates", href: "/locations/portland/service/automatic-gates" },
+  { label: "Fencing", href: "/locations/portland/service/fencing" },
+  { label: "Access Control", href: "/locations/portland/service/access-control" },
   { label: "Locations", href: "/#service-area" },
   { label: "Reviews", href: "#reviews" },
   { label: "About Us", href: "/#about" },
@@ -42,28 +42,28 @@ export const services = [
     title: "Locksmith services",
     body: "Emergency lockout service, lock change, lock rekey, lock repairs, storefront doors and auto keys.",
     cta: "Locksmith services",
-    href: "/locksmith-services",
+    href: "/locations/portland/service/locksmith",
   },
   {
     icon: "garage",
     title: "Garage / overhead door services",
     body: "Spring, cable, panel and motor operator replacement, plus door installation services.",
     cta: "Garage door services",
-    href: "/garage-door-services/spring-repair",
+    href: "/locations/portland/service/garage-doors",
   },
   {
     icon: "gate",
     title: "Automatic gates",
     body: "Driveway and commercial gate repair, gate repair, and fence repair and installation services.",
     cta: "Automatic gate services",
-    href: "/automatic-gate-services",
+    href: "/locations/portland/service/automatic-gates",
   },
   {
     icon: "access",
     title: "Access control systems",
     body: "Keycard and fob entry, keypad and intercom systems, gate access control and panic hardware.",
     cta: "Access control services",
-    href: "/access-control-services",
+    href: "/locations/portland/service/access-control",
   },
 ] as const;
 

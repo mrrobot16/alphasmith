@@ -54,7 +54,7 @@ export function pageMeta({ title, description, path }: { title: string; descript
   };
 }
 
-export function serviceJsonLd({ name, description, path }: { name: string; description: string; path: string }) {
+export function serviceJsonLd({ name, description, path, area }: { name: string; description: string; path: string; area?: string }) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -62,6 +62,6 @@ export function serviceJsonLd({ name, description, path }: { name: string; descr
     description,
     url: `${SITE_URL}${path}`,
     provider: { "@id": `${SITE_URL}/#business` },
-    areaServed: cities.map((c) => ({ "@type": "City", name: `${c}, OR` })),
+    areaServed: area ? { "@type": "City", name: area } : cities.map((c) => ({ "@type": "City", name: `${c}, OR` })),
   };
 }

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site, homeReviews } from "@/lib/site";
-import { serviceAreas, type ServicePageConfig } from "@/lib/services";
-import { cityHref } from "@/lib/cities";
+import { cityServicePath, type ServicePageConfig } from "@/lib/services";
+import { cityHref, getCity, type City } from "@/lib/cities";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { TrustBar, Hero, Faq } from "./Shared";
 import { ReviewsCarousel } from "./ReviewsCarousel";
@@ -20,16 +20,22 @@ function Rich({ text }: { text: string }) {
   );
 }
 
-export function ServicePage({ c }: { c: ServicePageConfig }) {
+export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
+  const pagePath = cityServicePath(city.slug, c.slug);
+  // Nearby cities, each linking to the same service in that city.
+  const areas = city.nearby.map((a) => {
+    const other = getCity(cityHref(a)?.split("/").pop() ?? "");
+    return { label: a, href: other ? cityServicePath(other.slug, c.slug) : undefined };
+  });
   return (
     <>
-      <JsonLd data={serviceJsonLd({ name: c.schema.name, description: c.schema.description, path: c.path })} />
-      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: c.crumbs.label, path: c.path }])} />
+      <JsonLd data={serviceJsonLd({ name: c.schema.name, description: c.schema.description, path: pagePath, area: `${city.name}, ${city.state}` })} />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: city.name, path: `/locations/${city.slug}` }, { name: c.crumbs.label, path: pagePath }])} />
       <nav aria-label="Breadcrumb" className="border-b border-line text-small text-muted">
         <ol className="wrap flex gap-2 py-3">
           <li><Link href="/" className="hover:text-ink">Home</Link></li>
           <li aria-hidden>·</li>
-          <li>{c.crumbs.category}</li>
+          <li><Link href={`/locations/${city.slug}`} className="hover:text-ink">{city.name}</Link></li>
           <li aria-hidden>·</li>
           <li className="text-ink" aria-current="page">{c.crumbs.label}</li>
         </ol>
@@ -131,22 +137,22 @@ export function ServicePage({ c }: { c: ServicePageConfig }) {
           <h2 className="h-section">{c.near.title}</h2>
           <p className="mt-3 text-small text-muted">{c.near.intro}</p>
           <ul className="mt-5 flex flex-wrap gap-2">
-            {serviceAreas.map((a) => {
-              const href = cityHref(a);
-              return (
-                <li key={a}>
-                  {href ? <Link href={href} className="chip">{a}</Link> : <span className="chip">{a}</span>}
-                </li>
-              );
-            })}
+            {areas.map((a) => (
+              <li key={a.label}>
+                {a.href ? <Link href={a.href} className="chip">{a.label}</Link> : <span className="chip">{a.label}</span>}
+              </li>
+            ))}
           </ul>
           <h3 className="mt-10 text-sub">Related services</h3>
           <ul className="mt-4 flex flex-wrap gap-2">
-            {c.related.map((r) => (
-              <li key={r.label}>
-                {r.href ? <Link href={r.href} className="chip">{r.label}</Link> : <span className="chip">{r.label}</span>}
-              </li>
-            ))}
+            {c.related.map((r) => {
+              const href = r.slug ? cityServicePath(city.slug, r.slug) : undefined;
+              return (
+                <li key={r.label}>
+                  {href ? <Link href={href} className="chip">{r.label}</Link> : <span className="chip">{r.label}</span>}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>

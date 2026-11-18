@@ -31,7 +31,8 @@ export function RecentJobs({ name }: { name: string }) {
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line">
               <Image src={j.src} alt={j.alt} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover" />
             </div>
-            <p className="mt-2 text-small text-muted">[Job type, {name} · Month Year]</p>
+            {/* Hidden until real job details exist. Remove "hidden" to show the caption. */}
+            <p className="mt-2 hidden text-small text-muted">[Job type, {name} · Month Year]</p>
           </li>
         ))}
       </ul>

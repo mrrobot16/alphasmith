@@ -36,10 +36,11 @@ function formatPhone(digits: string) {
 function pageLabel(path: string) {
   const known: Record<string, string> = {
     "/": "Homepage",
-    "/garage-door-services/spring-repair": "Garage door spring repair page",
   };
   if (known[path]) return known[path];
   const title = (slug: string) => slug.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+  const cs = path.match(/^\/locations\/([^/]+)\/service\/([^/]+)/);
+  if (cs) return `${title(cs[2])} page in ${title(cs[1])}`;
   if (path.startsWith("/locations/")) return `${title(path.slice("/locations/".length))} city page`;
   const last = path.split("/").filter(Boolean).pop();
   if (!last) return "Website";

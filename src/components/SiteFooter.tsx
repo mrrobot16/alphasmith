@@ -59,7 +59,7 @@ export function SiteFooter() {
                 </a>
               </li>
               <li className="hidden text-muted md:list-item">Issued by the Oregon Construction Contractors Board</li>
-              <li className="hidden text-muted md:list-item">[Insured and bonded]</li>
+              <li className="hidden text-muted md:list-item">Insured and bonded</li>
             </ul>
           </div>
 
@@ -70,7 +70,7 @@ export function SiteFooter() {
                 {[
                   ["About Us", "/#about"],
                   ["Reviews", "/#reviews"],
-                  ["FAQ", "/garage-door-services/spring-repair#faq"],
+                  ["FAQ", "/locations/portland/service/garage-door-spring-repair#faq"],
                   ["Contact and booking", "/#quote"],
                 ].map(([label, href]) => (
                   <li key={label}>
@@ -101,13 +101,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Placeholder links: they point to "#" until the owner approves the legal pages. */}
         <div className="border-t border-line">
           <div className="wrap flex flex-col gap-3 py-5 text-small text-muted sm:flex-row sm:items-center sm:justify-between">
             <p>&copy; {new Date().getFullYear()} {site.name}</p>
             <ul className="flex flex-wrap gap-x-6 gap-y-2">
-              <li><a href="#" className="hover:text-orange">Terms and Conditions</a></li>
-              <li><a href="#" className="hover:text-orange">Privacy Policy</a></li>
+              <li><Link href="/terms-and-conditions" className="hover:text-orange">Terms and Conditions</Link></li>
+              <li><Link href="/privacy-policy" className="hover:text-orange">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>

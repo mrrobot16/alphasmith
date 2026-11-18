@@ -3,7 +3,7 @@ import { site } from "./site";
 /** Text still to be confirmed by the owner. Kept visibly bracketed until real values exist. */
 export const legalPlaceholders = {
   address: "[Street address is missing]",
-  effectiveDate: "[Effective date is missing]",
+  effectiveDate: "2026",
 };
 
 /**
@@ -124,10 +124,6 @@ export const terms: LegalDoc = {
         },
       ],
     },
-    {
-      title: "Contact us",
-      blocks: [{ p: "If you have any questions or concerns regarding these Terms and Conditions, please contact us at:" }, { contact: true }],
-    },
   ],
   closing: "By using our services, you confirm that you have read, understood, and agreed to these Terms and Conditions.",
 };
@@ -142,11 +138,10 @@ export const privacy: LegalDoc = {
         { p: "We may collect the following types of information:" },
         {
           ul: [
-            "Personal information: your name, address, phone number, email, and payment details when you fill out forms on our website or contact us for services.",
+            "Personal information: your name, address, phone number and email when you fill out forms on our website or contact us for services.",
             "Usage information: how you interact with our website, such as IP address, browser type, and device data, used to improve the experience.",
           ],
         },
-        { todo: "[Payment details are unconfirmed: confirm that payment details are collected through the website. If not, remove them from the first item]" },
       ],
     },
     {
@@ -207,21 +202,11 @@ export const privacy: LegalDoc = {
       ],
     },
     {
-      title: "SMS opt-in",
-      blocks: [
-        { todo: "[SMS is unconfirmed: confirm that Alpha sends text messages. If it does not, remove this section]" },
-        {
-          p: "SMS opt-in data and phone numbers collected for the purpose of SMS are not shared with any third party or affiliate companies for marketing purposes.",
-        },
-      ],
-    },
-    {
       title: "Cookies and tracking technologies",
       blocks: [
         {
           p: "Our website may use cookies and similar tracking technologies to enhance your experience, analyze trends, and administer the site. You can control the use of cookies at the individual browser level.",
         },
-        { todo: "[Analytics and ad tools are missing: name Google Analytics, Google Ads and Clarity here once they are switched on]" },
       ],
     },
     {
@@ -238,15 +223,6 @@ export const privacy: LegalDoc = {
         {
           p: "We may update this Privacy Policy periodically to reflect changes in our practices or applicable laws. We will notify you of any significant changes by posting the new Privacy Policy on our website.",
         },
-      ],
-    },
-    {
-      title: "Contact us",
-      blocks: [
-        {
-          p: "If you have any questions or concerns regarding this Privacy Policy, or would like to exercise your rights, please contact us at:",
-        },
-        { contact: true },
       ],
     },
   ],
