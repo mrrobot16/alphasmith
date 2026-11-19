@@ -132,6 +132,30 @@ export const moreCities = [
   "Woodburn",
 ];
 
+/** Home page FAQ, as approved by the client. */
+export const homeFaqs = [
+  {
+    q: "Do you offer 24/7 emergency service in Portland?",
+    a: `Yes. We answer emergency calls 24/7 for lockouts and urgent problems with garage doors, commercial doors, automatic gates, fences or access control. Call ${site.phone} with your location and what’s happening so we can confirm technician availability and give you an estimated arrival time.`,
+  },
+  {
+    q: "Can you help if I’m locked out of my car, home, or business?",
+    a: "Yes. Our mobile locksmith team will help with car, house, and business lockouts throughout the Portland metro and surrounding areas. Tell us what you’re locked out of and where you are. We’ll be there as soon as we can.",
+  },
+  {
+    q: "What areas do you serve around Portland?",
+    a: "We serve Portland metro and nearby communities, including Beaverton, Hillsboro, Tigard, Tualatin, Lake Oswego, Gresham, and Wilsonville. If you’re outside those areas, call with your ZIP code and the service you need so we can confirm coverage. Most likely we can help.",
+  },
+  {
+    q: "What services do you offer for homes and businesses?",
+    a: "Alpha Locksmith & Garage provides locksmith services, garage and overhead door services, automatic gate installation and repair, fence installation and repair, and access control. We also repair commercial storefront and back doors, including locks, hinges, door closers, and panic bars.",
+  },
+  {
+    q: "Do you provide a quote before starting work?",
+    a: "Yes. We explain the recommended work and provide a quote before getting started. When requesting service, describe the issue and share photos or a model number if you have them.",
+  },
+];
+
 /** Real Google reviews, word for word as customers wrote them. Add new ones at the end. Every card on the site opens `site.reviewsUrl`. */
 export const homeReviews = [
   { name: "Diane Anderson", text: "The locksmith who serviced my home was excellent. Joseph was efficient, and his fees were reasonable. Joseph was also clear in explaining what he had done, and I felt safe. As he was leaving, he had parked his truck infront of my garage, he saw the loose doorframe, found a nail and pounded it in. Voila !" },
