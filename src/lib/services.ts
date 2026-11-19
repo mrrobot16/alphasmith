@@ -161,11 +161,11 @@ export const garageDoors: ServicePageConfig = {
     items: ["LiftMaster", "Chamberlain", "Genie", "Clopay", "Amarr", "Wayne Dalton", "Overhead Door"],
   },
   faqs: [
-    { q: "How much does garage door repair cost?", a: "It depends on what failed. A roller, sensor or remote is a small repair, while springs, cables, a motor or a damaged panel cost more, and a new door costs more again. Door size and parts matter too. You get the price in writing before work starts." },
-    { q: "Can you come today?", a: "Call us any time, day or night. We answer 24/7 and give you an arrival time when you call, based on where our team is and what the job needs." },
-    { q: "Should I repair or replace my garage door?", a: "Repair is usually the better value when the problem is one part, such as a spring, cable, roller or opener. Replacement makes sense when several panels are damaged, the door is badly worn or no longer closes square, or you want better insulation or security. We'll look at the door and tell you which is the better value." },
-    { q: "Do you install new garage doors?", a: "Yes. We install new residential and commercial garage doors. Tell us the size of the opening and the style you like, and we'll quote it in writing before work starts." },
-    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
+    { q: "Do you repair residential or commercial garage doors in Portland?", a: "Yes. We repair both residential and commercial garage doors and openers throughout the Portland metro area. Common service calls include broken springs, damaged cables, bent or broken doors/panels, doors that won’t close, and openers that stop responding." },
+    { q: "Do you repair commercial overhead and rolling doors?", a: "Yes. We service commercial overhead and rolling doors for retail locations, warehouses, and other facilities. When you call, tell us the door type, whether it operates manually or with a motor, and whether it’s stuck open or closed." },
+    { q: "Why does my garage door opener run without moving the door?", a: "The door may be disconnected from the opener, or an opener component may have failed. A spring or cable problem can also affect how the door moves. We inspect the door and opener to identify which part needs attention." },
+    { q: "How much does garage door repair cost?", a: "The cost depends on the type and size of the door, the part that needs repair, and the labor involved. A photo of the door and the opener model can help us identify the equipment. We explain the work and quote it before starting." },
+    { q: "Can you replace my garage door opener without replacing the door?", a: "Often, yes. If the door is in good condition and compatible with the new opener, we can replace the opener while keeping the existing door. We check how the door operates and identify any repairs it needs before recommending an opener." },
   ],
   near: {
     title: "Garage door service near you",
