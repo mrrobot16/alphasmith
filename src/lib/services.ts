@@ -446,11 +446,11 @@ export const fencing: ServicePageConfig = {
     items: ["Chain-link", "Wood", "Metal and ornamental", "Privacy fencing", "Fence gates"],
   },
   faqs: [
-    { q: "How much does fence repair cost?", a: "The price depends on the fence type (chain-link, wood or metal), the length and height, the condition of the posts, and whether it's a repair or a new installation. You get the price in writing before work starts." },
-    { q: "Can you come out to give a quote?", a: "Call us and describe the fence or the damage. We'll tell you whether we need to see it in person, and give you the price in writing before work starts." },
-    { q: "Can you repair just one section?", a: "Often, yes. A few damaged boards, a panel or a single post can usually be fixed on their own. If the posts are rotted or leaning along a long run, replacing that stretch is usually the better value, and we'll tell you which applies." },
-    { q: "Do you install fence gates?", a: "Yes. We install and repair fence gates, including automatic gates. See our automatic gate services for opener options." },
-    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
+    { q: "Do you install and repair fences in Portland?", a: "Yes. We install and repair wood, chain-link, and metal fences for homes and businesses in the Portland metro and surrounding areas. We can quote a new fence, replacement of a damaged section, or repairs to existing posts and panels." },
+    { q: "Can you repair a leaning fence without replacing the whole fence?", a: "Often, yes. If the damage is limited to a few posts or panels and the rest of the fence is sound, we may be able to repair just the affected section. We inspect the posts and surrounding sections to determine how much work is needed." },
+    { q: "What affects the cost of a new fence?", a: "Fence pricing depends on the length, height, material, number of gates, and site conditions. Removing an old fence can also affect the quote. Approximate measurements and photos of the property help us understand the scope." },
+    { q: "Which fence material should I choose for privacy or security?", a: "Wood is a common choice for backyard privacy. Chain-link can enclose a yard, commercial property, or equipment area while keeping it visible. Metal fencing is another option when you want a defined perimeter with an open view. We can discuss which material fits your property and how you use it." },
+    { q: "Can you install or repair a gate as part of a fencing job?", a: "Yes. We can include a pedestrian or vehicle gate in a fencing quote and assess existing gates that sag, drag, or won’t latch. If you want a powered vehicle gate, we can also discuss automatic gate options." },
   ],
   near: {
     title: "Fence service near you",
