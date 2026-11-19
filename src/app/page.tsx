@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { site, services, homeReviews } from "@/lib/site";
+import { site, services, homeReviews, homeFaqs } from "@/lib/site";
 import { serviceIcons, PhoneIcon } from "@/components/Icons";
 import { QuoteForm } from "@/components/QuoteForm";
-import { TrustBar, Hero } from "@/components/Shared";
+import { TrustBar, Hero, Faq } from "@/components/Shared";
 import { GoogleMap } from "@/components/GoogleMap";
 import { pageMeta } from "@/lib/seo";
 import { WorkGallery } from "@/components/WorkGallery";
@@ -182,6 +182,13 @@ export default function Home() {
       <section id="reviews" data-section="reviews" className="scroll-mt-6 py-14 lg:py-16">
         <div className="wrap">
           <ReviewsCarousel items={homeReviews} />
+        </div>
+      </section>
+
+      <section id="faq" data-section="faq" className="scroll-mt-6 border-t border-line py-14 lg:py-16">
+        <div className="wrap">
+          <h2 className="h-section">Frequently asked questions</h2>
+          <div className="mt-6"><Faq items={homeFaqs} /></div>
         </div>
       </section>
 

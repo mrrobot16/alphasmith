@@ -70,7 +70,7 @@ export function SiteFooter() {
                 {[
                   ["About Us", "/#about"],
                   ["Reviews", "/#reviews"],
-                  ["FAQ", "/locations/portland/service/garage-door-spring-repair#faq"],
+                  ["FAQ", "/#faq"],
                   ["Contact and booking", "/#quote"],
                 ].map(([label, href]) => (
                   <li key={label}>
