@@ -375,11 +375,11 @@ export const accessControl: ServicePageConfig = {
     items: ["Keypads", "Keycard readers", "Key fobs", "Intercoms", "Video entry", "Panic hardware", "Electric strikes"],
   },
   faqs: [
-    { q: "How much does an access control system cost?", a: "The price depends on the number of doors, the type of reader (keypad, card, fob or intercom), the wiring and the programming. We look at your doors first, then give you the price in writing before work starts." },
-    { q: "Can you add access control to our existing doors?", a: "Often, yes. A reader and electric lock can usually be added to an existing door, depending on the door, the frame and the lock that's already there. We check the door first and tell you what's possible before we quote." },
-    { q: "Can we manage who has access ourselves?", a: "Yes. After setup we show you how to add or remove users and change schedules yourself, so you don't need a service call every time someone joins or leaves." },
-    { q: "Can you repair a system someone else installed?", a: "Tell us the brand and model when you call and we'll say whether we can service it. If it's too old or locked to one vendor, we'll tell you and suggest your options." },
-    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
+    { q: "Do you install and repair access control systems in Portland?", a: "Yes. We install and repair access control systems for businesses, apartment communities, and gated properties in the Portland metro and surrounding areas. We work with keypads, key cards, fobs, and intercoms for doors and gates." },
+    { q: "Can you add keyless entry to an existing commercial door?", a: "Many commercial doors can be upgraded with a keypad or card reader. We look at the door, frame, lock, and existing wiring to determine what can be reused and which hardware the upgrade requires." },
+    { q: "Can you fix a card reader or keypad that works but won’t unlock the door?", a: "Yes. A reader can respond to a card or code even when the door fails to release. We check the reader, power supply, wiring, and locking hardware to find where the problem starts." },
+    { q: "Can you connect an automatic gate to a keypad, fob reader, or intercom?", a: "Yes, when the equipment is compatible. We review the gate operator and existing controls, then recommend a setup based on how employees, residents, and visitors need to enter." },
+    { q: "Can I remove access when an employee leaves or a tenant moves out?", a: "Many access control systems let you deactivate an individual card, fob, or user code. If everyone uses a shared PIN, you may need to change it for everyone. We can help you understand what your current system supports and recommend options if you need more control." },
   ],
   near: {
     title: "Access control near you",
