@@ -303,11 +303,11 @@ export const automaticGates: ServicePageConfig = {
     items: ["LiftMaster", "Chamberlain", "Viking Access", "FAAC", "Nice"],
   },
   faqs: [
-    { q: "How much does automatic gate repair cost?", a: "The price depends on the type of gate (swing or slide), the opener, the size of the gate, and which parts are worn. A sensor or remote is a small repair, while a motor or a new gate costs more. You get the price in writing before work starts." },
-    { q: "Can you come today?", a: "Call us any time, day or night. We answer 24/7 and give you an arrival time when you call, based on where our team is and what the job needs." },
-    { q: "My gate won't move after a power outage. What do I do?", a: "Many gates have a manual release for outages. Check your owner's manual, and call us if the gate still won't move once power is back." },
-    { q: "Can you install a new automatic gate?", a: "Yes. We install automatic gates and openers for homes and businesses. Tell us the width of the opening and the style you want, and we'll quote it in writing before work starts." },
-    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
+    { q: "Do you install and repair automatic gates in the Portland metro and surrounding areas?", a: "Yes. We install and repair automatic driveway gates and commercial gates, including sliding and swing gates. Tell us whether you need service for an existing gate or want a quote for a new installation. We will make an appointment to visit your desired project location, we will take measurements and check the whole area to provide a quote." },
+    { q: "Why won’t my automatic gate open or close?", a: "The issue may be with the power supply, gate operator, safety sensors, access controls, or gate hardware. Tell us whether the gate responds to its controls, makes a sound, or stops partway. Those details help us narrow down the problem. We can do a visit to do an assessment and determine the solution." },
+    { q: "Can you automate an existing manual driveway gate?", a: "Some manual gates can be fitted with an automatic operator. We assess the gate’s condition, how it moves, and the space and power available before recommending equipment or modifications." },
+    { q: "Should I repair or replace my gate operator?", a: "Repair may make sense when the problem is isolated and replacement parts are available. Replacement may be a better option if the operator has repeated failures or parts are difficult to source. We also check the gate itself so a hardware issue doesn’t get mistaken for a bad motor." },
+    { q: "Do you offer preventive maintenance for commercial gates?", a: "Yes. We offer quarterly maintenance for manual and automatic gates. We check how the gate operates, lubricate applicable parts, and make routine adjustments. If parts or additional repairs are needed, we quote those separately." },
   ],
   near: {
     title: "Gate repair near you",
