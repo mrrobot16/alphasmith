@@ -233,11 +233,11 @@ export const locksmith: ServicePageConfig = {
     items: ["Schlage", "Kwikset", "Yale", "Medeco", "Baldwin"],
   },
   faqs: [
-    { q: "How much does a locksmith cost?", a: "The price depends on the job (a lockout, rekey, new lock or car key), the lock or key involved, and parts and labor. You get the price in writing before work starts." },
-    { q: "How fast can you get here?", a: "We answer 24/7. When you call, we give you an arrival time based on where our team is and what you need." },
-    { q: "Will you damage my lock to get me in?", a: "We open locks without damaging them whenever we can. If a lock has to be drilled or replaced, we tell you first and quote the price in writing." },
-    { q: "Can you make keys for my car?", a: "Yes, we handle auto keys. Tell us the year, make and model of the vehicle and what you need, such as a lost key, a spare or a key that won't turn, and we'll confirm what we can do on the phone." },
-    { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
+    { q: "Should I rekey or replace my locks after moving in?", a: "Rekeying is a good option when your locks work properly and you want old keys to stop working. You keep the existing hardware and get new keys. Replacement makes sense when the lock is damaged, worn out, or you want to upgrade to different hardware." },
+    { q: "How much does it cost to rekey a house in Portland?", a: "The price depends on the number and type of locks and how many new keys you need. If you want one key to open several doors, tell us when you call so we can check whether your locks are compatible and quote the job." },
+    { q: "Can you make a replacement car key if I lost my only key?", a: "Yes. We offer mobile car key replacement for supported vehicles, including some cases where all keys are lost. Call with your vehicle’s year, make, and model so we can confirm whether we can cut or program a replacement." },
+    { q: "Can you repair a lock that sticks or won’t turn?", a: "Yes. A sticking lock may come from a worn key, a problem inside the lock cylinder, or a door that no longer lines up properly. We check the lock and door together and explain whether an adjustment, repair, or replacement makes sense." },
+    { q: "Can you rekey my business after an employee leaves or a tenant moves out?", a: "Yes. We rekey commercial locks for businesses and property managers. Tell us which doors need new keys and which entrances should share a key so we can plan the work around your property’s access needs." },
   ],
   near: {
     title: "Locksmith service near you",
