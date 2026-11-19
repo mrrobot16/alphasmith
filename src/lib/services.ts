@@ -488,6 +488,9 @@ export function localizeService(c: ServicePageConfig, city: City): ServicePageCo
     t
       .replaceAll("Portland, OR", place)
       .replaceAll("Portland OR", `${city.name} ${city.state}`)
+      // Longer phrasings first, so "the Portland metro" below doesn't leave "areas area" behind.
+      .replaceAll("the Portland metro and surrounding areas", `${city.name} and nearby areas`)
+      .replaceAll("the Portland metro area", `${city.name} and nearby areas`)
       .replaceAll("across the Portland metro", `in ${city.name} and nearby areas`)
       .replaceAll("the Portland metro", `${city.name} and nearby areas`)
       .replaceAll("Portland", city.name);
