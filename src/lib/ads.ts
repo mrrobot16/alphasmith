@@ -1,4 +1,10 @@
 /**
+ * DISABLED: AdSense is switched off and this file is not imported anywhere. To turn ads back on,
+ * uncomment <AdSenseScript /> in app/layout.tsx, the <AdSlot /> tags (and their imports) in
+ * app/page.tsx, components/ServicePage.tsx and components/CityPage.tsx, restore the GET in
+ * app/ads.txt/route.ts, and uncomment the NEXT_PUBLIC_ADSENSE_* lines in .env.example.
+ */
+/**
  * Display ads (Google AdSense). Everything here is switched off until the env vars are filled in,
  * so with them blank no script loads, no request is made and no ad slot takes up any space.
  *

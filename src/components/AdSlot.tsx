@@ -1,5 +1,7 @@
 "use client";
 
+// AdSense is disabled. See src/lib/ads.ts to turn it back on. Not imported anywhere while ads are off.
+
 import { useEffect, useRef } from "react";
 import { ADSENSE_CLIENT, ADS_ENABLED, ADS_PREVIEW, adPlacements, type AdPlacement } from "@/lib/ads";
 

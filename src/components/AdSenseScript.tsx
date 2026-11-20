@@ -1,3 +1,4 @@
+// AdSense is disabled. See src/lib/ads.ts to turn it back on. Not imported anywhere while ads are off.
 import Script from "next/script";
 import { ADSENSE_CLIENT, ADS_ENABLED } from "@/lib/ads";
 
