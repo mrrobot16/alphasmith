@@ -76,20 +76,34 @@ export const workFilters = [
   "Access control",
 ];
 
-export type WorkItem = { cat: string; caption: string; src?: string };
+export type WorkItem = { cat: string; caption: string; src: string; /** Shown under the "All" filter. */ featured?: boolean };
 
-/** All 10 show on every screen size, in this order (it matches the design). Set `src` (e.g. "/work/spring.jpg", file in /public/work) to show a real photo. */
+/**
+ * Our work gallery. Each service filter shows its 4 photos, in this order. "All" shows the items marked
+ * `featured` (the first two of every service, interleaved). Photos live in /public/work/gallery,
+ * resized from the originals in top_photos. The array order is the display order.
+ */
 export const work: WorkItem[] = [
-  { cat: "Locksmith", caption: "Lock installation and repair", src: "/work/lock-installation.jpg" },
-  { cat: "Garage doors", caption: "Spring and track repair", src: "/our-work-3.jpg" },
-  { cat: "Automatic gates", caption: "Gate panel repair", src: "/our-work-1.jpg" },
-  { cat: "Fencing", caption: "Metal fence installation", src: "/our-work-2.jpg" },
-  { cat: "Access control", caption: "Keycard and keypad entry", src: "/work/keycard-entry.jpg" },
-  { cat: "Locksmith", caption: "Car lockout service", src: "/work/car-lockout.jpg" },
-  { cat: "Garage doors", caption: "Commercial overhead door service", src: "/our-work-6.jpg" },
-  { cat: "Automatic gates", caption: "Wood driveway gate", src: "/work/wood-driveway-gate.jpg" },
-  { cat: "Fencing", caption: "Chain-link fence", src: "/work/chain-link-fence-2.jpg" },
-  { cat: "Access control", caption: "Video intercom at gate", src: "/work/gate-video-intercom.jpg" },
+  { cat: "Locksmith", caption: "Lock installation and repair", src: "/work/gallery/locksmith-1.jpg", featured: true },
+  { cat: "Garage doors", caption: "Spring and track repair", src: "/work/gallery/garage-doors-1.jpg", featured: true },
+  { cat: "Automatic gates", caption: "Gate panel repair", src: "/work/gallery/automatic-gates-1.jpg", featured: true },
+  { cat: "Fencing", caption: "Metal fence installation", src: "/work/gallery/fencing-1.jpg", featured: true },
+  { cat: "Access control", caption: "Keycard and keypad entry", src: "/work/gallery/access-control-1.jpg", featured: true },
+  { cat: "Locksmith", caption: "Car lockout service", src: "/work/gallery/locksmith-2.jpg", featured: true },
+  { cat: "Garage doors", caption: "Commercial overhead door service", src: "/work/gallery/garage-doors-2.jpg", featured: true },
+  { cat: "Automatic gates", caption: "Wood driveway gate", src: "/work/gallery/automatic-gates-2.jpg", featured: true },
+  { cat: "Fencing", caption: "Chain-link fence", src: "/work/gallery/fencing-2.jpg", featured: true },
+  { cat: "Access control", caption: "Video intercom at gate", src: "/work/gallery/access-control-2.jpg", featured: true },
+  { cat: "Locksmith", caption: "Key cutting", src: "/work/gallery/locksmith-3.jpg" },
+  { cat: "Locksmith", caption: "Smart lock installation", src: "/work/gallery/locksmith-4.jpg" },
+  { cat: "Garage doors", caption: "Commercial roll-up door", src: "/work/gallery/garage-doors-3.jpg" },
+  { cat: "Garage doors", caption: "Commercial door operator install", src: "/work/gallery/garage-doors-4.jpg" },
+  { cat: "Automatic gates", caption: "Steel slat driveway gate", src: "/work/gallery/automatic-gates-3.jpg" },
+  { cat: "Automatic gates", caption: "Wood double driveway gate", src: "/work/gallery/automatic-gates-4.jpg" },
+  { cat: "Fencing", caption: "Commercial chain-link with rolling gate", src: "/work/gallery/fencing-3.jpg" },
+  { cat: "Fencing", caption: "Security fence with barbed wire", src: "/work/gallery/fencing-4.jpg" },
+  { cat: "Access control", caption: "Delayed egress exit device", src: "/work/gallery/access-control-3.jpg" },
+  { cat: "Access control", caption: "Key switch control", src: "/work/gallery/access-control-4.jpg" },
 ];
 
 export const cities = [
