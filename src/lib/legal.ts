@@ -39,6 +39,7 @@ export const terms: LegalDoc = {
         },
       ],
     },
+    /* Hidden until the owner confirms Alpha sends text messages. If it does, uncomment this section; if not, delete it.
     {
       title: "Consent for SMS communication",
       blocks: [
@@ -79,6 +80,7 @@ export const terms: LegalDoc = {
         },
       ],
     },
+    */
     {
       title: "Website usage",
       blocks: [

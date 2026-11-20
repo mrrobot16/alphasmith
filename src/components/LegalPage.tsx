@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { legalPlaceholders, type LegalBlock, type LegalDoc } from "@/lib/legal";
+// Add legalPlaceholders back to this import when the address or effective date is uncommented below.
+import { type LegalBlock, type LegalDoc } from "@/lib/legal";
 
 /** Renders [label](/path) links inside a plain string. */
 function Inline({ text }: { text: string }) {
@@ -37,7 +38,9 @@ function Contact() {
             {site.phone}
           </a>
         </p>
+        {/* Hidden until the street address is confirmed. Set legalPlaceholders.address in lib/legal.ts, then uncomment.
         <p className="text-muted">Address: {legalPlaceholders.address}</p>
+        */}
       </div>
     </address>
   );
@@ -83,7 +86,9 @@ export function LegalPage({ doc, path }: { doc: LegalDoc; path: string }) {
       <article data-section="legal" data-path={path} className="wrap py-10 lg:py-16">
         <header className="max-w-[44rem]">
           <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] font-extrabold">{doc.title}</h1>
+          {/* Hidden until a full effective date is set (e.g. "November 19, 2026") in lib/legal.ts, then uncomment.
           <p className="mt-3 text-small text-muted">Effective date: {legalPlaceholders.effectiveDate}</p>
+          */}
           <p className="mt-6 text-body leading-relaxed">{doc.intro}</p>
         </header>
 
