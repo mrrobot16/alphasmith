@@ -28,7 +28,7 @@ const slugFor = {
 export function WorkGallery() {
   const [active, setActive] = useState("All");
   const filters = workFilters.filter((f) => f === "All" || work.some((w) => w.cat === f));
-  const items = work.filter((w) => active === "All" || w.cat.toLowerCase() === active.toLowerCase());
+  const items = work.filter((w) => (active === "All" ? w.featured : w.cat.toLowerCase() === active.toLowerCase()));
 
   return (
     <div>
@@ -52,12 +52,13 @@ export function WorkGallery() {
       </div>
 
       <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {items.map((w) => {
+        {items.map((w, i) => {
           const key = w.cat.toLowerCase() as keyof typeof iconFor;
           const Icon = serviceIcons[iconFor[key] ?? "key"];
           const href = `/locations/${GALLERY_CITY}/service/${slugFor[key] ?? "locksmith"}`;
           return (
-            <li key={w.caption} className="rise">
+            // The filter is part of the key so every tile remounts and replays its entrance when the filter changes.
+            <li key={`${active}:${w.caption}`} className="gallery-item" style={{ "--i": i } as React.CSSProperties}>
               <Link
                 href={href}
                 data-track="gallery_tile"

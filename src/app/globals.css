@@ -233,6 +233,22 @@ select.field {
   animation: rise 500ms var(--ease-out) backwards;
 }
 
+/* Our work gallery: tiles fade and lift in, one after another, each time the filter changes. */
+@keyframes gallery-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.gallery-item {
+  animation: gallery-in 450ms var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
 details > summary {
   list-style: none;
   cursor: pointer;
@@ -256,6 +272,7 @@ details[open] > summary::before {
     scroll-behavior: auto;
   }
   .rise,
+  .gallery-item,
   .slide-next,
   .slide-prev {
     animation: none;
