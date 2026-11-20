@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { Logo } from "./Logo";
+import { hoursClass } from "./Hours";
 
 const CCB_SEARCH = "https://search.ccb.state.or.us/search/business_details.aspx";
 
@@ -36,7 +37,7 @@ export function SiteFooter() {
               <li>
                 <a href={`mailto:${site.email}`} className="hover:text-orange">{site.email}</a>
               </li>
-              <li className="text-muted">Open 24 hours, 7 days</li>
+              <li className={`text-muted ${hoursClass.open}`}>Open 24 hours, 7 days</li>
             </ul>
           </div>
 

@@ -146,10 +146,11 @@ export const moreCities = [
   "Woodburn",
 ];
 
-/** Home page FAQ, as approved by the client. */
-export const homeFaqs = [
+/** Home page FAQ, as approved by the client. `afterHours: null` hides a question from 10pm to 6am (lib/hours.ts). */
+export const homeFaqs: { q: string; a: string; afterHours?: string | null }[] = [
   {
     q: "Do you offer 24/7 emergency service in Portland?",
+    afterHours: null,
     a: `Yes. We answer emergency calls 24/7 for lockouts and urgent problems with garage doors, commercial doors, automatic gates, fences or access control. Call ${site.phone} with your location and what’s happening so we can confirm technician availability and give you an estimated arrival time.`,
   },
   {

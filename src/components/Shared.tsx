@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { ShieldIcon, KeyIcon, DocIcon, AwardIcon, PhoneIcon } from "./Icons";
+import { Hours, hoursClass } from "./Hours";
 
 export function TrustBar() {
   const items = [
@@ -41,7 +42,7 @@ export function StickyCall() {
             <span className="grid size-3.5 place-items-center rounded-full bg-orange/30">
               <span className="size-2 rounded-full bg-orange" />
             </span>
-            Open now · a real person answers 24/7
+            <Hours open="Open now · a real person answers 24/7" closed="Licensed, insured and bonded" />
           </p>
           <div className="mt-2.5 flex gap-3">
             <a href={site.phoneHref} className="btn min-w-0 flex-1 whitespace-nowrap px-3 py-3 text-title !text-black sm:text-sub">
@@ -63,7 +64,7 @@ export function StickyCall() {
           <span className="flex items-center gap-2 text-small font-bold">
             <span className="size-1.5 rounded-full bg-black" />
             <span>
-              Open now<span className="hidden sm:inline"> · Licensed {site.license}</span>
+              <Hours open={<>Open now<span className="hidden sm:inline"> · Licensed {site.license}</span></>} closed={`Licensed ${site.license}`} />
             </span>
           </span>
           <a href={site.phoneHref} className="btn !bg-black px-5 py-2.5 text-body !text-white">
@@ -75,13 +76,22 @@ export function StickyCall() {
   );
 }
 
-export function Faq({ items }: { items: { q: string; a: string }[] }) {
+export type FaqItem = {
+  q: string;
+  a: string;
+  /** Answer shown from 10pm to 6am instead of `a` (lib/hours.ts). `null` hides the whole question after hours. */
+  afterHours?: string | null;
+};
+
+export function Faq({ items }: { items: FaqItem[] }) {
   return (
     <div className="space-y-3">
       {items.map((f) => (
-        <details key={f.q} className="card group mb-3 px-5 py-4">
+        <details key={f.q} className={`card group mb-3 px-5 py-4 ${f.afterHours === null ? hoursClass.open : ""}`}>
           <summary className="font-display text-title font-semibold">{f.q}</summary>
-          <p className="mt-2 pb-8 text-body leading-relaxed text-muted">{f.a}</p>
+          <p className="mt-2 pb-8 text-body leading-relaxed text-muted">
+            {f.afterHours ? <Hours open={f.a} closed={f.afterHours} /> : f.a}
+          </p>
         </details>
       ))}
     </div>
@@ -108,9 +118,9 @@ export function Hero({
   asideWide = false,
   asideHiddenOnPhones = false,
 }: {
-  badge: string;
+  badge: React.ReactNode;
   title: string;
-  accent: string;
+  accent: React.ReactNode;
   children: React.ReactNode;
   form?: React.ReactNode;
   /** Home page: below lg the form is shown further down the page instead. */

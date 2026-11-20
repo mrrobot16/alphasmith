@@ -16,6 +16,8 @@ export type ServicePageConfig = {
   schema: { name: string; description: string };
   hero: {
     badge: string;
+    /** Replaces `badge` from 10pm to 6am Portland time (lib/hours.ts). */
+    badgeAfterHours: string;
     title: string;
     accent: string;
     lead: string;
@@ -28,7 +30,8 @@ export type ServicePageConfig = {
   info: { title: string; body: string };
   steps: { title: string; items: [string, string, string][] };
   brands: { title: string; items: string[] };
-  faqs: { q: string; a: string }[];
+  /** `afterHours` swaps the answer from 10pm to 6am; `null` hides the question then. */
+  faqs: { q: string; a: string; afterHours?: string | null }[];
   near: { title: string; intro: string };
   /** slug links to another service page in the same city. */
   related: { label: string; slug?: string }[];
@@ -52,6 +55,7 @@ export const springRepair: ServicePageConfig = {
   },
   hero: {
     badge: "Same-day service · Open 24/7",
+    badgeAfterHours: "Same-day service",
     title: "Garage door spring repair in",
     accent: "Portland, OR",
     lead: "Broken torsion or extension spring? We replace springs on residential and commercial garage doors across the Portland metro, usually the same day you call.",
@@ -91,7 +95,7 @@ export const springRepair: ServicePageConfig = {
   },
   faqs: [
     { q: "How much does garage door spring repair cost?", a: "The price depends on the type of spring (torsion or extension), the size and weight of your door, and whether one or both springs and the cables need replacing. You get the price in writing before any work starts." },
-    { q: "Can you come today?", a: "Call us any time, day or night. We answer 24/7 and give you an arrival time when you call, based on where our team is and what the job needs." },
+    { q: "Can you come today?", a: "Call us any time, day or night. We answer 24/7 and give you an arrival time when you call, based on where our team is and what the job needs.", afterHours: "Call us and we'll give you an arrival time when you call, based on where our team is and what the job needs." },
     { q: "Should I replace both springs?", a: "Springs wear at about the same rate, so when one breaks the other is usually close behind. Replacing both keeps the door balanced and saves a second visit. We'll show you the condition of the second spring and let you decide." },
     { q: "Is it safe to open the door with a broken spring?", a: "No. Leave the door where it is, unplug the opener, and call us." },
     { q: "Do you offer a warranty?", a: "Ask us about warranty coverage when you call. We'll explain what applies to the parts and labor on your job before work starts." },
@@ -122,6 +126,7 @@ export const garageDoors: ServicePageConfig = {
   },
   hero: {
     badge: "Open 24/7 · Residential & commercial",
+    badgeAfterHours: "Residential & commercial",
     title: "Garage door repair & installation in",
     accent: "Portland, OR",
     lead: "Door off track, opener dead, or ready for a new door? We repair and install residential and commercial garage doors across the Portland metro, day or night.",
@@ -194,6 +199,7 @@ export const locksmith: ServicePageConfig = {
   },
   hero: {
     badge: "Open 24/7 · Licensed locksmith",
+    badgeAfterHours: "Licensed locksmith",
     title: "Locksmith services in",
     accent: "Portland, OR",
     lead: "Locked out, lost your keys, or need your locks changed? Our licensed locksmiths handle homes, businesses and vehicles across the Portland metro, day or night.",
@@ -265,6 +271,7 @@ export const automaticGates: ServicePageConfig = {
   },
   hero: {
     badge: "Open 24/7 · Gate repair",
+    badgeAfterHours: "Gate repair",
     title: "Automatic gate repair in",
     accent: "Portland, OR",
     lead: "Gate stuck, opener dead, or ready for a new driveway gate? We repair and install automatic gates for homes and businesses across the Portland metro.",
@@ -336,6 +343,7 @@ export const accessControl: ServicePageConfig = {
   },
   hero: {
     badge: "Open 24/7 · Commercial & residential",
+    badgeAfterHours: "Commercial & residential",
     title: "Access control systems in",
     accent: "Portland, OR",
     lead: "Keycards, fobs, keypads and intercoms that decide who gets in and when. We install, repair and rekey access control for businesses, offices, gated properties and multi-unit buildings.",
@@ -407,6 +415,7 @@ export const fencing: ServicePageConfig = {
   },
   hero: {
     badge: "Repair & installation · Open 24/7",
+    badgeAfterHours: "Repair & installation",
     title: "Fence repair & installation in",
     accent: "Portland, OR",
     lead: "Storm damage, leaning posts or a brand-new fence line? We repair and install fences and gates for homes and businesses across the Portland metro.",
