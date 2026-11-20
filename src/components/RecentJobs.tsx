@@ -19,6 +19,8 @@ const jobs = [
 
 const DEFAULT_VISIBLE = 4;
 
+// `name` is used by the job caption, which is commented out below until real job details exist.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function RecentJobs({ name }: { name: string }) {
   const [open, setOpen] = useState(false);
   const more = jobs.length - DEFAULT_VISIBLE;
@@ -31,8 +33,9 @@ export function RecentJobs({ name }: { name: string }) {
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line">
               <Image src={j.src} alt={j.alt} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover" />
             </div>
-            {/* Hidden until real job details exist. Remove "hidden" to show the caption. */}
-            <p className="mt-2 hidden text-small text-muted">[Job type, {name} · Month Year]</p>
+            {/* Hidden until real job details exist. Uncomment to show the caption.
+            <p className="mt-2 text-small text-muted">[Job type, {name} · Month Year]</p>
+            */}
           </li>
         ))}
       </ul>

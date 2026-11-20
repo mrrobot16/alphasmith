@@ -8,7 +8,8 @@ import { TrustBar, Hero, Faq } from "./Shared";
 import { ReviewsCarousel } from "./ReviewsCarousel";
 import { JsonLd } from "./JsonLd";
 import { StepsList } from "./StepsList";
-import { AdSlot } from "./AdSlot";
+// AdSense is disabled. See src/lib/ads.ts to turn it back on.
+// import { AdSlot } from "./AdSlot";
 import { CheckIcon, PhoneIcon, WarnIcon } from "./Icons";
 
 /** Renders **bold** segments inside a plain string. */
@@ -99,7 +100,7 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
         </div>
       </section>
 
-      <AdSlot placement="service_mid" />
+      {/* <AdSlot placement="service_mid" /> */}
 
       <section data-section="how_it_works" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
@@ -130,7 +131,7 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
         </div>
       </section>
 
-      <AdSlot placement="service_bottom" />
+      {/* <AdSlot placement="service_bottom" /> */}
 
       <section data-section="areas_and_related" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">

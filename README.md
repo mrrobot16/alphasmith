@@ -82,6 +82,8 @@ The site has no cookie consent banner. GA4 and Clarity set cookies, so check whe
 
 ### Display ads (Google AdSense)
 
+> **Currently disabled.** The ad script, every `<AdSlot />` and `/ads.txt` are commented out, so the variables below do nothing. The steps to turn ads back on are at the top of `src/lib/ads.ts`.
+
 Six places on the site can show a Google display ad. They are built in but **off by default**: with the variables below blank, no ad script loads, no request is made and the slots take up no space. This is separate from the Google Ads *conversion tracking* above, which measures your ad campaigns.
 
 | Variable | What it does |
