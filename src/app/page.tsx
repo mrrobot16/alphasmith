@@ -5,6 +5,7 @@ import { site, services, homeReviews, homeFaqs } from "@/lib/site";
 import { serviceIcons, PhoneIcon } from "@/components/Icons";
 import { QuoteForm } from "@/components/QuoteForm";
 import { TrustBar, Hero, Faq } from "@/components/Shared";
+import { Hours } from "@/components/Hours";
 import { GoogleMap } from "@/components/GoogleMap";
 import { pageMeta } from "@/lib/seo";
 import { WorkGallery } from "@/components/WorkGallery";
@@ -28,9 +29,9 @@ export default function Home() {
   return (
     <>
       <Hero
-        badge="Open now · Answering 24/7"
+        badge={<Hours open="Open now · Answering 24/7" closed="Licensed · Insured · Bonded" />}
         title="Portland locksmith & garage door repair ·"
-        accent="Open 24/7"
+        accent={<Hours open="Open 24/7" closed="Licensed & insured" />}
         form={<QuoteForm id="quote-hero" />}
         formDesktopOnly
       >
@@ -126,10 +127,10 @@ export default function Home() {
                 ["10+ years", "in the trade"],
                 [site.license, "Oregon contractor license"],
                 [site.certification, "Certified locksmith"],
-                ["24/7", "Emergency service"],
-              ].map(([v, l]) => (
+                [<Hours key="v" open="24/7" closed={site.bbb} />, <Hours key="l" open="Emergency service" closed="BBB rating" />],
+              ].map(([v, l], i) => (
                 <div
-                  key={l}
+                  key={i}
                   className="rounded-lg border border-line bg-surface p-4 md:rounded-none md:border-0 md:border-l-2 md:border-orange md:bg-transparent md:p-0 md:pl-3"
                 >
                   <dt className="font-display text-title font-bold leading-none text-orange md:text-ink">{v}</dt>

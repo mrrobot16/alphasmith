@@ -5,6 +5,7 @@ import { cityServicePath, type ServicePageConfig } from "@/lib/services";
 import { cityHref, getCity, type City } from "@/lib/cities";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { TrustBar, Hero, Faq } from "./Shared";
+import { Hours } from "./Hours";
 import { ReviewsCarousel } from "./ReviewsCarousel";
 import { JsonLd } from "./JsonLd";
 import { StepsList } from "./StepsList";
@@ -42,7 +43,7 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
         </ol>
       </nav>
 
-      <Hero badge={c.hero.badge} title={c.hero.title} accent={c.hero.accent}
+      <Hero badge={<Hours open={c.hero.badge} closed={c.hero.badgeAfterHours} />} title={c.hero.title} accent={c.hero.accent}
         asideWide
         asideHiddenOnPhones
         form={

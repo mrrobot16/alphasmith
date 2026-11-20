@@ -4,6 +4,7 @@ import { serviceCards, cityServicePath } from "@/lib/services";
 import { cityHref, type City } from "@/lib/cities";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import { TrustBar, Hero, Faq } from "./Shared";
+import { Hours } from "./Hours";
 import { ReviewsCarousel } from "./ReviewsCarousel";
 import { RecentJobs } from "./RecentJobs";
 // AdSense is disabled. See src/lib/ads.ts to turn it back on.
@@ -37,14 +38,18 @@ export function CityPage({ city }: { city: City }) {
         </ol>
       </nav>
 
-      <Hero badge={`Serving ${name} · Open 24/7`} title="Locksmith & garage door service" accent={`in ${name}, ${state}`}>
+      <Hero badge={<Hours open={`Serving ${name} · Open 24/7`} closed={`Serving ${name}`} />} title="Locksmith & garage door service" accent={`in ${name}, ${state}`}>
         <p className="mt-6 max-w-[36rem] text-body leading-relaxed text-muted">
           Locked out, broken garage door, or a gate that won&apos;t close? Alpha serves homes and businesses in {name},
           day or night.
         </p>
         <ul className="mt-5 space-y-2 text-body">
-          {[`Open 24/7 in ${name}`, "Written quote before any work starts", `Licensed and certified, ${site.license}`].map((t) => (
-            <li key={t} className="flex items-center gap-2"><CheckIcon className="text-orange" /> {t}</li>
+          {[
+            { t: <Hours open={`Open 24/7 in ${name}`} closed="Insured and bonded" />, key: "hours" },
+            { t: "Written quote before any work starts", key: "quote" },
+            { t: `Licensed and certified, ${site.license}`, key: "license" },
+          ].map(({ t, key }) => (
+            <li key={key} className="flex items-center gap-2"><CheckIcon className="text-orange" /> {t}</li>
           ))}
         </ul>
         <a href={site.phoneHref} className="btn mt-7 px-6 py-3.5 text-sub"><PhoneIcon /> Call {site.phone}</a>

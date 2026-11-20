@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { site, nav } from "@/lib/site";
 import { Logo } from "./Logo";
+import { Hours } from "./Hours";
 import { PhoneIcon, MenuIcon, CloseIcon } from "./Icons";
 
 export function SiteHeader() {
@@ -30,7 +31,7 @@ export function SiteHeader() {
       <div className="bg-topbar text-small">
         <div className="wrap flex flex-wrap items-center gap-x-6 gap-y-1 py-2">
           <span className="flex items-center gap-2 font-bold">
-            <span className="size-1.5 rounded-full bg-orange" /> Open 24/7
+            <span className="size-1.5 rounded-full bg-orange" /> <Hours open="Open 24/7" closed={`Call ${site.phone}`} />
           </span>
           <span className="text-muted sm:hidden">
             CCB <b className="text-ink">{site.license.replace(/^CCB#?/, "")}</b>
@@ -137,7 +138,7 @@ export function SiteHeader() {
                 Request a quote
               </Link>
               <p className="text-center text-small text-muted">
-                Open 24/7 · {site.license}
+                <Hours open="Open 24/7" closed="Licensed" /> · {site.license}
               </p>
             </div>
           </div>

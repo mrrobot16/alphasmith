@@ -9,6 +9,7 @@ import { QuoteAnchor } from "@/components/QuoteAnchor";
 // import { AdSenseScript } from "@/components/AdSenseScript";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL, localBusinessJsonLd } from "@/lib/seo";
+import { hoursScript, fixedHoursState } from "@/lib/hours";
 import "./globals.css";
 
 const barlow = Barlow({
@@ -33,7 +34,18 @@ export const viewport: Viewport = { themeColor: "#151515" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${barlow.variable} ${barlowCondensed.variable}`}>
+    // data-hours is fixed in "show"/"hide" mode; in "auto" the hours script sets it before React
+    // hydrates, hence suppressHydrationWarning. See lib/hours.ts.
+    <html
+      lang="en"
+      className={`${barlow.variable} ${barlowCondensed.variable}`}
+      data-hours={fixedHoursState}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Runs before paint so after-hours visitors never see "Open 24/7" flash. */}
+        {hoursScript && <script dangerouslySetInnerHTML={{ __html: hoursScript }} />}
+      </head>
       <body>
         <Analytics />
         <QuoteAnchor />

@@ -51,6 +51,13 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Open-hours copy (components/Hours.tsx, lib/hours.ts). "Open" copy is the default, so it
+   also shows without JavaScript; after-hours copy only shows once the script marks <html> closed. */
+html[data-hours="closed"] .hours-open,
+html:not([data-hours="closed"]) .hours-closed {
+  display: none !important;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
