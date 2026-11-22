@@ -21,7 +21,7 @@ export const metadata: Metadata = {
       "Licensed Portland locksmith, garage door and automatic gate service, open 24/7. Lockouts, rekeys, spring repair and gate repair. Call 503-505-8560.",
     path: "/",
   }),
-  title: { absolute: "Portland Locksmith & Garage Door Repair | Alpha Locksmith" },
+  title: { absolute: "Portland Locksmith & Garage Door Repair" },
 };
 
 // Phone layout (below 1024px): the quote form sits after the services section instead of beside the hero.

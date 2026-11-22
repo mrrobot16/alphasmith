@@ -28,7 +28,10 @@ export type ServicePageConfig = {
   warning: { bold: string; text: string };
   signs: { title: string; items: string[] };
   info: { title: string; body: string };
-  steps: { title: string; items: [string, string, string][] };
+  /** Extra blocks stacked under `info` in the same column. */
+  moreInfo?: { title: string; body: string }[];
+  /** `intro` is an optional paragraph between the heading and the steps. */
+  steps: { title: string; intro?: string; items: [string, string, string][] };
   brands: { title: string; items: string[] };
   /** `afterHours` swaps the answer from 10pm to 6am; `null` hides the question then. */
   faqs: { q: string; a: string; afterHours?: string | null }[];
@@ -188,9 +191,9 @@ export const garageDoors: ServicePageConfig = {
 export const locksmith: ServicePageConfig = {
   slug: "locksmith",
   meta: {
-    title: "Locksmith Services in Portland, OR",
+    title: "Portland Locksmith Services",
     description:
-      "Licensed Portland locksmith for lockouts, rekeying, lock changes and car keys, day or night. Written quote before work starts. Call 503-505-8560.",
+      "Alpha provides mobile locksmith services in Portland for homes, businesses, and vehicles. Get help with lockouts, rekeying, lock repairs, and lock changes.",
   },
   crumbs: { category: "Services", label: "Locksmith" },
   schema: {
@@ -202,7 +205,7 @@ export const locksmith: ServicePageConfig = {
     badgeAfterHours: "Licensed locksmith",
     title: "Locksmith services in",
     accent: "Portland, OR",
-    lead: "Locked out, lost your keys, or need your locks changed? Our licensed locksmiths handle homes, businesses and vehicles across the Portland metro, day or night.",
+    lead: "Alpha Locksmith & Garage provides mobile locksmith service for homes, businesses, and vehicles throughout the Portland metro and surrounding areas. Whether you’re moving into a new home, managing keys for a business, or dealing with a lock that keeps jamming, our licensed team comes to your location.",
     checks: [quote, licensed, "Homes, businesses and vehicles"],
     image: { src: "/our-work-4.jpg", alt: "Locksmith installing a lock on a front door" },
   },
@@ -222,11 +225,21 @@ export const locksmith: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Rekey or replace?",
-    body: "**Rekeying** changes the lock so old keys stop working, and you keep the hardware you already have. **Replacing** is the right call when a lock is damaged, worn out, or you want a higher-security model. Not sure? Call us and we'll recommend the simpler option.",
+    title: "Locksmith services for homes and businesses",
+    body: "We repair, replace, and rekey locks on exterior doors, employee entrances, stockrooms, and rental properties. If several doors need attention, tell us which doors should use the same key and which need separate access. We can check which locks are compatible and which need repair or replacement.",
   },
+  // PENDING CLIENT DECISION: "24/7" shows at all hours here; it is not covered by the
+  // after-hours swap in lib/hours.ts.
+  moreInfo: [
+    {
+      title: "Help with lockouts and replacement car keys",
+      body: "We answer emergency lockout calls 24/7 and offer mobile car key replacement for supported vehicles. Tell us your location and what happened so we can confirm the service you need.",
+    },
+  ],
   steps: {
     title: "How a locksmith call works",
+    // PENDING CLIENT DECISION: the 20-35 minute arrival window is unconfirmed.
+    intro: "Tell us what the lock or door is doing. A key that turns with the door open but sticks when it’s closed can help us identify a possible alignment issue. We’ll arrive between 20-35 minutes and inspect the hardware, explain our recommendation, and provide a quote before starting.",
     items: [
       ["01", "Call", "Tell us where you are and what's going on, and we'll confirm what we can do and when we can get there."],
       ["02", "Written quote", "You get the price in writing before any work starts. No surprises."],
@@ -250,10 +263,13 @@ export const locksmith: ServicePageConfig = {
     intro: "Locksmith service in these areas and more:",
   },
   related: [
+    // No pages yet for these four; add a slug to each as its page goes live.
+    { label: "Emergency Lockouts" },
+    { label: "Lock Rekeying" },
+    { label: "Lock Repair & Replacement" },
+    { label: "Replacement Car Keys" },
     { label: "Access control systems", slug: "access-control" },
     { label: "Automatic gates", slug: "automatic-gates" },
-    { label: "Car lockout service" },
-    { label: "Key cutting" },
   ],
 };
 

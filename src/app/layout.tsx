@@ -27,7 +27,7 @@ const barlowCondensed = Barlow_Condensed({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: "Portland Locksmith & Garage Door Repair | Alpha Locksmith", template: "%s | Alpha Locksmith" },
+  title: "Portland Locksmith & Garage Door Repair",
 };
 
 export const viewport: Viewport = { themeColor: "#151515" };
