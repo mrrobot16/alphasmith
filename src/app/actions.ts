@@ -2,6 +2,7 @@
 
 import { headers } from "next/headers";
 import { site } from "@/lib/site";
+import { saveLead, setEmailStatus } from "@/lib/leads";
 
 export type QuoteState = { ok: boolean; message: string } | null;
 
@@ -48,7 +49,7 @@ function pageLabel(path: string) {
   return `${words.charAt(0).toUpperCase()}${words.slice(1)} page`;
 }
 
-/** Validates the quote form and emails it to LEADS_TO_EMAIL through Resend. */
+/** Validates the quote form, saves it to MongoDB (if configured) and emails it to LEADS_TO_EMAIL through Resend. */
 export async function submitQuote(_prev: QuoteState, formData: FormData): Promise<QuoteState> {
   // Honeypot: real visitors never fill this hidden field. Pretend success to bots.
   if (clean(formData.get("website"), 100)) return { ok: true, message: "Thanks. We'll call you shortly." };
@@ -86,11 +87,15 @@ export async function submitQuote(_prev: QuoteState, formData: FormData): Promis
     .map(([k, v]) => `<tr><td style="color:#666;vertical-align:top">${k}</td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)
     .join("")}</table></div>`;
 
+  // Save first, so the lead is kept even if the email fails.
+  const leadId = await saveLead({ name, phone, service, zip, details, page });
+
   const key = process.env.RESEND_API_KEY;
   const to = (process.env.LEADS_TO_EMAIL ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   const from = process.env.LEADS_FROM_EMAIL || "Alpha Website <onboarding@resend.dev>";
 
   if (!key || to.length === 0) {
+    await setEmailStatus(leadId, "not_configured");
     if (process.env.NODE_ENV !== "production") {
       console.log(`[quote form] Email not configured (RESEND_API_KEY / LEADS_TO_EMAIL). Would send:\n${subject}\n${text}`);
       return { ok: true, message: "Thanks. We'll call you shortly." };
@@ -107,12 +112,15 @@ export async function submitQuote(_prev: QuoteState, formData: FormData): Promis
     });
     if (!res.ok) {
       console.error("[quote form] Resend error", res.status, await res.text());
+      await setEmailStatus(leadId, "failed");
       return { ok: false, message: `We couldn't send your request. Please ${CALL_US}.` };
     }
   } catch (err) {
     console.error("[quote form] Resend request failed", err);
+    await setEmailStatus(leadId, "failed");
     return { ok: false, message: `We couldn't send your request. Please ${CALL_US}.` };
   }
 
+  await setEmailStatus(leadId, "sent");
   return { ok: true, message: `Thanks. We'll call you shortly. For an emergency, ${CALL_US}.` };
 }

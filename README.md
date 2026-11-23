@@ -4,7 +4,7 @@ Marketing site for Alpha Locksmith & Garage (Portland, OR). It is built to get a
 
 - **Stack:** Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS v4.
 - **Pages:** homepage, 5 service pages, 11 city pages, all generated from data files.
-- **Forms:** the quote form emails each lead through [Resend](https://resend.com). Nothing is stored in a database.
+- **Forms:** the quote form saves each lead to MongoDB and emails it through [Resend](https://resend.com).
 - **Tracking:** optional Google Analytics 4, Google Ads and Microsoft Clarity, switched on by environment variables.
 
 Design and product context live in [`DESIGN.md`](DESIGN.md) and [`PRODUCT.md`](PRODUCT.md).
@@ -59,6 +59,16 @@ The form validates, then emails the lead. If sending fails, the visitor sees "pl
 
 With no keys in development, the form just logs the lead in the terminal. With no keys in production, it shows the "please call us" message.
 
+### Quote form storage (MongoDB)
+
+Each lead is saved to the `leads` collection **before** the email is sent, so a lead is kept even if Resend fails. Each record has `name`, `phone`, `service`, `zip`, `details`, `page`, `createdAt` and `emailStatus` (`pending`, `sent`, `failed` or `not_configured`). To find leads that never reached the inbox, look for `emailStatus: "failed"`.
+
+| Variable | Notes |
+|---|---|
+| `MONGODB_URI` | Connection string. Put the database name in the path, e.g. `mongodb+srv://user:pass@cluster0.xxxxx.mongodb.net/alpha?retryWrites=true&w=majority`. Without a name, MongoDB uses `test`. |
+
+Leave it blank to skip saving. If the database can't be reached, the error is logged and the email still goes out; the visitor never sees a database error. On MongoDB Atlas, allow the host's IPs in Network Access (Vercel needs `0.0.0.0/0`).
+
 ### Analytics and heatmaps
 
 Setting a key turns the matching tracking on. Leaving all of them blank loads no scripts and attaches no listeners.
@@ -108,7 +118,7 @@ The "What customers say" carousel (home, service and city pages) shows real Goog
 1. Fill in the bracketed placeholders, and check the ZIP codes in `cities.ts` and the brand lists in `services.ts`.
 2. Confirm every review in `homeReviews` really is the 5-star review it is shown as (the cards always show five stars).
 3. Set the environment variables above in your hosting provider (not just `.env.local`).
-4. Verify the sending domain in Resend and send a real test lead.
+4. Verify the sending domain in Resend and send a real test lead. Check it also appears in the MongoDB `leads` collection with `emailStatus: "sent"`.
 5. Add the Google Business Profile link and street address (if public) to the footer and `src/lib/seo.ts`.
 6. Set up redirects from the old site's URLs to the new ones.
 7. Verify the site in Google Search Console and submit `/sitemap.xml`.
@@ -126,7 +136,7 @@ src/
     page.tsx                      Homepage
     locations/[city]/page.tsx     One route that renders every city page
     <service>/page.tsx            One small file per service page
-    actions.ts                    Quote form server action (validation + Resend)
+    actions.ts                    Quote form server action (validation, MongoDB, Resend)
     layout.tsx                    Fonts, metadata, header, footer, analytics
     sitemap.ts, robots.ts         Generated from the data files
     opengraph-image.tsx           Social share image
@@ -137,6 +147,7 @@ src/
   lib/
     site.ts, services.ts, cities.ts   Content
     seo.ts                            Metadata and structured data helpers
+    leads.ts                          Saves quote form leads to MongoDB
 public/                         Logo and photos
 ```
 
