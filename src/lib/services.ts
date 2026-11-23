@@ -282,9 +282,9 @@ export const locksmith: ServicePageConfig = {
 export const automaticGates: ServicePageConfig = {
   slug: "automatic-gates",
   meta: {
-    title: "Automatic Gate Repair in Portland, OR",
+    title: "Automatic Gate Installation & Repair in Portland",
     description:
-      "Automatic driveway and commercial gate repair and installation across the Portland metro. Written quote before work starts. Call 503-505-8560.",
+      "Alpha installs and repairs automatic swing and sliding gates in Portland. Service for driveway gates, commercial gates, operators, and controls.",
   },
   crumbs: { category: "Services", label: "Automatic gates" },
   schema: {
@@ -294,9 +294,9 @@ export const automaticGates: ServicePageConfig = {
   hero: {
     badge: "Open 24/7 · Gate repair",
     badgeAfterHours: "Gate repair",
-    title: "Automatic gate repair in",
+    title: "Automatic Gate Installation and Repair in",
     accent: "Portland, OR",
-    lead: "Gate stuck, opener dead, or ready for a new driveway gate? We repair and install automatic gates for homes and businesses across the Portland metro.",
+    lead: "We install and repair automatic sliding and swing gates for driveways, businesses, and gated properties. If your gate won’t open, won’t close, or stops partway, we inspect the gate hardware and the equipment that controls it.",
     checks: [quote, licensed, "Driveway and commercial gates"],
     image: { src: "/work/wood-driveway-gate.jpg", alt: "Wood automatic driveway gate installed by Alpha" },
   },
@@ -315,9 +315,15 @@ export const automaticGates: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Swing or slide?",
-    body: "**Swing gates** open like a door on hinges and suit driveways with room in front of the gate. **Slide gates** roll along the fence line and suit tight or sloped driveways. We repair and install both, and we'll help you choose the right type.",
+    title: "Gate operators, sensors, and entry controls",
+    body: "Tell us if the gate stops in the same spot, makes an unusual sound, or responds to only one of its controls. We check how the gate moves and assess the operator, safety sensors, and entry controls to identify the cause.",
   },
+  moreInfo: [
+    {
+      title: "Plan a new gate or automate an existing one",
+      body: "For new installations, we consider the opening width, travel space, power, and how vehicles enter and exit. If you want to automate a manual gate, we check its condition and movement before recommending an operator. We can also discuss which remotes, keypads, fobs, or intercoms fit the way people use your property.",
+    },
+  ],
   steps: {
     title: "How a gate repair works",
     items: [
@@ -343,11 +349,11 @@ export const automaticGates: ServicePageConfig = {
     intro: "Automatic gate repair and installation in these areas and more:",
   },
   related: [
-    { label: "Fence repair and installation", slug: "fencing" },
+    // No page yet; add a slug when it goes live.
+    { label: "Commercial Gate Maintenance" },
     { label: "Access control systems", slug: "access-control" },
+    { label: "Fence repair and installation", slug: "fencing" },
     { label: "Locksmith services", slug: "locksmith" },
-    { label: "Gate opener replacement" },
-    { label: "Keypad and intercom" },
   ],
 };
 
