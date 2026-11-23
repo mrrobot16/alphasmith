@@ -432,9 +432,9 @@ export const accessControl: ServicePageConfig = {
 export const fencing: ServicePageConfig = {
   slug: "fencing",
   meta: {
-    title: "Fence Repair & Installation, Portland OR",
+    title: "Fence Installation & Repair in Portland, OR",
     description:
-      "Fence repair and installation for Portland homes and businesses: chain-link, wood and metal. Written quote before work starts. Call 503-505-8560.",
+      "Get a quote for wood, chain-link, or metal fence installation and repair in Portland. Service for homes, businesses, and managed properties.",
   },
   crumbs: { category: "Services", label: "Fencing" },
   schema: {
@@ -444,9 +444,9 @@ export const fencing: ServicePageConfig = {
   hero: {
     badge: "Repair & installation · Open 24/7",
     badgeAfterHours: "Repair & installation",
-    title: "Fence repair & installation in",
+    title: "Fence Installation and Repair in",
     accent: "Portland, OR",
-    lead: "Storm damage, leaning posts or a brand-new fence line? We repair and install fences and gates for homes and businesses across the Portland metro.",
+    lead: "Alpha Locksmith & Garage installs and repairs wood, chain-link, and metal fences for homes and businesses. Whether you want backyard privacy, a defined commercial perimeter, or a damaged section repaired, we can quote the work based on how you use the property.",
     checks: [quote, licensed, "Chain-link, wood and metal fences"],
     image: { src: "/our-work-2.jpg", alt: "Alpha technician installing a metal fence" },
   },
@@ -466,9 +466,15 @@ export const fencing: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Which fence fits?",
-    body: "**Chain-link** is durable and budget friendly, and works for yards and commercial lots. **Wood** gives privacy and a classic look. **Metal and ornamental** fencing suits security and curb appeal. Tell us what you need and we'll recommend what holds up in Portland's wet weather.",
+    title: "Choose a fence material that fits the job",
+    body: "Wood is a common choice for backyard privacy. Chain-link can enclose a yard, parking area, or equipment area while keeping it visible. Metal fencing is another option when you want a defined perimeter with an open view. We’ll discuss the material, height, and gate openings that fit your project.",
   },
+  moreInfo: [
+    {
+      title: "Repair a damaged section or replace the fence",
+      body: "If your fence is leaning or a section has come loose, we check the posts and neighboring panels to see how much can stay. For a new fence, the estimate accounts for length, height, slope, access, materials, and gates. We can include old fence removal in the quote when needed.",
+    },
+  ],
   steps: {
     title: "How a fence job works",
     items: [
@@ -496,8 +502,6 @@ export const fencing: ServicePageConfig = {
   related: [
     { label: "Automatic gates", slug: "automatic-gates" },
     { label: "Access control systems", slug: "access-control" },
-    { label: "Chain-link fence" },
-    { label: "Metal fence installation" },
   ],
 };
 
