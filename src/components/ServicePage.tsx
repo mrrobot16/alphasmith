@@ -98,6 +98,12 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
         <div>
           <h2 className="h-section">{c.info.title}</h2>
           <p className="mt-4 text-body leading-relaxed"><Rich text={c.info.body} /></p>
+          {c.moreInfo?.map((m) => (
+            <div key={m.title} className="mt-8">
+              <h2 className="h-section">{m.title}</h2>
+              <p className="mt-4 text-body leading-relaxed"><Rich text={m.body} /></p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -106,6 +112,7 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
       <section data-section="how_it_works" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
           <h2 className="h-section">{c.steps.title}</h2>
+          {c.steps.intro && <p className="mt-4 max-w-[44rem] text-body leading-relaxed text-muted">{c.steps.intro}</p>}
           <StepsList items={c.steps.items} />
         </div>
       </section>

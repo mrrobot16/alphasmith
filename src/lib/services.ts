@@ -28,7 +28,10 @@ export type ServicePageConfig = {
   warning: { bold: string; text: string };
   signs: { title: string; items: string[] };
   info: { title: string; body: string };
-  steps: { title: string; items: [string, string, string][] };
+  /** Extra blocks stacked under `info` in the same column. */
+  moreInfo?: { title: string; body: string }[];
+  /** `intro` is an optional paragraph between the heading and the steps. */
+  steps: { title: string; intro?: string; items: [string, string, string][] };
   brands: { title: string; items: string[] };
   /** `afterHours` swaps the answer from 10pm to 6am; `null` hides the question then. */
   faqs: { q: string; a: string; afterHours?: string | null }[];
@@ -115,9 +118,9 @@ export const springRepair: ServicePageConfig = {
 export const garageDoors: ServicePageConfig = {
   slug: "garage-doors",
   meta: {
-    title: "Garage Door Repair & Installation in Portland, OR",
+    title: "Garage Door Repair & Replacement in Portland, OR",
     description:
-      "Garage door repair, springs, cables, openers, panels and new door installation across the Portland metro. Written quote before work starts. Call 503-505-8560.",
+      "Portland garage door service for broken springs, damaged cables, opener problems, and replacement doors. Request a quote from Alpha.",
   },
   crumbs: { category: "Services", label: "Garage doors" },
   schema: {
@@ -127,9 +130,9 @@ export const garageDoors: ServicePageConfig = {
   hero: {
     badge: "Open 24/7 · Residential & commercial",
     badgeAfterHours: "Residential & commercial",
-    title: "Garage door repair & installation in",
-    accent: "Portland, OR",
-    lead: "Door off track, opener dead, or ready for a new door? We repair and install residential and commercial garage doors across the Portland metro, day or night.",
+    title: "Residential Garage Door Repair and Replacement in",
+    accent: "Portland",
+    lead: "Does your garage door lift a few inches and stop, close unevenly, or make a noise it didn’t make before? Alpha Locksmith & Garage repairs residential garage doors and openers throughout the Portland metro area. We also install replacement doors when needed.",
     checks: [quote, licensed, "Residential and commercial doors"],
     image: { src: "/work/job-overhead-door.jpg", alt: "Alpha technician working on an overhead garage door" },
   },
@@ -149,9 +152,15 @@ export const garageDoors: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Repair or replace?",
-    body: "Most problems, such as **springs, cables, rollers and openers**, can be repaired in one visit. A **new door** makes sense when several panels are damaged, the door is very old, or you want better insulation, security or curb appeal. We'll tell you which makes sense before you spend anything.",
+    title: "Spring, cable, panel, and opener service",
+    body: "We inspect the springs, cables, rollers, tracks, panels, and opener to identify the cause. Tell us whether the problem happens every time or only at one point in the door’s travel. If the motor runs without moving the door, mention that when you call.",
   },
+  moreInfo: [
+    {
+      title: "Should you repair the door or replace it?",
+      body: "A targeted repair may make sense when one component has failed and the rest of the door is in good condition. If several sections are damaged or compatible parts are hard to find, we can discuss replacement. We’ll also check whether you can keep your existing door when replacing the opener.",
+    },
+  ],
   steps: {
     title: "How a garage door call works",
     items: [
@@ -188,9 +197,9 @@ export const garageDoors: ServicePageConfig = {
 export const locksmith: ServicePageConfig = {
   slug: "locksmith",
   meta: {
-    title: "Locksmith Services in Portland, OR",
+    title: "Portland Locksmith Services",
     description:
-      "Licensed Portland locksmith for lockouts, rekeying, lock changes and car keys, day or night. Written quote before work starts. Call 503-505-8560.",
+      "Alpha provides mobile locksmith services in Portland for homes, businesses, and vehicles. Get help with lockouts, rekeying, lock repairs, and lock changes.",
   },
   crumbs: { category: "Services", label: "Locksmith" },
   schema: {
@@ -202,7 +211,7 @@ export const locksmith: ServicePageConfig = {
     badgeAfterHours: "Licensed locksmith",
     title: "Locksmith services in",
     accent: "Portland, OR",
-    lead: "Locked out, lost your keys, or need your locks changed? Our licensed locksmiths handle homes, businesses and vehicles across the Portland metro, day or night.",
+    lead: "Alpha Locksmith & Garage provides mobile locksmith service for homes, businesses, and vehicles throughout the Portland metro and surrounding areas. Whether you’re moving into a new home, managing keys for a business, or dealing with a lock that keeps jamming, our licensed team comes to your location.",
     checks: [quote, licensed, "Homes, businesses and vehicles"],
     image: { src: "/our-work-4.jpg", alt: "Locksmith installing a lock on a front door" },
   },
@@ -222,11 +231,21 @@ export const locksmith: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Rekey or replace?",
-    body: "**Rekeying** changes the lock so old keys stop working, and you keep the hardware you already have. **Replacing** is the right call when a lock is damaged, worn out, or you want a higher-security model. Not sure? Call us and we'll recommend the simpler option.",
+    title: "Locksmith services for homes and businesses",
+    body: "We repair, replace, and rekey locks on exterior doors, employee entrances, stockrooms, and rental properties. If several doors need attention, tell us which doors should use the same key and which need separate access. We can check which locks are compatible and which need repair or replacement.",
   },
+  // PENDING CLIENT DECISION: "24/7" shows at all hours here; it is not covered by the
+  // after-hours swap in lib/hours.ts.
+  moreInfo: [
+    {
+      title: "Help with lockouts and replacement car keys",
+      body: "We answer emergency lockout calls 24/7 and offer mobile car key replacement for supported vehicles. Tell us your location and what happened so we can confirm the service you need.",
+    },
+  ],
   steps: {
     title: "How a locksmith call works",
+    // PENDING CLIENT DECISION: the 20-35 minute arrival window is unconfirmed.
+    intro: "Tell us what the lock or door is doing. A key that turns with the door open but sticks when it’s closed can help us identify a possible alignment issue. We’ll arrive between 20-35 minutes and inspect the hardware, explain our recommendation, and provide a quote before starting.",
     items: [
       ["01", "Call", "Tell us where you are and what's going on, and we'll confirm what we can do and when we can get there."],
       ["02", "Written quote", "You get the price in writing before any work starts. No surprises."],
@@ -250,19 +269,22 @@ export const locksmith: ServicePageConfig = {
     intro: "Locksmith service in these areas and more:",
   },
   related: [
+    // No pages yet for these four; add a slug to each as its page goes live.
+    { label: "Emergency Lockouts" },
+    { label: "Lock Rekeying" },
+    { label: "Lock Repair & Replacement" },
+    { label: "Replacement Car Keys" },
     { label: "Access control systems", slug: "access-control" },
     { label: "Automatic gates", slug: "automatic-gates" },
-    { label: "Car lockout service" },
-    { label: "Key cutting" },
   ],
 };
 
 export const automaticGates: ServicePageConfig = {
   slug: "automatic-gates",
   meta: {
-    title: "Automatic Gate Repair in Portland, OR",
+    title: "Automatic Gate Installation & Repair in Portland",
     description:
-      "Automatic driveway and commercial gate repair and installation across the Portland metro. Written quote before work starts. Call 503-505-8560.",
+      "Alpha installs and repairs automatic swing and sliding gates in Portland. Service for driveway gates, commercial gates, operators, and controls.",
   },
   crumbs: { category: "Services", label: "Automatic gates" },
   schema: {
@@ -272,9 +294,9 @@ export const automaticGates: ServicePageConfig = {
   hero: {
     badge: "Open 24/7 · Gate repair",
     badgeAfterHours: "Gate repair",
-    title: "Automatic gate repair in",
+    title: "Automatic Gate Installation and Repair in",
     accent: "Portland, OR",
-    lead: "Gate stuck, opener dead, or ready for a new driveway gate? We repair and install automatic gates for homes and businesses across the Portland metro.",
+    lead: "We install and repair automatic sliding and swing gates for driveways, businesses, and gated properties. If your gate won’t open, won’t close, or stops partway, we inspect the gate hardware and the equipment that controls it.",
     checks: [quote, licensed, "Driveway and commercial gates"],
     image: { src: "/work/wood-driveway-gate.jpg", alt: "Wood automatic driveway gate installed by Alpha" },
   },
@@ -293,9 +315,15 @@ export const automaticGates: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Swing or slide?",
-    body: "**Swing gates** open like a door on hinges and suit driveways with room in front of the gate. **Slide gates** roll along the fence line and suit tight or sloped driveways. We repair and install both, and we'll help you choose the right type.",
+    title: "Gate operators, sensors, and entry controls",
+    body: "Tell us if the gate stops in the same spot, makes an unusual sound, or responds to only one of its controls. We check how the gate moves and assess the operator, safety sensors, and entry controls to identify the cause.",
   },
+  moreInfo: [
+    {
+      title: "Plan a new gate or automate an existing one",
+      body: "For new installations, we consider the opening width, travel space, power, and how vehicles enter and exit. If you want to automate a manual gate, we check its condition and movement before recommending an operator. We can also discuss which remotes, keypads, fobs, or intercoms fit the way people use your property.",
+    },
+  ],
   steps: {
     title: "How a gate repair works",
     items: [
@@ -321,20 +349,20 @@ export const automaticGates: ServicePageConfig = {
     intro: "Automatic gate repair and installation in these areas and more:",
   },
   related: [
-    { label: "Fence repair and installation", slug: "fencing" },
+    // No page yet; add a slug when it goes live.
+    { label: "Commercial Gate Maintenance" },
     { label: "Access control systems", slug: "access-control" },
+    { label: "Fence repair and installation", slug: "fencing" },
     { label: "Locksmith services", slug: "locksmith" },
-    { label: "Gate opener replacement" },
-    { label: "Keypad and intercom" },
   ],
 };
 
 export const accessControl: ServicePageConfig = {
   slug: "access-control",
   meta: {
-    title: "Access Control Systems in Portland, OR",
+    title: "Access Control Installation & Repair in Portland",
     description:
-      "Keycard, fob, keypad and intercom access control installed and repaired for Portland businesses and properties. Call 503-505-8560.",
+      "Portland access control installation and repair for businesses and apartments. Alpha works with keypads, cards, fobs, and intercoms for doors and gates.",
   },
   crumbs: { category: "Services", label: "Access control" },
   schema: {
@@ -344,9 +372,9 @@ export const accessControl: ServicePageConfig = {
   hero: {
     badge: "Open 24/7 · Commercial & residential",
     badgeAfterHours: "Commercial & residential",
-    title: "Access control systems in",
+    title: "Access Control Installation and Repair in",
     accent: "Portland, OR",
-    lead: "Keycards, fobs, keypads and intercoms that decide who gets in and when. We install, repair and rekey access control for businesses, offices, gated properties and multi-unit buildings.",
+    lead: "Alpha Locksmith & Garage installs and repairs access control systems for commercial doors, apartment entrances, and automatic gates. We start by asking who needs access, when they need it, and who will manage changes when staff or tenants come and go.",
     checks: [quote, licensed, "Businesses, offices and gated properties"],
     image: { src: "/work/gate-video-intercom.jpg", alt: "Video intercom and keypad entry at a gate" },
   },
@@ -366,9 +394,19 @@ export const accessControl: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Which system fits?",
-    body: "**Keypad and keycard** systems suit offices and small buildings. **Fob and proximity readers** suit larger sites with many users. **Intercom and video entry** suit gates and multi-unit buildings. We install and service them all, and we'll help you choose.",
+    title: "Keypads, card readers, fobs, and intercoms",
+    body: "A keypad may suit a staff entrance. Individual cards or fobs can help property managers manage access for specific people. An intercom gives visitors a way to request entry at a building or vehicle gate. We’ll review your entrances and help you choose equipment that fits how the property operates.",
   },
+  moreInfo: [
+    {
+      title: "Troubleshoot a door or gate that won’t release",
+      body: "If a reader recognizes a card or code but the door stays locked, we check the reader, power, wiring, lock, and door hardware. Tell us whether the issue affects one entrance or several and whether it happens with every card or code. That helps us narrow down the problem.",
+    },
+    {
+      title: "Upgrade an existing entrance",
+      body: "We assess the door, frame, locking hardware, and wiring before recommending what to keep or replace. For a vehicle gate, we check whether the existing operator can work with your preferred keypad, reader, or intercom.",
+    },
+  ],
   steps: {
     title: "How an access control job works",
     items: [
@@ -394,19 +432,19 @@ export const accessControl: ServicePageConfig = {
     intro: "Access control installation and repair in these areas and more:",
   },
   related: [
-    { label: "Locksmith services", slug: "locksmith" },
     { label: "Automatic gates", slug: "automatic-gates" },
-    { label: "Commercial rekeying" },
-    { label: "Panic bars" },
+    // No page yet; add a slug when it goes live.
+    { label: "Storefront & Commercial Doors" },
+    { label: "Locksmith services", slug: "locksmith" },
   ],
 };
 
 export const fencing: ServicePageConfig = {
   slug: "fencing",
   meta: {
-    title: "Fence Repair & Installation, Portland OR",
+    title: "Fence Installation & Repair in Portland, OR",
     description:
-      "Fence repair and installation for Portland homes and businesses: chain-link, wood and metal. Written quote before work starts. Call 503-505-8560.",
+      "Get a quote for wood, chain-link, or metal fence installation and repair in Portland. Service for homes, businesses, and managed properties.",
   },
   crumbs: { category: "Services", label: "Fencing" },
   schema: {
@@ -416,9 +454,9 @@ export const fencing: ServicePageConfig = {
   hero: {
     badge: "Repair & installation · Open 24/7",
     badgeAfterHours: "Repair & installation",
-    title: "Fence repair & installation in",
+    title: "Fence Installation and Repair in",
     accent: "Portland, OR",
-    lead: "Storm damage, leaning posts or a brand-new fence line? We repair and install fences and gates for homes and businesses across the Portland metro.",
+    lead: "Alpha Locksmith & Garage installs and repairs wood, chain-link, and metal fences for homes and businesses. Whether you want backyard privacy, a defined commercial perimeter, or a damaged section repaired, we can quote the work based on how you use the property.",
     checks: [quote, licensed, "Chain-link, wood and metal fences"],
     image: { src: "/our-work-2.jpg", alt: "Alpha technician installing a metal fence" },
   },
@@ -438,9 +476,15 @@ export const fencing: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Which fence fits?",
-    body: "**Chain-link** is durable and budget friendly, and works for yards and commercial lots. **Wood** gives privacy and a classic look. **Metal and ornamental** fencing suits security and curb appeal. Tell us what you need and we'll recommend what holds up in Portland's wet weather.",
+    title: "Choose a fence material that fits the job",
+    body: "Wood is a common choice for backyard privacy. Chain-link can enclose a yard, parking area, or equipment area while keeping it visible. Metal fencing is another option when you want a defined perimeter with an open view. We’ll discuss the material, height, and gate openings that fit your project.",
   },
+  moreInfo: [
+    {
+      title: "Repair a damaged section or replace the fence",
+      body: "If your fence is leaning or a section has come loose, we check the posts and neighboring panels to see how much can stay. For a new fence, the estimate accounts for length, height, slope, access, materials, and gates. We can include old fence removal in the quote when needed.",
+    },
+  ],
   steps: {
     title: "How a fence job works",
     items: [
@@ -468,8 +512,6 @@ export const fencing: ServicePageConfig = {
   related: [
     { label: "Automatic gates", slug: "automatic-gates" },
     { label: "Access control systems", slug: "access-control" },
-    { label: "Chain-link fence" },
-    { label: "Metal fence installation" },
   ],
 };
 
