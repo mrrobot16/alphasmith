@@ -240,6 +240,22 @@ select.field {
   animation: rise 500ms var(--ease-out) backwards;
 }
 
+/* Hero entrance: the same lift as .rise, but no fade. The hero heading or photo is the page's
+   Largest Contentful Paint, and Chrome does not count it while it is at opacity 0. Fading it in
+   pushed LCP from ~0.3s to ~0.8s, and Lighthouse's slow-phone estimate to 7-8s. Keep it visible
+   from the first frame. */
+@keyframes hero-in {
+  from {
+    transform: translateY(10px);
+  }
+  to {
+    transform: none;
+  }
+}
+.hero-in {
+  animation: hero-in 500ms var(--ease-out) backwards;
+}
+
 /* Our work gallery: tiles fade and lift in, one after another, each time the filter changes. */
 @keyframes gallery-in {
   from {
@@ -279,6 +295,7 @@ details[open] > summary::before {
     scroll-behavior: auto;
   }
   .rise,
+  .hero-in,
   .gallery-item,
   .slide-next,
   .slide-prev {
