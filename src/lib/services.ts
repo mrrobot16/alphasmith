@@ -118,9 +118,9 @@ export const springRepair: ServicePageConfig = {
 export const garageDoors: ServicePageConfig = {
   slug: "garage-doors",
   meta: {
-    title: "Garage Door Repair & Installation in Portland, OR",
+    title: "Garage Door Repair & Replacement in Portland, OR",
     description:
-      "Garage door repair, springs, cables, openers, panels and new door installation across the Portland metro. Written quote before work starts. Call 503-505-8560.",
+      "Portland garage door service for broken springs, damaged cables, opener problems, and replacement doors. Request a quote from Alpha.",
   },
   crumbs: { category: "Services", label: "Garage doors" },
   schema: {
@@ -130,9 +130,9 @@ export const garageDoors: ServicePageConfig = {
   hero: {
     badge: "Open 24/7 · Residential & commercial",
     badgeAfterHours: "Residential & commercial",
-    title: "Garage door repair & installation in",
-    accent: "Portland, OR",
-    lead: "Door off track, opener dead, or ready for a new door? We repair and install residential and commercial garage doors across the Portland metro, day or night.",
+    title: "Residential Garage Door Repair and Replacement in",
+    accent: "Portland",
+    lead: "Does your garage door lift a few inches and stop, close unevenly, or make a noise it didn’t make before? Alpha Locksmith & Garage repairs residential garage doors and openers throughout the Portland metro area. We also install replacement doors when needed.",
     checks: [quote, licensed, "Residential and commercial doors"],
     image: { src: "/work/job-overhead-door.jpg", alt: "Alpha technician working on an overhead garage door" },
   },
@@ -152,9 +152,15 @@ export const garageDoors: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Repair or replace?",
-    body: "Most problems, such as **springs, cables, rollers and openers**, can be repaired in one visit. A **new door** makes sense when several panels are damaged, the door is very old, or you want better insulation, security or curb appeal. We'll tell you which makes sense before you spend anything.",
+    title: "Spring, cable, panel, and opener service",
+    body: "We inspect the springs, cables, rollers, tracks, panels, and opener to identify the cause. Tell us whether the problem happens every time or only at one point in the door’s travel. If the motor runs without moving the door, mention that when you call.",
   },
+  moreInfo: [
+    {
+      title: "Should you repair the door or replace it?",
+      body: "A targeted repair may make sense when one component has failed and the rest of the door is in good condition. If several sections are damaged or compatible parts are hard to find, we can discuss replacement. We’ll also check whether you can keep your existing door when replacing the opener.",
+    },
+  ],
   steps: {
     title: "How a garage door call works",
     items: [

@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
       { source: "/access-control-services", destination: to("access-control"), permanent: true },
     ];
   },
+  devIndicators: false,
 };
 
 export default nextConfig;
