@@ -2,6 +2,7 @@
 
 import { headers } from "next/headers";
 import { site } from "@/lib/site";
+import { pageLabel, saveLead, setEmailStatus } from "@/lib/leads";
 
 export type QuoteState = { ok: boolean; message: string } | null;
 
@@ -32,23 +33,7 @@ function formatPhone(digits: string) {
   return d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : digits;
 }
 
-/** Turns a page path into a plain-English label for the owner. */
-function pageLabel(path: string) {
-  const known: Record<string, string> = {
-    "/": "Homepage",
-  };
-  if (known[path]) return known[path];
-  const title = (slug: string) => slug.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
-  const cs = path.match(/^\/locations\/([^/]+)\/service\/([^/]+)/);
-  if (cs) return `${title(cs[2])} page in ${title(cs[1])}`;
-  if (path.startsWith("/locations/")) return `${title(path.slice("/locations/".length))} city page`;
-  const last = path.split("/").filter(Boolean).pop();
-  if (!last) return "Website";
-  const words = last.replace(/-/g, " ");
-  return `${words.charAt(0).toUpperCase()}${words.slice(1)} page`;
-}
-
-/** Validates the quote form and emails it to LEADS_TO_EMAIL through Resend. */
+/** Validates the quote form, saves it to MongoDB (if configured) and emails it to LEADS_TO_EMAIL through Resend. */
 export async function submitQuote(_prev: QuoteState, formData: FormData): Promise<QuoteState> {
   // Honeypot: real visitors never fill this hidden field. Pretend success to bots.
   if (clean(formData.get("website"), 100)) return { ok: true, message: "Thanks. We'll call you shortly." };
@@ -86,11 +71,15 @@ export async function submitQuote(_prev: QuoteState, formData: FormData): Promis
     .map(([k, v]) => `<tr><td style="color:#666;vertical-align:top">${k}</td><td style="white-space:pre-wrap">${esc(v)}</td></tr>`)
     .join("")}</table></div>`;
 
+  // Save first, so the lead is kept even if the email fails.
+  const leadId = await saveLead({ name, phone, service, zip, details, page });
+
   const key = process.env.RESEND_API_KEY;
   const to = (process.env.LEADS_TO_EMAIL ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   const from = process.env.LEADS_FROM_EMAIL || "Alpha Website <onboarding@resend.dev>";
 
   if (!key || to.length === 0) {
+    await setEmailStatus(leadId, "not_configured");
     if (process.env.NODE_ENV !== "production") {
       console.log(`[quote form] Email not configured (RESEND_API_KEY / LEADS_TO_EMAIL). Would send:\n${subject}\n${text}`);
       return { ok: true, message: "Thanks. We'll call you shortly." };
@@ -107,12 +96,15 @@ export async function submitQuote(_prev: QuoteState, formData: FormData): Promis
     });
     if (!res.ok) {
       console.error("[quote form] Resend error", res.status, await res.text());
+      await setEmailStatus(leadId, "failed");
       return { ok: false, message: `We couldn't send your request. Please ${CALL_US}.` };
     }
   } catch (err) {
     console.error("[quote form] Resend request failed", err);
+    await setEmailStatus(leadId, "failed");
     return { ok: false, message: `We couldn't send your request. Please ${CALL_US}.` };
   }
 
+  await setEmailStatus(leadId, "sent");
   return { ok: true, message: `Thanks. We'll call you shortly. For an emergency, ${CALL_US}.` };
 }
