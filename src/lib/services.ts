@@ -360,9 +360,9 @@ export const automaticGates: ServicePageConfig = {
 export const accessControl: ServicePageConfig = {
   slug: "access-control",
   meta: {
-    title: "Access Control Systems in Portland, OR",
+    title: "Access Control Installation & Repair in Portland",
     description:
-      "Keycard, fob, keypad and intercom access control installed and repaired for Portland businesses and properties. Call 503-505-8560.",
+      "Portland access control installation and repair for businesses and apartments. Alpha works with keypads, cards, fobs, and intercoms for doors and gates.",
   },
   crumbs: { category: "Services", label: "Access control" },
   schema: {
@@ -372,9 +372,9 @@ export const accessControl: ServicePageConfig = {
   hero: {
     badge: "Open 24/7 · Commercial & residential",
     badgeAfterHours: "Commercial & residential",
-    title: "Access control systems in",
+    title: "Access Control Installation and Repair in",
     accent: "Portland, OR",
-    lead: "Keycards, fobs, keypads and intercoms that decide who gets in and when. We install, repair and rekey access control for businesses, offices, gated properties and multi-unit buildings.",
+    lead: "Alpha Locksmith & Garage installs and repairs access control systems for commercial doors, apartment entrances, and automatic gates. We start by asking who needs access, when they need it, and who will manage changes when staff or tenants come and go.",
     checks: [quote, licensed, "Businesses, offices and gated properties"],
     image: { src: "/work/gate-video-intercom.jpg", alt: "Video intercom and keypad entry at a gate" },
   },
@@ -394,9 +394,19 @@ export const accessControl: ServicePageConfig = {
     ],
   },
   info: {
-    title: "Which system fits?",
-    body: "**Keypad and keycard** systems suit offices and small buildings. **Fob and proximity readers** suit larger sites with many users. **Intercom and video entry** suit gates and multi-unit buildings. We install and service them all, and we'll help you choose.",
+    title: "Keypads, card readers, fobs, and intercoms",
+    body: "A keypad may suit a staff entrance. Individual cards or fobs can help property managers manage access for specific people. An intercom gives visitors a way to request entry at a building or vehicle gate. We’ll review your entrances and help you choose equipment that fits how the property operates.",
   },
+  moreInfo: [
+    {
+      title: "Troubleshoot a door or gate that won’t release",
+      body: "If a reader recognizes a card or code but the door stays locked, we check the reader, power, wiring, lock, and door hardware. Tell us whether the issue affects one entrance or several and whether it happens with every card or code. That helps us narrow down the problem.",
+    },
+    {
+      title: "Upgrade an existing entrance",
+      body: "We assess the door, frame, locking hardware, and wiring before recommending what to keep or replace. For a vehicle gate, we check whether the existing operator can work with your preferred keypad, reader, or intercom.",
+    },
+  ],
   steps: {
     title: "How an access control job works",
     items: [
@@ -422,10 +432,10 @@ export const accessControl: ServicePageConfig = {
     intro: "Access control installation and repair in these areas and more:",
   },
   related: [
-    { label: "Locksmith services", slug: "locksmith" },
     { label: "Automatic gates", slug: "automatic-gates" },
-    { label: "Commercial rekeying" },
-    { label: "Panic bars" },
+    // No page yet; add a slug when it goes live.
+    { label: "Storefront & Commercial Doors" },
+    { label: "Locksmith services", slug: "locksmith" },
   ],
 };
 
