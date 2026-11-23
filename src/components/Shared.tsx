@@ -135,7 +135,7 @@ export function Hero({
       data-section="hero"
       className={`wrap grid gap-10 py-12 lg:py-20 ${form ? (asideWide ? "lg:grid-cols-[1fr_minmax(0,520px)] lg:items-center lg:gap-14" : "lg:grid-cols-[1fr_340px] lg:gap-20") : ""}`}
     >
-      <div className="rise">
+      <div className="hero-in">
         <p className="inline-flex items-center gap-2.5 rounded-full border border-orange/70 py-1.5 pl-2.5 pr-4 font-display text-small font-semibold uppercase tracking-[0.12em] text-orange">
           <span className="grid size-4 place-items-center rounded-full bg-orange/30">
             <span className="size-2.5 rounded-full bg-orange" />
@@ -147,7 +147,7 @@ export function Hero({
         </h1>
         {children}
       </div>
-      {form && <div className={`rise [animation-delay:80ms] ${formDesktopOnly ? "hidden lg:block" : asideHiddenOnPhones ? "hidden md:block" : ""}`}>{form}</div>}
+      {form && <div className={`hero-in [animation-delay:80ms] ${formDesktopOnly ? "hidden lg:block" : asideHiddenOnPhones ? "hidden md:block" : ""}`}>{form}</div>}
     </section>
   );
 }

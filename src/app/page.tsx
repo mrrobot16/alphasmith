@@ -11,8 +11,6 @@ import { pageMeta } from "@/lib/seo";
 import { WorkGallery } from "@/components/WorkGallery";
 import { ReviewsCarousel } from "@/components/ReviewsCarousel";
 import { ServiceAreaCities } from "@/components/ServiceAreaCities";
-// AdSense is disabled. See src/lib/ads.ts to turn it back on.
-// import { AdSlot } from "@/components/AdSlot";
 
 export const metadata: Metadata = {
   ...pageMeta({
@@ -81,8 +79,6 @@ export default function Home() {
           })}
         </ul>
       </section>
-
-      {/* <AdSlot placement="home_mid" /> */}
 
       <section data-section="our_work" className="border-t border-line py-14 lg:py-16">
         <div className="wrap">
@@ -193,8 +189,6 @@ export default function Home() {
           <div className="mt-6"><Faq items={homeFaqs} /></div>
         </div>
       </section>
-
-      {/* <AdSlot placement="home_bottom" /> */}
 
       {/* Phones and tablets: the quote form sits at the end of the page instead of beside the hero. It comes last, just above the footer. */}
       <section className="wrap pb-14 lg:hidden">

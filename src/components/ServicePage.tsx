@@ -9,8 +9,6 @@ import { Hours } from "./Hours";
 import { ReviewsCarousel } from "./ReviewsCarousel";
 import { JsonLd } from "./JsonLd";
 import { StepsList } from "./StepsList";
-// AdSense is disabled. See src/lib/ads.ts to turn it back on.
-// import { AdSlot } from "./AdSlot";
 import { CheckIcon, PhoneIcon, WarnIcon } from "./Icons";
 
 /** Renders **bold** segments inside a plain string. */
@@ -107,8 +105,6 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
         </div>
       </section>
 
-      {/* <AdSlot placement="service_mid" /> */}
-
       <section data-section="how_it_works" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
           <h2 className="h-section">{c.steps.title}</h2>
@@ -138,8 +134,6 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
           <div className="mt-6"><Faq items={c.faqs} /></div>
         </div>
       </section>
-
-      {/* <AdSlot placement="service_bottom" /> */}
 
       <section data-section="areas_and_related" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
