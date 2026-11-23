@@ -1,4 +1,4 @@
-import { MongoClient, type ObjectId } from "mongodb";
+import { MongoClient, type ObjectId, type WithId } from "mongodb";
 
 export type EmailStatus = "pending" | "sent" | "failed" | "not_configured";
 
@@ -54,4 +54,42 @@ export async function setEmailStatus(id: ObjectId | null, emailStatus: EmailStat
   } catch (err) {
     console.error("[leads] Could not update lead email status", err);
   }
+}
+
+export const LEADS_PAGE_SIZE = 50;
+
+/**
+ * One page of leads, newest first. `failedOnly` keeps the ones whose email never arrived.
+ * Returns null when MONGODB_URI is not set; throws if the database can't be reached.
+ */
+export async function listLeads({ page, failedOnly }: { page: number; failedOnly: boolean }) {
+  const col = await leads();
+  if (!col) return null;
+  const filter = failedOnly ? { emailStatus: { $in: ["failed", "not_configured"] as EmailStatus[] } } : {};
+  const [items, total] = await Promise.all([
+    col
+      .find(filter)
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * LEADS_PAGE_SIZE)
+      .limit(LEADS_PAGE_SIZE)
+      .toArray(),
+    col.countDocuments(filter),
+  ]);
+  return { items: items as WithId<Lead>[], total };
+}
+
+/** Turns a page path into a plain-English label for the owner. */
+export function pageLabel(path: string) {
+  const known: Record<string, string> = {
+    "/": "Homepage",
+  };
+  if (known[path]) return known[path];
+  const title = (slug: string) => slug.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+  const cs = path.match(/^\/locations\/([^/]+)\/service\/([^/]+)/);
+  if (cs) return `${title(cs[2])} page in ${title(cs[1])}`;
+  if (path.startsWith("/locations/")) return `${title(path.slice("/locations/".length))} city page`;
+  const last = path.split("/").filter(Boolean).pop();
+  if (!last) return "Website";
+  const words = last.replace(/-/g, " ");
+  return `${words.charAt(0).toUpperCase()}${words.slice(1)} page`;
 }

@@ -69,6 +69,16 @@ Each lead is saved to the `leads` collection **before** the email is sent, so a 
 
 Leave it blank to skip saving. If the database can't be reached, the error is logged and the email still goes out; the visitor never sees a database error. On MongoDB Atlas, allow the host's IPs in Network Access (Vercel needs `0.0.0.0/0`).
 
+### Leads page (`/admin`)
+
+`/admin` lists every saved lead, newest first, 50 per page, with a "Not emailed" filter for leads whose email failed. Tap a phone number to call. It is protected by one shared password: entering it sets a signed cookie that keeps you logged in for 7 days on that device.
+
+| Variable | Notes |
+|---|---|
+| `ADMIN_PASSWORD` | The shared password. Use a long random one, e.g. `openssl rand -base64 24`. Blank switches the page off. Changing it logs everyone out. |
+
+The page needs `MONGODB_URI` too. It isn't linked anywhere, is kept out of search results, and shows no site header, footer or analytics, so Clarity never records customers' details. Wrong passwords are limited to 10 per IP every 15 minutes (per server instance, so the password itself must be strong).
+
 ### Analytics and heatmaps
 
 Setting a key turns the matching tracking on. Leaving all of them blank loads no scripts and attaches no listeners.
@@ -137,6 +147,7 @@ src/
     locations/[city]/page.tsx     One route that renders every city page
     <service>/page.tsx            One small file per service page
     actions.ts                    Quote form server action (validation, MongoDB, Resend)
+    admin/                        Password-protected leads page
     layout.tsx                    Fonts, metadata, header, footer, analytics
     sitemap.ts, robots.ts         Generated from the data files
     opengraph-image.tsx           Social share image
@@ -147,7 +158,8 @@ src/
   lib/
     site.ts, services.ts, cities.ts   Content
     seo.ts                            Metadata and structured data helpers
-    leads.ts                          Saves quote form leads to MongoDB
+    leads.ts                          Saves and lists quote form leads (MongoDB)
+    admin-auth.ts                     Shared-password session for /admin
 public/                         Logo and photos
 ```
 

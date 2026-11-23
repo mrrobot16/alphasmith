@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Analytics } from "@/components/Analytics";
 import { QuoteAnchor } from "@/components/QuoteAnchor";
 import { JsonLd } from "@/components/JsonLd";
+import { PublicOnly } from "@/components/PublicOnly";
 import { SITE_URL, localBusinessJsonLd } from "@/lib/seo";
 import { hoursScript, fixedHoursState } from "@/lib/hours";
 import "./globals.css";
@@ -45,13 +46,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {hoursScript && <script dangerouslySetInnerHTML={{ __html: hoursScript }} />}
       </head>
       <body>
-        <Analytics />
-        <QuoteAnchor />
-        <JsonLd data={localBusinessJsonLd} />
-        <SiteHeader />
+        {/* /admin shows customers' details, so it gets no site chrome and no tracking (Clarity records sessions). */}
+        <PublicOnly>
+          <Analytics />
+          <QuoteAnchor />
+          <JsonLd data={localBusinessJsonLd} />
+          <SiteHeader />
+        </PublicOnly>
         <main>{children}</main>
-        <SiteFooter />
-        <StickyCall />
+        <PublicOnly>
+          <SiteFooter />
+          <StickyCall />
+        </PublicOnly>
       </body>
     </html>
   );

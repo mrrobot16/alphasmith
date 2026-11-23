@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 import { site } from "@/lib/site";
-import { saveLead, setEmailStatus } from "@/lib/leads";
+import { pageLabel, saveLead, setEmailStatus } from "@/lib/leads";
 
 export type QuoteState = { ok: boolean; message: string } | null;
 
@@ -31,22 +31,6 @@ const esc = (s: string) =>
 function formatPhone(digits: string) {
   const d = digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
   return d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : digits;
-}
-
-/** Turns a page path into a plain-English label for the owner. */
-function pageLabel(path: string) {
-  const known: Record<string, string> = {
-    "/": "Homepage",
-  };
-  if (known[path]) return known[path];
-  const title = (slug: string) => slug.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
-  const cs = path.match(/^\/locations\/([^/]+)\/service\/([^/]+)/);
-  if (cs) return `${title(cs[2])} page in ${title(cs[1])}`;
-  if (path.startsWith("/locations/")) return `${title(path.slice("/locations/".length))} city page`;
-  const last = path.split("/").filter(Boolean).pop();
-  if (!last) return "Website";
-  const words = last.replace(/-/g, " ");
-  return `${words.charAt(0).toUpperCase()}${words.slice(1)} page`;
 }
 
 /** Validates the quote form, saves it to MongoDB (if configured) and emails it to LEADS_TO_EMAIL through Resend. */
