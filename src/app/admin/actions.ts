@@ -2,7 +2,9 @@
 
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { endSession, passwordMatches, startSession } from "@/lib/admin-auth";
+import { revalidatePath } from "next/cache";
+import { endSession, isAdmin, passwordMatches, startSession } from "@/lib/admin-auth";
+import { setCalled } from "@/lib/leads";
 
 export type LoginState = { error: string } | null;
 
@@ -30,4 +32,15 @@ export async function login(_prev: LoginState, formData: FormData): Promise<Logi
 export async function logout() {
   await endSession();
   redirect("/admin");
+}
+
+/** "Mark as called" / "Undo" on a lead card. Server actions are public endpoints, so check the session here too. */
+export async function markCalled(formData: FormData) {
+  if (!(await isAdmin())) redirect("/admin");
+  try {
+    await setCalled(String(formData.get("id") ?? ""), formData.get("called") === "1");
+  } catch (err) {
+    console.error("[admin] Could not update lead", err);
+  }
+  revalidatePath("/admin");
 }

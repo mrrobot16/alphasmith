@@ -71,7 +71,7 @@ Leave it blank to skip saving. If the database can't be reached, the error is lo
 
 ### Leads page (`/admin`)
 
-`/admin` lists every saved lead, newest first, 50 per page, with a "Not emailed" filter for leads whose email failed. Tap a phone number to call. It is protected by one shared password: entering it sets a signed cookie that keeps you logged in for 7 days on that device.
+`/admin` lists saved leads, newest first, 50 per page, in four tabs: **To call** (the default), **Called**, **All** and **Not emailed** (the email failed). Tap a phone number to call, then "Mark as called" to move the lead out of To call; "Undo" moves it back. Called leads get a `calledAt` date in the database. While the tab is open and visible it checks for new leads every 15 seconds. It is protected by one shared password: entering it sets a signed cookie that keeps you logged in for 7 days on that device.
 
 | Variable | Notes |
 |---|---|

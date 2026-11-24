@@ -1,4 +1,4 @@
-import { MongoClient, type ObjectId, type WithId } from "mongodb";
+import { MongoClient, ObjectId, type Filter, type WithId } from "mongodb";
 
 export type EmailStatus = "pending" | "sent" | "failed" | "not_configured";
 
@@ -11,6 +11,8 @@ export type Lead = {
   page: string;
   createdAt: Date;
   emailStatus: EmailStatus;
+  /** When someone marked the lead as called from /admin. Missing or null = still to call. */
+  calledAt?: Date | null;
 };
 
 // One client per server instance, reused across requests (and across hot reloads in dev).
@@ -58,24 +60,47 @@ export async function setEmailStatus(id: ObjectId | null, emailStatus: EmailStat
 
 export const LEADS_PAGE_SIZE = 50;
 
+/** The tabs on /admin. "failed" is every lead whose email never arrived, called or not. */
+export const LEAD_VIEWS = ["open", "called", "all", "failed"] as const;
+export type LeadView = (typeof LEAD_VIEWS)[number];
+
+const VIEW_FILTERS: Record<LeadView, Filter<Lead>> = {
+  open: { calledAt: null }, // matches missing too
+  called: { calledAt: { $ne: null } },
+  all: {},
+  failed: { emailStatus: { $in: ["failed", "not_configured"] } },
+};
+
 /**
- * One page of leads, newest first. `failedOnly` keeps the ones whose email never arrived.
+ * One page of leads for a tab, newest first, plus how many leads each tab holds.
  * Returns null when MONGODB_URI is not set; throws if the database can't be reached.
  */
-export async function listLeads({ page, failedOnly }: { page: number; failedOnly: boolean }) {
+export async function listLeads({ page, view }: { page: number; view: LeadView }) {
   const col = await leads();
   if (!col) return null;
-  const filter = failedOnly ? { emailStatus: { $in: ["failed", "not_configured"] as EmailStatus[] } } : {};
-  const [items, total] = await Promise.all([
+  const [items, ...totals] = await Promise.all([
     col
-      .find(filter)
+      .find(VIEW_FILTERS[view])
       .sort({ createdAt: -1 })
       .skip((page - 1) * LEADS_PAGE_SIZE)
       .limit(LEADS_PAGE_SIZE)
       .toArray(),
-    col.countDocuments(filter),
+    ...LEAD_VIEWS.map((v) => col.countDocuments(VIEW_FILTERS[v])),
   ]);
-  return { items: items as WithId<Lead>[], total };
+  const counts = Object.fromEntries(LEAD_VIEWS.map((v, i) => [v, totals[i]])) as Record<LeadView, number>;
+  return { items: items as WithId<Lead>[], counts };
+}
+
+/** Marks a lead as called (or back to "to call"). Returns false for an unknown id. */
+export async function setCalled(id: string, called: boolean) {
+  if (!/^[0-9a-f]{24}$/i.test(id)) return false;
+  const col = await leads();
+  if (!col) return false;
+  const { matchedCount } = await col.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: { calledAt: called ? new Date() : null } },
+  );
+  return matchedCount === 1;
 }
 
 /** Turns a page path into a plain-English label for the owner. */
