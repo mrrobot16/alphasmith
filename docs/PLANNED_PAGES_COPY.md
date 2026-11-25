@@ -6,17 +6,60 @@ The copy below is taken word for word from `SEO_COPY_V1.md`, keeping the doc's n
 
 ## Pages
 
-| # | Page | Already named on the site (as plain text, no link) |
-|---|---|---|
-| 2 | Emergency Lockout Service | Locksmith page, related pages: "Emergency Lockouts" |
-| 3 | Lock Rekeying | Locksmith page, related pages: "Lock Rekeying" |
-| 4 | Lock Repair and Replacement | Locksmith page, related pages: "Lock Repair & Replacement" |
-| 5 | Replacement Car Keys | Locksmith page, related pages: "Replacement Car Keys" |
-| 7 | Commercial Overhead and Rolling Doors | Garage doors page, related pages: "Commercial overhead doors" |
-| 8 | Storefront and Commercial Door Repair | Access control page, related pages: "Storefront & Commercial Doors" |
-| 10 | Commercial Gate Maintenance | Automatic gates page, related pages: "Commercial Gate Maintenance" |
+| # | Page | Group | What it covers | Already named on the site |
+|---|---|---|---|---|
+| 2 | Emergency Lockout Service | Locksmith | 24/7 mobile lockout help for cars, homes and businesses. Explains what to tell the business and how to give your location. | Locksmith page: "Emergency Lockouts" |
+| 3 | Lock Rekeying | Locksmith | Changing which keys open existing locks after a move, a lost key or a tenant change. Also covers one key for several doors and what affects the cost. | Locksmith page: "Lock Rekeying" |
+| 4 | Lock Repair and Replacement | Locksmith | Sticking locks, binding deadbolts and latches that won't catch. Explains why locks jam when the door is closed and when to replace a lock. | Locksmith page: "Lock Repair & Replacement" |
+| 5 | Replacement Car Keys | Locksmith | Mobile car key cutting and programming for lost, spare or damaged keys. Lists the vehicle details to have ready. | Locksmith page: "Replacement Car Keys" |
+| 7 | Commercial Overhead and Rolling Doors | Garage and Overhead Doors | Repair of manual and motorized overhead and rolling doors at warehouses and retail sites. Lists what to include in a work order. | Garage doors page: "Commercial overhead doors" |
+| 8 | Storefront and Commercial Door Repair | Garage and Overhead Doors | Closers, hinges, locks and panic bars on storefront and back doors. Includes guidance for property managers and facility teams. | Access control page: "Storefront & Commercial Doors" |
+| 10 | Commercial Gate Maintenance | Automatic Gates | Quarterly preventive maintenance for manual and automatic gates at apartments, retail and managed properties. Says what a visit includes and how to get a quote. | Automatic gates page: "Commercial Gate Maintenance" |
 
-When a page goes live, add its `slug` to those related entries in `src/lib/services.ts` so they become links.
+"Already named on the site" is the plain-text label (no link) in that page's related pages. When a page goes live, add its `slug` to that entry in `src/lib/services.ts` so it becomes a link.
+
+## Drafts
+
+All seven are built as draft previews while the budget is approved. List: `/drafts`. Each page: `/drafts/locations/portland/service/<slug>`. Every `/drafts` page asks for a password, `DRAFTS_PASSWORD`, which is separate from `ADMIN_PASSWORD`; give the client this one only. The drafts are also noindex, aren't in the sitemap, have no analytics, and nothing on the live site links to them.
+
+| # | Draft slug | Parent page |
+|---|---|---|
+| 2 | `emergency-lockout` | Locksmith |
+| 3 | `lock-rekeying` | Locksmith |
+| 4 | `lock-repair` | Locksmith |
+| 5 | `car-key-replacement` | Locksmith |
+| 7 | `commercial-overhead-doors` | Garage doors |
+| 8 | `storefront-door-repair` | Garage doors (pending client decision) |
+| 10 | `commercial-gate-maintenance` | Automatic gates |
+
+### Copy needed
+
+The live site names two more pages that the copy doc (V0 and V1) has no section for. We need the client's copy (SEO title, meta description, H1, intro, H2 sections, related pages) before they can be drafted. They're listed under "Copy needed" on `/drafts` (`copyNeeded` in `src/lib/drafts.ts`).
+
+| Page | Named on the site |
+|---|---|
+| Garage Door Opener Repair | Spring repair page: "Garage door opener repair"; Garage doors page: "Opener repair" |
+| Broken Cable Repair | Spring repair page: "Broken cable repair" |
+
+### Images to choose
+
+None of the planned pages has its final photos yet. We hold the photos, and we still need to decide which go on each page; then put them in. The built drafts show a placeholder main photo borrowed from the existing job photos, and no gallery.
+
+For each page: put the chosen files in `public/work/drafts/<slug>/`, set the main photo in `hero.image`, and list any others in `gallery` (each with `alt` text describing the photo) in `src/lib/drafts.ts`.
+
+| Page | Slug | Placeholder now | Photos chosen |
+|---|---|---|---|
+| Emergency Lockouts | `emergency-lockout` | `/work/car-lockout.jpg` | No |
+| Lock Rekeying | `lock-rekeying` | `/work/gallery/locksmith-3.jpg` | No |
+| Lock Repair & Replacement | `lock-repair` | `/work/lock-installation.jpg` | No |
+| Replacement Car Keys | `car-key-replacement` | `/work/gallery/locksmith-2.jpg` | No |
+| Commercial Overhead & Rolling Doors | `commercial-overhead-doors` | `/work/gallery/garage-doors-3.jpg` | No |
+| Storefront & Commercial Doors | `storefront-door-repair` | `/work/job-door-hardware.jpg` | No |
+| Commercial Gate Maintenance | `commercial-gate-maintenance` | `/work/job-slat-gate.jpg` | No |
+| Garage Door Opener Repair | not built (copy needed) | None | No |
+| Broken Cable Repair | not built (copy needed) | None | No |
+
+The content is in `src/lib/drafts.ts`. Its header comment covers how to add photos (`gallery`), swap the main photo, add sections and publish a page once approved.
 
 ## Notes from the existing pages
 

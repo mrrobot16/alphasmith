@@ -7,7 +7,9 @@ import { cityServicePath, getServiceBySlug, type ServicePageConfig } from "./ser
  * sitemap entry. Nothing on the live site links here. Index of all drafts: /drafts.
  *
  * Copy is verbatim from the doc, minus the "| Alpha" title suffix and the "Button" lines.
- * Hero photos are placeholders from the existing job photos until the client sends their own.
+ * IMAGES NOT CHOSEN YET: every hero.image below is a placeholder borrowed from the existing job
+ * photos, and no page has a gallery. We hold the photos and still have to pick which go on each
+ * page; checklist in docs/PLANNED_PAGES_COPY.md ("Images to choose").
  *
  * Common change requests:
  * - Edit text: change the field. H1 = hero.title + hero.accent; intro = hero.lead;
