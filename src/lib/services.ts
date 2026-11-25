@@ -11,31 +11,41 @@ import type { City } from "./cities";
 export type ServicePageConfig = {
   /** Last part of /locations/[city]/service/[service]. */
   slug: string;
+  /** Slug of the service this page sits under. Adds that page to the breadcrumb. */
+  parent?: string;
   meta: { title: string; description: string };
   crumbs: { category: string; label: string };
   schema: { name: string; description: string };
   hero: {
-    badge: string;
-    /** Replaces `badge` from 10pm to 6am Portland time (lib/hours.ts). */
-    badgeAfterHours: string;
     title: string;
     accent: string;
     lead: string;
-    checks: string[];
+    checks?: string[];
     /** Large photo beside the hero text (file in /public). */
     image: { src: string; alt: string };
-  };
-  warning: { bold: string; text: string };
-  signs: { title: string; items: string[] };
+  } & (
+    | {
+        badge: string;
+        /** Replaces `badge` from 10pm to 6am Portland time (lib/hours.ts). */
+        badgeAfterHours: string;
+      }
+    | { badge?: undefined; badgeAfterHours?: undefined }
+  );
+  /** Sections below are optional: a page without one simply skips that section. */
+  warning?: { bold: string; text: string };
+  signs?: { title: string; items: string[] };
   info: { title: string; body: string };
   /** Extra blocks stacked under `info` in the same column. */
   moreInfo?: { title: string; body: string }[];
+  /** Photos shown in a grid under the info blocks (files in /public). */
+  gallery?: { src: string; alt: string; caption?: string }[];
   /** `intro` is an optional paragraph between the heading and the steps. */
-  steps: { title: string; intro?: string; items: [string, string, string][] };
-  brands: { title: string; items: string[] };
+  steps?: { title: string; intro?: string; items: [string, string, string][] };
+  brands?: { title: string; items: string[] };
   /** `afterHours` swaps the answer from 10pm to 6am; `null` hides the question then. */
-  faqs: { q: string; a: string; afterHours?: string | null }[];
-  near: { title: string; intro: string };
+  faqs?: { q: string; a: string; afterHours?: string | null }[];
+  /** Nearby cities, each linking to this service there. */
+  near?: { title: string; intro: string };
   /** slug links to another service page in the same city. */
   related: { label: string; slug?: string }[];
 };

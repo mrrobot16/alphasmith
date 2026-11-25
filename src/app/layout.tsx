@@ -46,9 +46,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {hoursScript && <script dangerouslySetInnerHTML={{ __html: hoursScript }} />}
       </head>
       <body>
-        {/* /admin shows customers' details, so it gets no site chrome and no tracking (Clarity records sessions). */}
-        <PublicOnly>
+        {/* /admin shows customers' details, so it gets no site chrome and no tracking (Clarity records sessions).
+            /drafts keeps the site chrome but no tracking, so client reviews don't count as visits. */}
+        <PublicOnly except={["/admin", "/drafts"]}>
           <Analytics />
+        </PublicOnly>
+        <PublicOnly>
           <QuoteAnchor />
           <JsonLd data={localBusinessJsonLd} />
           <SiteHeader />
