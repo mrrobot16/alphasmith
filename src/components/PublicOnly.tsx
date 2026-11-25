@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation";
 
-/** Renders its children everywhere except the /admin pages. */
-export function PublicOnly({ children }: { children: React.ReactNode }) {
+/** Renders its children everywhere except under the given paths (the /admin pages by default). */
+export function PublicOnly({ children, except = ["/admin"] }: { children: React.ReactNode; except?: string[] }) {
   const pathname = usePathname();
-  return pathname === "/admin" || pathname.startsWith("/admin/") ? null : children;
+  return except.some((p) => pathname === p || pathname.startsWith(`${p}/`)) ? null : children;
 }

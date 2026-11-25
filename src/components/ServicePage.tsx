@@ -1,7 +1,8 @@
+import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { site, homeReviews } from "@/lib/site";
-import { cityServicePath, type ServicePageConfig } from "@/lib/services";
+import { cityServicePath, getServiceBySlug, type ServicePageConfig } from "@/lib/services";
 import { cityHref, getCity, type City } from "@/lib/cities";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/seo";
 import { TrustBar, Hero, Faq } from "./Shared";
@@ -20,28 +21,45 @@ function Rich({ text }: { text: string }) {
   );
 }
 
-export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
+export function ServicePage({
+  c,
+  city,
+  linkFor = cityServicePath,
+}: {
+  c: ServicePageConfig;
+  city: City;
+  /** Where a service links to in a given city; undefined shows it as plain text. Draft pages pass their own. */
+  linkFor?: (citySlug: string, serviceSlug: string) => string | undefined;
+}) {
   const pagePath = cityServicePath(city.slug, c.slug);
+  const parent = c.parent ? getServiceBySlug(c.parent) : undefined;
+  const crumbs = [
+    { name: "Home", path: "/" },
+    { name: city.name, path: `/locations/${city.slug}` },
+    ...(parent ? [{ name: parent.crumbs.label, path: cityServicePath(city.slug, parent.slug) }] : []),
+  ];
   // Nearby cities, each linking to the same service in that city.
   const areas = city.nearby.map((a) => {
     const other = getCity(cityHref(a)?.split("/").pop() ?? "");
-    return { label: a, href: other ? cityServicePath(other.slug, c.slug) : undefined };
+    return { label: a, href: other ? linkFor(other.slug, c.slug) : undefined };
   });
   return (
     <>
       <JsonLd data={serviceJsonLd({ name: c.schema.name, description: c.schema.description, path: pagePath, area: `${city.name}, ${city.state}` })} />
-      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: city.name, path: `/locations/${city.slug}` }, { name: c.crumbs.label, path: pagePath }])} />
+      <JsonLd data={breadcrumbJsonLd([...crumbs, { name: c.crumbs.label, path: pagePath }])} />
       <nav aria-label="Breadcrumb" className="border-b border-line text-small text-muted">
-        <ol className="wrap flex gap-2 py-3">
-          <li><Link href="/" className="hover:text-ink">Home</Link></li>
-          <li aria-hidden>·</li>
-          <li><Link href={`/locations/${city.slug}`} className="hover:text-ink">{city.name}</Link></li>
-          <li aria-hidden>·</li>
+        <ol className="wrap flex flex-wrap gap-2 py-3">
+          {crumbs.map((cr) => (
+            <Fragment key={cr.path}>
+              <li><Link href={cr.path} className="hover:text-ink">{cr.name}</Link></li>
+              <li aria-hidden>·</li>
+            </Fragment>
+          ))}
           <li className="text-ink" aria-current="page">{c.crumbs.label}</li>
         </ol>
       </nav>
 
-      <Hero badge={<Hours open={c.hero.badge} closed={c.hero.badgeAfterHours} />} title={c.hero.title} accent={c.hero.accent}
+      <Hero badge={c.hero.badge && <Hours open={c.hero.badge} closed={c.hero.badgeAfterHours} />} title={c.hero.title} accent={c.hero.accent}
         asideWide
         asideHiddenOnPhones
         form={
@@ -58,13 +76,15 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
         }
       >
         <p className="mt-6 max-w-[36rem] text-body leading-relaxed text-muted">{c.hero.lead}</p>
-        <ul className="mt-5 space-y-2 text-body">
-          {c.hero.checks.map((t) => (
-            <li key={t} className="flex items-center gap-2">
-              <CheckIcon className="text-orange" /> {t}
-            </li>
-          ))}
-        </ul>
+        {c.hero.checks && (
+          <ul className="mt-5 space-y-2 text-body">
+            {c.hero.checks.map((t) => (
+              <li key={t} className="flex items-center gap-2">
+                <CheckIcon className="text-orange" /> {t}
+              </li>
+            ))}
+          </ul>
+        )}
         <a href={site.phoneHref} className="btn mt-7 px-6 py-3.5 text-sub">
           <PhoneIcon /> Call {site.phone}
         </a>
@@ -72,6 +92,7 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
 
       <TrustBar />
 
+      {c.warning && (
       <div data-section="warning_band" className="bg-orange text-black">
         <div className="wrap flex flex-col items-start gap-3 py-4 md:flex-row md:items-center md:justify-between md:gap-6">
           <p className="flex min-w-0 flex-1 items-center gap-3 text-body">
@@ -83,17 +104,20 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
           <a href={site.phoneHref} className="btn shrink-0 whitespace-nowrap !bg-black px-4 py-2 text-body !text-white">Call now</a>
         </div>
       </div>
+      )}
 
-      <section data-section="signs_and_info" className="wrap grid gap-6 py-8 sm:py-14 md:grid-cols-2 md:gap-10">
-        <div>
-          <h2 className="h-section">{c.signs.title}</h2>
-          <ul className="mt-5 space-y-3 text-body">
-            {c.signs.items.map((s) => (
-              <li key={s} className="flex items-center gap-2"><CheckIcon className="text-orange" /> {s}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
+      <section data-section="signs_and_info" className={`wrap grid gap-6 py-8 sm:py-14 ${c.signs ? "md:grid-cols-2 md:gap-10" : ""}`}>
+        {c.signs && (
+          <div>
+            <h2 className="h-section">{c.signs.title}</h2>
+            <ul className="mt-5 space-y-3 text-body">
+              {c.signs.items.map((s) => (
+                <li key={s} className="flex items-center gap-2"><CheckIcon className="text-orange" /> {s}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <div className={c.signs ? "" : "max-w-[44rem]"}>
           <h2 className="h-section">{c.info.title}</h2>
           <p className="mt-4 text-body leading-relaxed"><Rich text={c.info.body} /></p>
           {c.moreInfo?.map((m) => (
@@ -105,22 +129,41 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
         </div>
       </section>
 
-      <section data-section="how_it_works" className="bg-bg-alt py-8 sm:py-14">
-        <div className="wrap">
-          <h2 className="h-section">{c.steps.title}</h2>
-          {c.steps.intro && <p className="mt-4 max-w-[44rem] text-body leading-relaxed text-muted">{c.steps.intro}</p>}
-          <StepsList items={c.steps.items} />
-        </div>
-      </section>
-
-      <section data-section="brands" className="py-8 sm:py-14">
-        <div className="wrap">
-          <h2 className="h-section">{c.brands.title}</h2>
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {c.brands.items.map((b) => (<li key={b} className="chip !rounded-md">{b}</li>))}
+      {c.gallery && c.gallery.length > 0 && (
+        <section data-section="gallery" className="wrap pb-8 sm:pb-14">
+          <ul className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+            {c.gallery.map((g) => (
+              <li key={g.src}>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-line">
+                  <Image src={g.src} alt={g.alt} fill sizes="(min-width:1024px) 360px, 50vw" className="object-cover" />
+                </div>
+                {g.caption && <p className="mt-2 text-small text-muted">{g.caption}</p>}
+              </li>
+            ))}
           </ul>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {c.steps && (
+        <section data-section="how_it_works" className="bg-bg-alt py-8 sm:py-14">
+          <div className="wrap">
+            <h2 className="h-section">{c.steps.title}</h2>
+            {c.steps.intro && <p className="mt-4 max-w-[44rem] text-body leading-relaxed text-muted">{c.steps.intro}</p>}
+            <StepsList items={c.steps.items} />
+          </div>
+        </section>
+      )}
+
+      {c.brands && (
+        <section data-section="brands" className="py-8 sm:py-14">
+          <div className="wrap">
+            <h2 className="h-section">{c.brands.title}</h2>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {c.brands.items.map((b) => (<li key={b} className="chip !rounded-md">{b}</li>))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <section id="reviews" data-section="reviews" className="bg-bg-alt py-8 sm:py-14">
         <div className="wrap">
@@ -128,28 +171,34 @@ export function ServicePage({ c, city }: { c: ServicePageConfig; city: City }) {
         </div>
       </section>
 
-      <section id="faq" data-section="faq" className="py-8 sm:py-14">
-        <div className="wrap">
-          <h2 className="h-section">Frequently asked questions</h2>
-          <div className="mt-6"><Faq items={c.faqs} /></div>
-        </div>
-      </section>
+      {c.faqs && c.faqs.length > 0 && (
+        <section id="faq" data-section="faq" className="py-8 sm:py-14">
+          <div className="wrap">
+            <h2 className="h-section">Frequently asked questions</h2>
+            <div className="mt-6"><Faq items={c.faqs} /></div>
+          </div>
+        </section>
+      )}
 
-      <section data-section="areas_and_related" className="bg-bg-alt py-8 sm:py-14">
+      <section data-section="areas_and_related" className={`py-8 sm:py-14 ${c.faqs?.length ? "bg-bg-alt" : ""}`}>
         <div className="wrap">
-          <h2 className="h-section">{c.near.title}</h2>
-          <p className="mt-3 text-small text-muted">{c.near.intro}</p>
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {areas.map((a) => (
-              <li key={a.label}>
-                {a.href ? <Link href={a.href} className="chip">{a.label}</Link> : <span className="chip">{a.label}</span>}
-              </li>
-            ))}
-          </ul>
-          <h3 className="mt-10 text-sub">Related services</h3>
+          {c.near && (
+            <>
+              <h2 className="h-section">{c.near.title}</h2>
+              <p className="mt-3 text-small text-muted">{c.near.intro}</p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {areas.map((a) => (
+                  <li key={a.label}>
+                    {a.href ? <Link href={a.href} className="chip">{a.label}</Link> : <span className="chip">{a.label}</span>}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {c.near ? <h3 className="mt-10 text-sub">Related services</h3> : <h2 className="h-section">Related services</h2>}
           <ul className="mt-4 flex flex-wrap gap-2">
             {c.related.map((r) => {
-              const href = r.slug ? cityServicePath(city.slug, r.slug) : undefined;
+              const href = r.slug ? linkFor(city.slug, r.slug) : undefined;
               return (
                 <li key={r.label}>
                   {href ? <Link href={href} className="chip">{r.label}</Link> : <span className="chip">{r.label}</span>}

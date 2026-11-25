@@ -118,7 +118,7 @@ export function Hero({
   asideWide = false,
   asideHiddenOnPhones = false,
 }: {
-  badge: React.ReactNode;
+  badge?: React.ReactNode;
   title: string;
   accent: React.ReactNode;
   children: React.ReactNode;
@@ -136,13 +136,15 @@ export function Hero({
       className={`wrap grid gap-10 py-12 lg:py-20 ${form ? (asideWide ? "lg:grid-cols-[1fr_minmax(0,520px)] lg:items-center lg:gap-14" : "lg:grid-cols-[1fr_340px] lg:gap-20") : ""}`}
     >
       <div className="hero-in">
-        <p className="inline-flex items-center gap-2.5 rounded-full border border-orange/70 py-1.5 pl-2.5 pr-4 font-display text-small font-semibold uppercase tracking-[0.12em] text-orange">
-          <span className="grid size-4 place-items-center rounded-full bg-orange/30">
-            <span className="size-2.5 rounded-full bg-orange" />
-          </span>
-          {badge}
-        </p>
-        <h1 className="mt-5 max-w-[14em] text-[clamp(2.5rem,5.4vw,4.25rem)] font-extrabold ![text-wrap:wrap] lg:![text-wrap:balance]">
+        {badge && (
+          <p className="inline-flex items-center gap-2.5 rounded-full border border-orange/70 py-1.5 pl-2.5 pr-4 font-display text-small font-semibold uppercase tracking-[0.12em] text-orange">
+            <span className="grid size-4 place-items-center rounded-full bg-orange/30">
+              <span className="size-2.5 rounded-full bg-orange" />
+            </span>
+            {badge}
+          </p>
+        )}
+        <h1 className={`${badge ? "mt-5 " : ""}max-w-[14em] text-[clamp(2.5rem,5.4vw,4.25rem)] font-extrabold ![text-wrap:wrap] lg:![text-wrap:balance]`}>
           {title} <span className="text-orange">{accent}</span>
         </h1>
         {children}
